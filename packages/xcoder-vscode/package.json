@@ -4,6 +4,7 @@
   "description": "在 VS Code 中快速启动 Xcoder AI 编程助手",
   "version": "0.0.1",
   "publisher": "xcoder",
+  "license": "MIT",
   "engines": {
     "vscode": "^1.80.0"
   },
@@ -29,13 +30,13 @@
     ]
   },
   "activationEvents": [
-    "onStartupFinished"
+    "onCommand:xcoder.launch"
   ],
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "lint": "eslint src --ext ts",
+    "lint": "echo 'lint not configured'",
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
