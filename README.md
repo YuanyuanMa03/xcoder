@@ -49,7 +49,6 @@ bash <(curl -fsSL https://raw.githubusercontent.com/YuanyuanMa03/xcoder/main/scr
 ### Windows
 
 ```powershell
-# 管理员 PowerShell 运行
 Set-ExecutionPolicy Bypass -Scope Process -Force; irm https://raw.githubusercontent.com/YuanyuanMa03/xcoder/main/scripts/install.ps1 | iex
 ```
 
