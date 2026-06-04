@@ -1,10 +1,15 @@
-import { describe, expect, test } from 'bun:test'
+import { beforeEach, describe, expect, test } from 'bun:test'
 import {
+  clearSkillIndexCache,
   searchSkills,
   tokenize,
   tokenizeAndStem,
   type SkillIndexEntry,
 } from '../localSearch.js'
+
+beforeEach(() => {
+  clearSkillIndexCache()
+})
 
 function makeEntry(overrides: Partial<SkillIndexEntry>): SkillIndexEntry {
   const tokens = overrides.tokens ?? []
