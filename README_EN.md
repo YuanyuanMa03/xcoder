@@ -9,6 +9,10 @@
 ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝
 ```
 
+<p align="center">
+  <a href="README.md">🇨🇳 中文</a> · <a href="README_EN.md">🇺🇸 English</a>
+</p>
+
 > **Beyond the Boundary of Human and AI** — AI doesn't just serve you, you also listen to AI's advice.
 
 ### Mascot

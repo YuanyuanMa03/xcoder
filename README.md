@@ -9,6 +9,10 @@
 ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝
 ```
 
+<p align="center">
+  <a href="README.md">🇨🇳 中文</a> · <a href="README_EN.md">🇺🇸 English</a>
+</p>
+
 ![xcoder 完整演示](assets/images/xcoder-screenshot-1.png)
 
 > **超越人类与 AI 的边界** — AI 不只是服务你，你也要听从 AI 的建议。
