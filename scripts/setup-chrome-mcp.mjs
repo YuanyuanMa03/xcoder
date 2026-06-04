@@ -44,9 +44,11 @@ function getChromeMcpLogDir() {
   )
 }
 
+const nodeBin = process.execPath
+
 if (userArgs.length > 0) {
   // Forward single sub-command
-  execFileSync('node', [cliPath, ...userArgs], { stdio: 'inherit' })
+  execFileSync(nodeBin, [cliPath, ...userArgs], { stdio: 'inherit' })
 } else {
   // Full setup sequence
   const steps = [
@@ -61,9 +63,16 @@ if (userArgs.length > 0) {
     const args = steps[i]
     const isLast = i === steps.length - 1
     if (isLast) console.log(`\n[${i + 1}/${steps.length}] ${args.join(' ')}`)
-    execFileSync('node', [cliPath, ...args], {
-      stdio: isLast ? 'inherit' : 'pipe',
-    })
+    try {
+      execFileSync(nodeBin, [cliPath, ...args], {
+        stdio: isLast ? 'inherit' : 'pipe',
+      })
+    } catch (e) {
+      // Chrome MCP setup is optional — don't block install on failure
+      if (isLast) {
+        console.warn(`\n⚠️  Chrome MCP doctor failed (non-fatal): ${e.message}`)
+      }
+    }
   }
 
   console.log('\nChrome MCP setup complete!')

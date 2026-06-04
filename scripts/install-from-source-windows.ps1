@@ -90,9 +90,19 @@ if (Test-Path $INSTALL_DIR) {
 Write-Host ""
 Write-Host "📥 安装依赖..."
 if ($HAS_BUN) {
-    bun install
+    # Postinstall scripts (e.g. chrome-mcp) may fail on Windows bun — non-fatal
+    try { bun install } catch {
+        Write-Host "⚠️  部分 postinstall 脚本失败（非致命），继续安装..."
+    }
 } else {
-    npm install
+    try { npm install } catch {
+        Write-Host "⚠️  部分 postinstall 脚本失败（非致命），继续安装..."
+    }
+}
+
+if (-not (Test-Path "node_modules")) {
+    Write-Host "❌ 依赖安装失败: node_modules 不存在"
+    exit 1
 }
 
 # Build

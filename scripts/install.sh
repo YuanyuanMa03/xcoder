@@ -50,9 +50,14 @@ fi
 # Install deps
 echo "📥 Installing dependencies..."
 if [ "$PKG" = "bun" ]; then
-  bun install --frozen-lockfile 2>/dev/null || bun install
+  bun install --frozen-lockfile 2>/dev/null || bun install || echo "⚠️  Some postinstall scripts failed (non-fatal), continuing..."
 else
-  npm ci 2>/dev/null || npm install
+  npm ci 2>/dev/null || npm install || echo "⚠️  Some postinstall scripts failed (non-fatal), continuing..."
+fi
+
+if [ ! -d "node_modules" ]; then
+  echo "❌ Dependency install failed: node_modules not found"
+  exit 1
 fi
 
 # Build
