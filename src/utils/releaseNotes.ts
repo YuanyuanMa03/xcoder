@@ -26,10 +26,9 @@ const MAX_RELEASE_NOTES_SHOWN = 5
  * 3. Next time the user starts Claude, the cached changelog is available immediately
  */
 export const CHANGELOG_URL =
-  'https://github.com/YuanyuanMa03.xcoder/blob/main/CHANGELOG.md'
-// Fetch from Claude Code to show upstream updates (with attribution in UI)
+  'https://github.com/YuanyuanMa03/xcoder/blob/main/CHANGELOG.md'
 const RAW_CHANGELOG_URL =
-  'https://raw.githubusercontent.com/anthropics/claude-code/refs/heads/main/CHANGELOG.md'
+  'https://raw.githubusercontent.com/YuanyuanMa03/xcoder/refs/heads/main/CHANGELOG.md'
 
 /**
  * Get the path for the cached changelog file.
