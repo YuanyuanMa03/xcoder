@@ -1,6 +1,6 @@
 {
   "name": "@yuanyuan20031001/xcoder",
-  "version": "1.1.0",
+  "version": "1.0.2",
   "description": "Xcoder — 超越人类与 AI 边界的 AI 编程 CLI",
   "type": "module",
   "author": "Xcoder <xcoder@users.noreply.github.com>",
@@ -35,7 +35,6 @@
   ],
   "files": [
     "dist",
-    "!dist/vendor/ripgrep",
     "scripts/postinstall.cjs",
     "scripts/run-parallel.mjs",
     "scripts/setup-chrome-mcp.mjs"
@@ -47,7 +46,7 @@
     "build:bun": "bun run build.ts",
     "dev": "bun run scripts/dev.ts",
     "dev:inspect": "bun run scripts/dev-debug.ts",
-    "prepublishOnly": "bun run build:vite",
+    "prepublishOnly": "bun run build",
     "lint": "biome lint .",
     "lint:fix": "biome lint --fix .",
     "format": "biome format --write .",
@@ -212,12 +211,6 @@
     "zod": "^4.3.6"
   },
   "optionalDependencies": {
-    "@yuanyuan20031001/xcoder-rg-arm64-darwin": "1.1.0",
-    "@yuanyuan20031001/xcoder-rg-arm64-linux": "1.1.0",
-    "@yuanyuan20031001/xcoder-rg-arm64-win32": "1.1.0",
-    "@yuanyuan20031001/xcoder-rg-x64-darwin": "1.1.0",
-    "@yuanyuan20031001/xcoder-rg-x64-linux": "1.1.0",
-    "@yuanyuan20031001/xcoder-rg-x64-win32": "1.1.0",
     "doubaoime-asr": "^0.1.0"
   },
   "overrides": {
