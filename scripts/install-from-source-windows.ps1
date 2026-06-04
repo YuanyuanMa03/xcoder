@@ -24,34 +24,38 @@ function Refresh-Path {
 
 Refresh-Path
 
-# Check for Git
+# ── Auto-install Git ──
+$HAS_GIT = $false
 try {
-    $gitVer = git --version
-    Write-Host "✅ $gitVer"
-} catch {
-    Write-Host "❌ 需要 Git"
-    Write-Host "   下载: https://git-scm.com/download/win"
-    Write-Host "   或运行: winget install Git.Git"
-    Write-Host ""
-    Write-Host "   安装后请重新打开 PowerShell 再运行此脚本。"
-    exit 1
-}
-
-# Check for Bun (preferred) or Node.js
-$HAS_BUN = $false
-try {
-    $bunVer = bun --version 2>$null
+    $gitVer = git --version 2>$null
     if ($LASTEXITCODE -eq 0) {
-        $HAS_BUN = $true
-        Write-Host "✅ Bun $bunVer"
+        $HAS_GIT = $true
+        Write-Host "✅ $gitVer"
     }
-} catch {
-    $HAS_BUN = $false
+} catch {}
+
+if (-not $HAS_GIT) {
+    Write-Host "📥 Git 未安装，正在自动安装..."
+    if (Get-Command winget -ErrorAction SilentlyContinue) {
+        winget install Git.Git --accept-source-agreements --accept-package-agreements --silent
+        Refresh-Path
+        try {
+            $gitVer = git --version
+            Write-Host "✅ $gitVer"
+        } catch {
+            Write-Host "❌ Git 安装失败，请手动安装: https://git-scm.com/download/win"
+            exit 1
+        }
+    } else {
+        Write-Host "❌ 需要 Git，请手动安装: https://git-scm.com/download/win"
+        exit 1
+    }
 }
 
+# ── Auto-install Node.js ──
 $HAS_NODE = $false
 if (Get-Command node -ErrorAction SilentlyContinue) {
-    $nodeVer = node -v
+    $nodeVer = node -v 2>$null
     $major = [int]($nodeVer -replace 'v(\d+).*', '$1')
     if ($major -ge 18) {
         $HAS_NODE = $true
@@ -61,14 +65,52 @@ if (Get-Command node -ErrorAction SilentlyContinue) {
     }
 }
 
+if (-not $HAS_NODE) {
+    Write-Host "📥 Node.js 未安装，正在自动安装..."
+    if (Get-Command winget -ErrorAction SilentlyContinue) {
+        winget install OpenJS.NodeJS.LTS --accept-source-agreements --accept-package-agreements --silent
+        Refresh-Path
+        if (Get-Command node -ErrorAction SilentlyContinue) {
+            $nodeVer = node -v
+            Write-Host "✅ Node.js $nodeVer"
+            $HAS_NODE = $true
+        } else {
+            Write-Host "⚠️  Node.js 安装后仍未检测到，继续尝试..."
+        }
+    } else {
+        Write-Host "⚠️  winget 不可用，跳过 Node.js 自动安装"
+    }
+}
+
+# ── Auto-install Bun ──
+$HAS_BUN = $false
+try {
+    $bunVer = bun --version 2>$null
+    if ($LASTEXITCODE -eq 0) {
+        $HAS_BUN = $true
+        Write-Host "✅ Bun $bunVer"
+    }
+} catch {}
+
+if (-not $HAS_BUN) {
+    Write-Host "📥 Bun 未安装，正在自动安装..."
+    try {
+        powershell -c "irm bun.sh/install.ps1 | iex"
+        Refresh-Path
+        $bunVer = bun --version 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            $HAS_BUN = $true
+            Write-Host "✅ Bun $bunVer"
+        }
+    } catch {
+        Write-Host "⚠️  Bun 安装失败，将使用 Node.js"
+    }
+}
+
 if (-not $HAS_BUN -and -not $HAS_NODE) {
     Write-Host ""
-    Write-Host "❌ 需要 Node.js >= 18 或 Bun"
-    Write-Host "   安装 Node: https://nodejs.org"
-    Write-Host "   或运行: winget install OpenJS.NodeJS.LTS"
-    Write-Host "   安装 Bun: powershell -c `"irm bun.sh/install.ps1 | iex`""
-    Write-Host ""
-    Write-Host "   安装后请重新打开 PowerShell 再运行此脚本。"
+    Write-Host "❌ 需要 Node.js >= 18 或 Bun，两者均安装失败"
+    Write-Host "   请手动安装后重试"
     exit 1
 }
 

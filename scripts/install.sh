@@ -12,23 +12,114 @@ echo ""
 echo "  超越人类与 AI 的边界"
 echo ""
 
-# Detect package manager
-if command -v bun &> /dev/null; then
-  PKG="bun"
-  echo "✅ Bun $(bun --version)"
-elif command -v node &> /dev/null; then
-  NODE_VER=$(node -v | cut -d'v' -f2 | cut -d'.' -f1)
-  if [ "$NODE_VER" -lt 18 ]; then
-    echo "❌ Node.js >= 18 required (found: $(node -v))"
-    echo "   Install: https://nodejs.org"
-    exit 1
-  fi
-  PKG="node"
-  echo "✅ Node.js $(node -v)"
+# ── Detect OS ──
+OS="$(uname -s)"
+case "$OS" in
+  Darwin) PLATFORM="macos" ;;
+  Linux)  PLATFORM="linux" ;;
+  *)      echo "❌ 不支持的系统: $OS"; exit 1 ;;
+esac
+
+# ── Auto-install Git ──
+if command -v git &> /dev/null; then
+  echo "✅ $(git --version)"
 else
-  echo "❌ Need Bun or Node.js >= 18"
-  echo "   Install Bun: curl -fsSL https://bun.sh/install | bash"
-  echo "   Install Node: https://nodejs.org"
+  echo "📥 Git 未安装，正在自动安装..."
+  if [ "$PLATFORM" = "macos" ]; then
+    if command -v brew &> /dev/null; then
+      brew install git
+    else
+      xcode-select --install 2>/dev/null || true
+      echo "⚠️  请在弹出的窗口中确认安装 Xcode Command Line Tools"
+      echo "   安装完成后请重新运行此脚本"
+      exit 1
+    fi
+  else
+    if command -v apt-get &> /dev/null; then
+      sudo apt-get update -qq && sudo apt-get install -y -qq git
+    elif command -v yum &> /dev/null; then
+      sudo yum install -y git
+    elif command -v dnf &> /dev/null; then
+      sudo dnf install -y git
+    elif command -v pacman &> /dev/null; then
+      sudo pacman -S --noconfirm git
+    else
+      echo "❌ 无法自动安装 Git，请手动安装"
+      exit 1
+    fi
+  fi
+  echo "✅ $(git --version)"
+fi
+
+# ── Auto-install Node.js ──
+HAS_NODE=false
+if command -v node &> /dev/null; then
+  NODE_VER=$(node -v | cut -d'v' -f2 | cut -d'.' -f1)
+  if [ "$NODE_VER" -ge 18 ]; then
+    HAS_NODE=true
+    echo "✅ Node.js $(node -v)"
+  else
+    echo "⚠️  Node.js 版本过低 (需要 >= 18, 当前: $(node -v))"
+  fi
+fi
+
+if [ "$HAS_NODE" = false ]; then
+  echo "📥 Node.js 未安装，正在自动安装..."
+  if [ "$PLATFORM" = "macos" ]; then
+    if command -v brew &> /dev/null; then
+      brew install node
+    else
+      echo "⚠️  需要 Homebrew 来安装 Node.js"
+      echo "   安装 Homebrew: /bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
+    fi
+  else
+    if command -v apt-get &> /dev/null; then
+      curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash - 2>/dev/null
+      sudo apt-get install -y -qq nodejs
+    elif command -v yum &> /dev/null; then
+      curl -fsSL https://rpm.nodesource.com/setup_lts.x | sudo bash - 2>/dev/null
+      sudo yum install -y nodejs
+    elif command -v dnf &> /dev/null; then
+      curl -fsSL https://rpm.nodesource.com/setup_lts.x | sudo bash - 2>/dev/null
+      sudo dnf install -y nodejs
+    elif command -v pacman &> /dev/null; then
+      sudo pacman -S --noconfirm nodejs npm
+    fi
+  fi
+  if command -v node &> /dev/null; then
+    NODE_VER=$(node -v | cut -d'v' -f2 | cut -d'.' -f1)
+    if [ "$NODE_VER" -ge 18 ]; then
+      HAS_NODE=true
+      echo "✅ Node.js $(node -v)"
+    fi
+  fi
+fi
+
+# ── Auto-install Bun ──
+HAS_BUN=false
+if command -v bun &> /dev/null; then
+  HAS_BUN=true
+  echo "✅ Bun $(bun --version)"
+else
+  echo "📥 Bun 未安装，正在自动安装..."
+  if curl -fsSL https://bun.sh/install | bash 2>/dev/null; then
+    # bun installs to ~/.bun/bin, source it for current session
+    export BUN_INSTALL="$HOME/.bun"
+    export PATH="$BUN_INSTALL/bin:$PATH"
+    if command -v bun &> /dev/null; then
+      HAS_BUN=true
+      echo "✅ Bun $(bun --version)"
+    fi
+  fi
+  if [ "$HAS_BUN" = false ]; then
+    echo "⚠️  Bun 安装失败，将使用 Node.js"
+  fi
+fi
+
+if [ "$HAS_BUN" = false ] && [ "$HAS_NODE" = false ]; then
+  echo ""
+  echo "❌ 需要 Node.js >= 18 或 Bun，两者均安装失败"
+  echo "   请手动安装后重试"
   exit 1
 fi
 
@@ -49,7 +140,7 @@ fi
 
 # Install deps
 echo "📥 Installing dependencies..."
-if [ "$PKG" = "bun" ]; then
+if [ "$HAS_BUN" = true ]; then
   bun install --frozen-lockfile 2>/dev/null || bun install || echo "⚠️  Some postinstall scripts failed (non-fatal), continuing..."
 else
   npm ci 2>/dev/null || npm install || echo "⚠️  Some postinstall scripts failed (non-fatal), continuing..."
@@ -62,7 +153,7 @@ fi
 
 # Build
 echo "🔨 Building..."
-if [ "$PKG" = "bun" ]; then
+if [ "$HAS_BUN" = true ]; then
   bun run build
 else
   node build.ts
@@ -97,6 +188,14 @@ if [[ ":$PATH:" != *":$BIN_DIR:"* ]]; then
   fi
   export PATH="$BIN_DIR:$PATH"
   echo "✅ Added $BIN_DIR to PATH"
+fi
+
+# Also add bun to PATH in shell rc if installed
+if [ "$HAS_BUN" = true ] && [ -n "$SHELL_RC" ]; then
+  if ! grep -q 'bun/bin' "$SHELL_RC" 2>/dev/null; then
+    echo 'export BUN_INSTALL="$HOME/.bun"' >> "$SHELL_RC"
+    echo 'export PATH="$BUN_INSTALL/bin:$PATH"' >> "$SHELL_RC"
+  fi
 fi
 
 echo ""
