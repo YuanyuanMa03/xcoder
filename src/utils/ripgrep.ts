@@ -69,6 +69,19 @@ const getRipgrepConfig = memoize((): RipgrepConfig => {
     }
   }
 
+  // Try optional dependency first (npm installed, platform-specific)
+  const rgPkgName = `@yuanyuan20031001/xcoder-rg-${process.arch}-${process.platform}`
+  try {
+    const rgPkgDir = path.dirname(require.resolve(`${rgPkgName}/package.json`))
+    const command =
+      process.platform === 'win32'
+        ? path.resolve(rgPkgDir, 'rg.exe')
+        : path.resolve(rgPkgDir, 'rg')
+    return { mode: 'builtin', command, args: [] }
+  } catch {
+    // Optional dep not installed, fall back to vendor dir (dev/test mode)
+  }
+
   const rgRoot = path.resolve(__dirname, 'vendor', 'ripgrep')
   const command =
     process.platform === 'win32'
