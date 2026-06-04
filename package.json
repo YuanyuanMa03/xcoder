@@ -1,7 +1,7 @@
 {
   "name": "@yuanyuan20031001/xcoder",
   "version": "1.1.3",
-  "description": "Xcoder — 超越人类与 AI 边界的 AI 编程 CLI",
+  "description": "Xcoder — 超越人类与 AI 边界的 AI 编程 CLI | AI coding assistant that pushes beyond the boundary between human and AI",
   "type": "module",
   "author": "Xcoder <xcoder@users.noreply.github.com>",
   "repository": {
@@ -18,7 +18,21 @@
     "ai",
     "coding-assistant",
     "terminal",
-    "repl"
+    "repl",
+    "code-generation",
+    "developer-tools",
+    "ai-agent",
+    "llm",
+    "anthropic",
+    "claude",
+    "openai",
+    "multi-model",
+    "voice-input",
+    "browser-automation",
+    "code-review",
+    "pair-programming",
+    "中文",
+    "编程助手"
   ],
   "engines": {
     "bun": ">=1.3.0",
