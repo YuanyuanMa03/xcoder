@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, test } from 'bun:test'
 import {
   existsSync,
+  mkdirSync,
   mkdtempSync,
   readFileSync,
   rmSync,
@@ -25,6 +26,9 @@ beforeEach(() => {
   root = mkdtempSync(join(tmpdir(), 'skill-learning-smoke-'))
   previousCwd = process.cwd()
   process.chdir(root)
+  // Create .claude dir so getProjectDotDir() returns '.claude' (not '.xcoder')
+  // before the memoized result gets cached.
+  mkdirSync(join(root, '.claude'), { recursive: true })
   process.env = { ...originalEnv }
   process.env.CLAUDE_SKILL_LEARNING_HOME = join(root, 'learning-home')
   process.env.CLAUDE_CONFIG_DIR = join(root, 'config')

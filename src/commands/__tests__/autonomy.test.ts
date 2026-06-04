@@ -260,6 +260,10 @@ describe('/autonomy', () => {
   })
 
   test('status --deep reports local autonomy health surfaces', async () => {
+    // Create .claude dir BEFORE any code that memoizes getProjectDotDir,
+    // otherwise it caches '.xcoder' and never sees '.claude'.
+    await mkdir(join(tempDir, '.claude'), { recursive: true })
+
     const run = await createAutonomyQueuedPrompt({
       basePrompt: 'scheduled prompt',
       trigger: 'scheduled-task',
@@ -269,7 +273,6 @@ describe('/autonomy', () => {
     })
     expect(run).not.toBeNull()
 
-    await mkdir(join(tempDir, '.claude'), { recursive: true })
     await writeFile(
       join(tempDir, '.claude', 'scheduled_tasks.json'),
       JSON.stringify({
