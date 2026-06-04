@@ -30,5 +30,5 @@
     "packages/**/*.ts",
     "packages/**/*.tsx"
   ],
-  "exclude": ["node_modules", "packages/xcoder-vscode"]
+  "exclude": ["node_modules"]
 }
