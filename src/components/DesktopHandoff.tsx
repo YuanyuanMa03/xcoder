@@ -57,13 +57,13 @@ export function DesktopHandoff({ onDone }: Props): React.ReactNode {
       const installStatus = await getDesktopInstallStatus();
 
       if (installStatus.status === 'not-installed') {
-        setDownloadMessage('xclaw Desktop is not installed.');
+        setDownloadMessage('xcoder Desktop is not installed.');
         setState('prompt-download');
         return;
       }
 
       if (installStatus.status === 'version-too-old') {
-        setDownloadMessage(`xclaw Desktop needs to be updated (found v${installStatus.version}, need v1.1.2396+).`);
+        setDownloadMessage(`xcoder Desktop needs to be updated (found v${installStatus.version}, need v1.1.2396+).`);
         setState('prompt-download');
         return;
       }
@@ -77,7 +77,7 @@ export function DesktopHandoff({ onDone }: Props): React.ReactNode {
       const result = await openCurrentSessionInDesktop();
 
       if (!result.success) {
-        setError(result.error ?? 'Failed to open xclaw Desktop');
+        setError(result.error ?? 'Failed to open Xcoder Desktop');
         setState('error');
         return;
       }
@@ -88,7 +88,7 @@ export function DesktopHandoff({ onDone }: Props): React.ReactNode {
       // Give the user a moment to see the success message
       setTimeout(
         async (onDone: Props['onDone']) => {
-          onDone('Session transferred to xclaw Desktop', { display: 'system' });
+          onDone('Session transferred to Xcoder Desktop', { display: 'system' });
           await gracefulShutdown(0, 'other');
         },
         500,
@@ -121,10 +121,10 @@ export function DesktopHandoff({ onDone }: Props): React.ReactNode {
   }
 
   const messages: Record<Exclude<DesktopHandoffState, 'error' | 'prompt-download'>, string> = {
-    checking: 'Checking for xclaw Desktop…',
+    checking: 'Checking for Xcoder Desktop…',
     flushing: 'Saving session…',
-    opening: 'Opening xclaw Desktop…',
-    success: 'Opening in xclaw Desktop…',
+    opening: 'Opening xcoder Desktop…',
+    success: 'Opening in Xcoder Desktop…',
   };
 
   return <LoadingState message={messages[state]} />;

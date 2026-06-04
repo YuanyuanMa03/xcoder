@@ -1,6 +1,6 @@
 import type { PermissionMode } from '../types/permissions.js'
 
-export interface XclawMode {
+export interface XcoderMode {
   name: string
   slug: string
   description: string

@@ -1,8 +1,8 @@
 /**
- * Session Tracing for xclaw using OpenTelemetry (BETA)
+ * Session Tracing for Xcoder using OpenTelemetry (BETA)
  *
  * This module provides a high-level API for creating and managing spans
- * to trace xclaw workflows. Each user interaction creates a root
+ * to trace xcoder workflows. Each user interaction creates a root
  * interaction span, which contains operation spans (LLM requests, tool calls, etc.).
  *
  * Requirements:

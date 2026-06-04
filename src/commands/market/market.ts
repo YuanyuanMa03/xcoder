@@ -49,7 +49,7 @@ export const call: LocalCommandCall = async args => {
       return {
         type: 'text',
         value: [
-          'xclaw Plugin Marketplace',
+          'Xcoder Plugin Marketplace',
           '',
           'Available plugins:',
           ...lines,

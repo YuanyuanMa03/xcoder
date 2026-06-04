@@ -15,7 +15,7 @@ import {
 import { truncate } from '../../utils/format.js';
 import { getDisplayPath } from '../../utils/file.js';
 import { Clawd } from './Clawd.js';
-import { XCLAW_TAGLINE } from '../../constants/xclaw.js';
+import { XCODER_TAGLINE } from '../../constants/xcoder.js';
 import { FeedColumn } from './FeedColumn.js';
 import {
   createRecentActivityFeed,
@@ -85,7 +85,7 @@ export function LogoV2(): React.ReactNode {
   const showOverageCreditUpsell = useShowOverageCreditUpsell();
   const agent = useAppState(s => s.agent);
   const effortValue = useAppState(s => s.effortValue);
-  const xclawMode = useCurrentMode();
+  const xcoderMode = useCurrentMode();
 
   const config = getGlobalConfig();
 
@@ -206,9 +206,9 @@ export function LogoV2(): React.ReactNode {
   const layoutMode = getLayoutMode(columns);
 
   const userTheme = resolveThemeSetting(getGlobalConfig().theme);
-  const modeColor = xclawMode.ui.accentColor || 'claude';
-  const borderTitle = ` ${color(modeColor as keyof Theme, userTheme)('xclaw')} ${color('inactive', userTheme)(`v${version}`)} `;
-  const compactBorderTitle = color(modeColor as keyof Theme, userTheme)(' xclaw ');
+  const modeColor = xcoderMode.ui.accentColor || 'claude';
+  const borderTitle = ` ${color(modeColor as keyof Theme, userTheme)('xcoder')} ${color('inactive', userTheme)(`v${version}`)} `;
+  const compactBorderTitle = color(modeColor as keyof Theme, userTheme)(' xcoder ');
 
   // Early return for compact mode
   if (layoutMode === 'compact') {
@@ -248,7 +248,7 @@ export function LogoV2(): React.ReactNode {
           >
             <Text bold>{welcomeMessage}</Text>
             <Text italic dimColor>
-              {XCLAW_TAGLINE}
+              {XCODER_TAGLINE}
             </Text>
             <Box marginY={1}>
               <Clawd bodyColor={modeColor} />
@@ -318,7 +318,7 @@ export function LogoV2(): React.ReactNode {
                 <Text bold>{welcomeMessage}</Text>
               </Box>
               <Text italic dimColor>
-                {XCLAW_TAGLINE}
+                {XCODER_TAGLINE}
               </Text>
 
               <Clawd bodyColor={modeColor} />

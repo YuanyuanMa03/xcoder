@@ -1,5 +1,5 @@
 import type { SettingSource } from 'src/utils/settings/constants.js'
-import type { AgentDefinition } from '@xclaw/builtin-tools/tools/AgentTool/loadAgentsDir.js'
+import type { AgentDefinition } from '@xcoder/builtin-tools/tools/AgentTool/loadAgentsDir.js'
 import { getProjectDotDir } from '../../utils/envUtils.js'
 
 export function getAgentPaths() {

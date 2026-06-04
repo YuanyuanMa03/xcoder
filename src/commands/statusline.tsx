@@ -1,10 +1,10 @@
 import type { ContentBlockParam } from '@anthropic-ai/sdk/resources/index.mjs';
 import type { Command } from '../commands.js';
-import { AGENT_TOOL_NAME } from '@xclaw/builtin-tools/tools/AgentTool/constants.js';
+import { AGENT_TOOL_NAME } from '@xcoder/builtin-tools/tools/AgentTool/constants.js';
 
 const statusline = {
   type: 'prompt',
-  description: "Set up xclaw's status line UI",
+  description: "Set up xcoder's status line UI",
   contentLength: 0, // Dynamic content
   aliases: [],
   name: 'statusline',

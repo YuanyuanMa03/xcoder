@@ -1,92 +1,93 @@
 // biome-ignore-all assist/source/organizeImports: ANT-ONLY import markers must not be reordered
 import { toolMatchesName, type Tool, type Tools } from './Tool.js'
-import { AgentTool } from '@xclaw/builtin-tools/tools/AgentTool/AgentTool.js'
-import { SkillTool } from '@xclaw/builtin-tools/tools/SkillTool/SkillTool.js'
-import { BashTool } from '@xclaw/builtin-tools/tools/BashTool/BashTool.js'
-import { FileEditTool } from '@xclaw/builtin-tools/tools/FileEditTool/FileEditTool.js'
-import { FileReadTool } from '@xclaw/builtin-tools/tools/FileReadTool/FileReadTool.js'
-import { FileWriteTool } from '@xclaw/builtin-tools/tools/FileWriteTool/FileWriteTool.js'
-import { GlobTool } from '@xclaw/builtin-tools/tools/GlobTool/GlobTool.js'
-import { NotebookEditTool } from '@xclaw/builtin-tools/tools/NotebookEditTool/NotebookEditTool.js'
-import { WebFetchTool } from '@xclaw/builtin-tools/tools/WebFetchTool/WebFetchTool.js'
-import { TaskStopTool } from '@xclaw/builtin-tools/tools/TaskStopTool/TaskStopTool.js'
-import { BriefTool } from '@xclaw/builtin-tools/tools/BriefTool/BriefTool.js'
+import { AgentTool } from '@xcoder/builtin-tools/tools/AgentTool/AgentTool.js'
+import { SkillTool } from '@xcoder/builtin-tools/tools/SkillTool/SkillTool.js'
+import { BashTool } from '@xcoder/builtin-tools/tools/BashTool/BashTool.js'
+import { FileEditTool } from '@xcoder/builtin-tools/tools/FileEditTool/FileEditTool.js'
+import { FileReadTool } from '@xcoder/builtin-tools/tools/FileReadTool/FileReadTool.js'
+import { FileWriteTool } from '@xcoder/builtin-tools/tools/FileWriteTool/FileWriteTool.js'
+import { GlobTool } from '@xcoder/builtin-tools/tools/GlobTool/GlobTool.js'
+import { NotebookEditTool } from '@xcoder/builtin-tools/tools/NotebookEditTool/NotebookEditTool.js'
+import { WebFetchTool } from '@xcoder/builtin-tools/tools/WebFetchTool/WebFetchTool.js'
+import { TaskStopTool } from '@xcoder/builtin-tools/tools/TaskStopTool/TaskStopTool.js'
+import { BriefTool } from '@xcoder/builtin-tools/tools/BriefTool/BriefTool.js'
 // Dead code elimination: conditional import for ant-only tools
 /* eslint-disable custom-rules/no-process-env-top-level, @typescript-eslint/no-require-imports */
 const REPLTool =
   process.env.USER_TYPE === 'ant'
-    ? require('@xclaw/builtin-tools/tools/REPLTool/REPLTool.js').REPLTool
+    ? require('@xcoder/builtin-tools/tools/REPLTool/REPLTool.js').REPLTool
     : null
 const SuggestBackgroundPRTool =
   process.env.USER_TYPE === 'ant'
-    ? require('@xclaw/builtin-tools/tools/SuggestBackgroundPRTool/SuggestBackgroundPRTool.js')
+    ? require('@xcoder/builtin-tools/tools/SuggestBackgroundPRTool/SuggestBackgroundPRTool.js')
         .SuggestBackgroundPRTool
     : null
 const SleepTool =
   feature('PROACTIVE') || feature('KAIROS')
-    ? require('@xclaw/builtin-tools/tools/SleepTool/SleepTool.js').SleepTool
+    ? require('@xcoder/builtin-tools/tools/SleepTool/SleepTool.js').SleepTool
     : null
 const cronTools = [
-  require('@xclaw/builtin-tools/tools/ScheduleCronTool/CronCreateTool.js')
+  require('@xcoder/builtin-tools/tools/ScheduleCronTool/CronCreateTool.js')
     .CronCreateTool,
-  require('@xclaw/builtin-tools/tools/ScheduleCronTool/CronDeleteTool.js')
+  require('@xcoder/builtin-tools/tools/ScheduleCronTool/CronDeleteTool.js')
     .CronDeleteTool,
-  require('@xclaw/builtin-tools/tools/ScheduleCronTool/CronListTool.js')
+  require('@xcoder/builtin-tools/tools/ScheduleCronTool/CronListTool.js')
     .CronListTool,
 ]
 const RemoteTriggerTool = feature('AGENT_TRIGGERS_REMOTE')
-  ? require('@xclaw/builtin-tools/tools/RemoteTriggerTool/RemoteTriggerTool.js')
+  ? require('@xcoder/builtin-tools/tools/RemoteTriggerTool/RemoteTriggerTool.js')
       .RemoteTriggerTool
   : null
 const MonitorTool = feature('MONITOR_TOOL')
-  ? require('@xclaw/builtin-tools/tools/MonitorTool/MonitorTool.js').MonitorTool
+  ? require('@xcoder/builtin-tools/tools/MonitorTool/MonitorTool.js')
+      .MonitorTool
   : null
 const SendUserFileTool = feature('KAIROS')
-  ? require('@xclaw/builtin-tools/tools/SendUserFileTool/SendUserFileTool.js')
+  ? require('@xcoder/builtin-tools/tools/SendUserFileTool/SendUserFileTool.js')
       .SendUserFileTool
   : null
 const PushNotificationTool =
   feature('KAIROS') || feature('KAIROS_PUSH_NOTIFICATION')
-    ? require('@xclaw/builtin-tools/tools/PushNotificationTool/PushNotificationTool.js')
+    ? require('@xcoder/builtin-tools/tools/PushNotificationTool/PushNotificationTool.js')
         .PushNotificationTool
     : null
 const SubscribePRTool = feature('KAIROS_GITHUB_WEBHOOKS')
-  ? require('@xclaw/builtin-tools/tools/SubscribePRTool/SubscribePRTool.js')
+  ? require('@xcoder/builtin-tools/tools/SubscribePRTool/SubscribePRTool.js')
       .SubscribePRTool
   : null
 /* eslint-enable custom-rules/no-process-env-top-level, @typescript-eslint/no-require-imports */
-import { TaskOutputTool } from '@xclaw/builtin-tools/tools/TaskOutputTool/TaskOutputTool.js'
-import { WebSearchTool } from '@xclaw/builtin-tools/tools/WebSearchTool/WebSearchTool.js'
-import { TodoWriteTool } from '@xclaw/builtin-tools/tools/TodoWriteTool/TodoWriteTool.js'
-import { ExitPlanModeV2Tool } from '@xclaw/builtin-tools/tools/ExitPlanModeTool/ExitPlanModeV2Tool.js'
-import { TestingPermissionTool } from '@xclaw/builtin-tools/tools/testing/TestingPermissionTool.js'
-import { GrepTool } from '@xclaw/builtin-tools/tools/GrepTool/GrepTool.js'
-import { TungstenTool } from '@xclaw/builtin-tools/tools/TungstenTool/TungstenTool.js'
+import { TaskOutputTool } from '@xcoder/builtin-tools/tools/TaskOutputTool/TaskOutputTool.js'
+import { WebSearchTool } from '@xcoder/builtin-tools/tools/WebSearchTool/WebSearchTool.js'
+import { TodoWriteTool } from '@xcoder/builtin-tools/tools/TodoWriteTool/TodoWriteTool.js'
+import { ExitPlanModeV2Tool } from '@xcoder/builtin-tools/tools/ExitPlanModeTool/ExitPlanModeV2Tool.js'
+import { TestingPermissionTool } from '@xcoder/builtin-tools/tools/testing/TestingPermissionTool.js'
+import { GrepTool } from '@xcoder/builtin-tools/tools/GrepTool/GrepTool.js'
+import { TungstenTool } from '@xcoder/builtin-tools/tools/TungstenTool/TungstenTool.js'
 // Lazy require to break circular dependency: tools.ts -> TeamCreateTool/TeamDeleteTool -> ... -> tools.ts
 /* eslint-disable @typescript-eslint/no-require-imports */
 const getTeamCreateTool = () =>
-  require('@xclaw/builtin-tools/tools/TeamCreateTool/TeamCreateTool.js')
-    .TeamCreateTool as typeof import('@xclaw/builtin-tools/tools/TeamCreateTool/TeamCreateTool.js').TeamCreateTool
+  require('@xcoder/builtin-tools/tools/TeamCreateTool/TeamCreateTool.js')
+    .TeamCreateTool as typeof import('@xcoder/builtin-tools/tools/TeamCreateTool/TeamCreateTool.js').TeamCreateTool
 const getTeamDeleteTool = () =>
-  require('@xclaw/builtin-tools/tools/TeamDeleteTool/TeamDeleteTool.js')
-    .TeamDeleteTool as typeof import('@xclaw/builtin-tools/tools/TeamDeleteTool/TeamDeleteTool.js').TeamDeleteTool
+  require('@xcoder/builtin-tools/tools/TeamDeleteTool/TeamDeleteTool.js')
+    .TeamDeleteTool as typeof import('@xcoder/builtin-tools/tools/TeamDeleteTool/TeamDeleteTool.js').TeamDeleteTool
 const getSendMessageTool = () =>
-  require('@xclaw/builtin-tools/tools/SendMessageTool/SendMessageTool.js')
-    .SendMessageTool as typeof import('@xclaw/builtin-tools/tools/SendMessageTool/SendMessageTool.js').SendMessageTool
+  require('@xcoder/builtin-tools/tools/SendMessageTool/SendMessageTool.js')
+    .SendMessageTool as typeof import('@xcoder/builtin-tools/tools/SendMessageTool/SendMessageTool.js').SendMessageTool
 /* eslint-enable @typescript-eslint/no-require-imports */
-import { AskUserQuestionTool } from '@xclaw/builtin-tools/tools/AskUserQuestionTool/AskUserQuestionTool.js'
-import { LSPTool } from '@xclaw/builtin-tools/tools/LSPTool/LSPTool.js'
-import { ListMcpResourcesTool } from '@xclaw/builtin-tools/tools/ListMcpResourcesTool/ListMcpResourcesTool.js'
-import { ReadMcpResourceTool } from '@xclaw/builtin-tools/tools/ReadMcpResourceTool/ReadMcpResourceTool.js'
-import { ToolSearchTool } from '@xclaw/builtin-tools/tools/ToolSearchTool/ToolSearchTool.js'
-import { EnterPlanModeTool } from '@xclaw/builtin-tools/tools/EnterPlanModeTool/EnterPlanModeTool.js'
-import { EnterWorktreeTool } from '@xclaw/builtin-tools/tools/EnterWorktreeTool/EnterWorktreeTool.js'
-import { ExitWorktreeTool } from '@xclaw/builtin-tools/tools/ExitWorktreeTool/ExitWorktreeTool.js'
-import { ConfigTool } from '@xclaw/builtin-tools/tools/ConfigTool/ConfigTool.js'
-import { TaskCreateTool } from '@xclaw/builtin-tools/tools/TaskCreateTool/TaskCreateTool.js'
-import { TaskGetTool } from '@xclaw/builtin-tools/tools/TaskGetTool/TaskGetTool.js'
-import { TaskUpdateTool } from '@xclaw/builtin-tools/tools/TaskUpdateTool/TaskUpdateTool.js'
-import { TaskListTool } from '@xclaw/builtin-tools/tools/TaskListTool/TaskListTool.js'
+import { AskUserQuestionTool } from '@xcoder/builtin-tools/tools/AskUserQuestionTool/AskUserQuestionTool.js'
+import { LSPTool } from '@xcoder/builtin-tools/tools/LSPTool/LSPTool.js'
+import { ListMcpResourcesTool } from '@xcoder/builtin-tools/tools/ListMcpResourcesTool/ListMcpResourcesTool.js'
+import { ReadMcpResourceTool } from '@xcoder/builtin-tools/tools/ReadMcpResourceTool/ReadMcpResourceTool.js'
+import { ToolSearchTool } from '@xcoder/builtin-tools/tools/ToolSearchTool/ToolSearchTool.js'
+import { EnterPlanModeTool } from '@xcoder/builtin-tools/tools/EnterPlanModeTool/EnterPlanModeTool.js'
+import { EnterWorktreeTool } from '@xcoder/builtin-tools/tools/EnterWorktreeTool/EnterWorktreeTool.js'
+import { ExitWorktreeTool } from '@xcoder/builtin-tools/tools/ExitWorktreeTool/ExitWorktreeTool.js'
+import { ConfigTool } from '@xcoder/builtin-tools/tools/ConfigTool/ConfigTool.js'
+import { TaskCreateTool } from '@xcoder/builtin-tools/tools/TaskCreateTool/TaskCreateTool.js'
+import { TaskGetTool } from '@xcoder/builtin-tools/tools/TaskGetTool/TaskGetTool.js'
+import { TaskUpdateTool } from '@xcoder/builtin-tools/tools/TaskUpdateTool/TaskUpdateTool.js'
+import { TaskListTool } from '@xcoder/builtin-tools/tools/TaskListTool/TaskListTool.js'
 import uniqBy from 'lodash-es/uniqBy.js'
 import { isToolSearchEnabledOptimistic } from './utils/toolSearch.js'
 import { isTodoV2Enabled } from './utils/tasks.js'
@@ -94,11 +95,11 @@ import { isTodoV2Enabled } from './utils/tasks.js'
 /* eslint-disable custom-rules/no-process-env-top-level, @typescript-eslint/no-require-imports */
 const VerifyPlanExecutionTool =
   process.env.CLAUDE_CODE_VERIFY_PLAN === 'true'
-    ? require('@xclaw/builtin-tools/tools/VerifyPlanExecutionTool/VerifyPlanExecutionTool.js')
+    ? require('@xcoder/builtin-tools/tools/VerifyPlanExecutionTool/VerifyPlanExecutionTool.js')
         .VerifyPlanExecutionTool
     : null
 /* eslint-enable custom-rules/no-process-env-top-level, @typescript-eslint/no-require-imports */
-import { SYNTHETIC_OUTPUT_TOOL_NAME } from '@xclaw/builtin-tools/tools/SyntheticOutputTool/SyntheticOutputTool.js'
+import { SYNTHETIC_OUTPUT_TOOL_NAME } from '@xcoder/builtin-tools/tools/SyntheticOutputTool/SyntheticOutputTool.js'
 export {
   ALL_AGENT_DISALLOWED_TOOLS,
   CUSTOM_AGENT_DISALLOWED_TOOLS,
@@ -109,43 +110,43 @@ import { feature } from 'bun:bundle'
 // Dead code elimination: conditional import for OVERFLOW_TEST_TOOL
 /* eslint-disable custom-rules/no-process-env-top-level, @typescript-eslint/no-require-imports */
 const OverflowTestTool = feature('OVERFLOW_TEST_TOOL')
-  ? require('@xclaw/builtin-tools/tools/OverflowTestTool/OverflowTestTool.js')
+  ? require('@xcoder/builtin-tools/tools/OverflowTestTool/OverflowTestTool.js')
       .OverflowTestTool
   : null
 const CtxInspectTool = feature('CONTEXT_COLLAPSE')
-  ? require('@xclaw/builtin-tools/tools/CtxInspectTool/CtxInspectTool.js')
+  ? require('@xcoder/builtin-tools/tools/CtxInspectTool/CtxInspectTool.js')
       .CtxInspectTool
   : null
 const TerminalCaptureTool = feature('TERMINAL_PANEL')
-  ? require('@xclaw/builtin-tools/tools/TerminalCaptureTool/TerminalCaptureTool.js')
+  ? require('@xcoder/builtin-tools/tools/TerminalCaptureTool/TerminalCaptureTool.js')
       .TerminalCaptureTool
   : null
 const WebBrowserTool = feature('WEB_BROWSER_TOOL')
-  ? require('@xclaw/builtin-tools/tools/WebBrowserTool/WebBrowserTool.js')
+  ? require('@xcoder/builtin-tools/tools/WebBrowserTool/WebBrowserTool.js')
       .WebBrowserTool
   : null
 const coordinatorModeModule = feature('COORDINATOR_MODE')
   ? (require('./coordinator/coordinatorMode.js') as typeof import('./coordinator/coordinatorMode.js'))
   : null
 const SnipTool = feature('HISTORY_SNIP')
-  ? require('@xclaw/builtin-tools/tools/SnipTool/SnipTool.js').SnipTool
+  ? require('@xcoder/builtin-tools/tools/SnipTool/SnipTool.js').SnipTool
   : null
 const DiscoverSkillsTool = feature('EXPERIMENTAL_SKILL_SEARCH')
-  ? require('@xclaw/builtin-tools/tools/DiscoverSkillsTool/DiscoverSkillsTool.js')
+  ? require('@xcoder/builtin-tools/tools/DiscoverSkillsTool/DiscoverSkillsTool.js')
       .DiscoverSkillsTool
   : null
 const ReviewArtifactTool = feature('REVIEW_ARTIFACT')
-  ? require('@xclaw/builtin-tools/tools/ReviewArtifactTool/ReviewArtifactTool.js')
+  ? require('@xcoder/builtin-tools/tools/ReviewArtifactTool/ReviewArtifactTool.js')
       .ReviewArtifactTool
   : null
 const ListPeersTool = feature('UDS_INBOX')
-  ? require('@xclaw/builtin-tools/tools/ListPeersTool/ListPeersTool.js')
+  ? require('@xcoder/builtin-tools/tools/ListPeersTool/ListPeersTool.js')
       .ListPeersTool
   : null
 const WorkflowTool = feature('WORKFLOW_SCRIPTS')
   ? (() => {
-      require('@xclaw/builtin-tools/tools/WorkflowTool/bundled/index.js').initBundledWorkflows()
-      return require('@xclaw/builtin-tools/tools/WorkflowTool/WorkflowTool.js')
+      require('@xcoder/builtin-tools/tools/WorkflowTool/bundled/index.js').initBundledWorkflows()
+      return require('@xcoder/builtin-tools/tools/WorkflowTool/WorkflowTool.js')
         .WorkflowTool
     })()
   : null
@@ -161,13 +162,13 @@ import {
   REPL_TOOL_NAME,
   REPL_ONLY_TOOLS,
   isReplModeEnabled,
-} from '@xclaw/builtin-tools/tools/REPLTool/constants.js'
+} from '@xcoder/builtin-tools/tools/REPLTool/constants.js'
 export { REPL_ONLY_TOOLS }
 /* eslint-disable @typescript-eslint/no-require-imports */
 const getPowerShellTool = () => {
   if (!isPowerShellToolEnabled()) return null
   return (
-    require('@xclaw/builtin-tools/tools/PowerShellTool/PowerShellTool.js') as typeof import('@xclaw/builtin-tools/tools/PowerShellTool/PowerShellTool.js')
+    require('@xcoder/builtin-tools/tools/PowerShellTool/PowerShellTool.js') as typeof import('@xcoder/builtin-tools/tools/PowerShellTool/PowerShellTool.js')
   ).PowerShellTool
 }
 /* eslint-enable @typescript-eslint/no-require-imports */

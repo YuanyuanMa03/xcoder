@@ -1,6 +1,6 @@
 // Host subprocess environment adapter
 
-import type { SubprocessEnvProvider } from '@xclaw/mcp-client'
+import type { SubprocessEnvProvider } from '@xcoder/mcp-client'
 import { subprocessEnv } from '../../../utils/subprocessEnv.js'
 
 /**

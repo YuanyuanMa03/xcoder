@@ -155,7 +155,7 @@ export class PaneBackendExecutor implements TeammateExecutor {
         await this.backend.enablePaneBorderStatus()
       }
 
-      // Build the command to spawn xclaw with teammate identity
+      // Build the command to spawn xcoder with teammate identity
       const binaryPath = getTeammateCommand()
 
       // Build teammate identity CLI args

@@ -1,9 +1,9 @@
 import type { Tools } from '../../Tool.js'
-import { resolveAgentTools } from '@xclaw/builtin-tools/tools/AgentTool/agentToolUtils.js'
+import { resolveAgentTools } from '@xcoder/builtin-tools/tools/AgentTool/agentToolUtils.js'
 import type {
   AgentDefinition,
   CustomAgentDefinition,
-} from '@xclaw/builtin-tools/tools/AgentTool/loadAgentsDir.js'
+} from '@xcoder/builtin-tools/tools/AgentTool/loadAgentsDir.js'
 import { getAgentSourceDisplayName } from './utils.js'
 
 export type AgentValidationResult = {

@@ -5,7 +5,7 @@ export default {
   type: 'local-jsx',
   name: 'mode',
   get description() {
-    return `Switch xclaw mode (currently: ${getCurrentMode().icon} ${getCurrentMode().name})`
+    return `Switch xcoder mode (currently: ${getCurrentMode().icon} ${getCurrentMode().name})`
   },
   argumentHint: '[mode-slug]',
   load: () => import('./mode.js'),

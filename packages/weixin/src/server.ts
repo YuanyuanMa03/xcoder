@@ -38,7 +38,7 @@ function formatPermissionRequestMessage(
   request: ChannelPermissionRequestParams,
 ): string {
   return [
-    'xclaw needs your approval.',
+    'xcoder needs your approval.',
     '',
     `Tool: ${request.tool_name}`,
     `Reason: ${request.description}`,

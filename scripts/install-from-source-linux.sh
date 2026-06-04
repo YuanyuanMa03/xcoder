@@ -11,7 +11,7 @@ echo " ╚═╝  ╚═╝ ╚═════╝╚══════╝╚═�
 echo ""
 echo "  超越人类与 AI 的边界"
 echo ""
-echo "📦 从源码安装 xclaw (Linux)..."
+echo "📦 从源码安装 xcoder (Linux)..."
 echo ""
 
 # Check for Git
@@ -50,7 +50,7 @@ if command -v node &> /dev/null; then
 fi
 
 # Clone repo
-INSTALL_DIR="$HOME/.xclaw-src"
+INSTALL_DIR="$HOME/.xcoder-src"
 echo ""
 echo "📥 克隆仓库到 $INSTALL_DIR..."
 
@@ -59,7 +59,7 @@ if [ -d "$INSTALL_DIR" ]; then
   cd "$INSTALL_DIR"
   git pull
 else
-  git clone https://github.com/YuanyuanMa03/xclaw.git "$INSTALL_DIR"
+  git clone https://github.com/YuanyuanMa03/xcoder.git "$INSTALL_DIR"
   cd "$INSTALL_DIR"
 fi
 
@@ -110,7 +110,7 @@ else
   if [[ ":$PATH:" != *":$INSTALL_BIN:"* ]]; then
     if [ -n "$SHELL_RC" ]; then
       echo '' >> "$SHELL_RC"
-      echo '# xclaw' >> "$SHELL_RC"
+      echo '# xcoder' >> "$SHELL_RC"
       echo "export PATH=\"$INSTALL_BIN:\$PATH\"" >> "$SHELL_RC"
     fi
     export PATH="$INSTALL_BIN:$PATH"
@@ -118,15 +118,15 @@ else
   fi
 fi
 
-ln -sf "$INSTALL_DIR/dist/cli-node.js" "$INSTALL_BIN/xclaw"
+ln -sf "$INSTALL_DIR/dist/cli-node.js" "$INSTALL_BIN/xcoder"
 chmod +x "$INSTALL_DIR/dist/cli-node.js"
 
 echo ""
-echo "✅ xclaw 已全局安装!"
+echo "✅ xcoder 已全局安装!"
 echo ""
 echo "🚀 开始使用:"
-echo "   xclaw              # 启动"
-echo "   xclaw --version    # 查看版本"
+echo "   xcoder              # 启动"
+echo "   xcoder --version    # 查看版本"
 echo ""
 echo "📝 首次配置:"
 echo "   启动后输入 /login 配置 API"

@@ -1,6 +1,6 @@
 // Host HTTP config adapter — bridges getUserAgent/getSessionId to mcp-client's HttpConfig interface
 
-import type { HttpConfig } from '@xclaw/mcp-client'
+import type { HttpConfig } from '@xcoder/mcp-client'
 import { getMCPUserAgent } from '../../../utils/http.js'
 import { getSessionId } from '../../../bootstrap/state.js'
 

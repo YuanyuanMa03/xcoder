@@ -16,7 +16,7 @@ import {
 } from '../../skills/loadSkillsDir.js'
 import { resetSentSkillNames } from '../attachments.js'
 import { registerCleanup } from '../cleanupRegistry.js'
-import { getProjectDotDir, getXclawConfigHomeDir } from '../envUtils.js'
+import { getProjectDotDir, getXcoderConfigHomeDir } from '../envUtils.js'
 import { logForDebugging } from '../debug.js'
 import { getFsImplementation } from '../fsOperations.js'
 import { executeConfigChangeHooks, hasBlockingResult } from '../hooks.js'
@@ -195,26 +195,26 @@ export async function getWatchablePaths(): Promise<string[]> {
     }
   }
 
-  // xclaw user skills directory (~/.xclaw/skills)
-  const xclawUserSkillsPath = platformPath.join(
-    getXclawConfigHomeDir(),
+  // xcoder user skills directory (~// xcoder/skills)
+  const xcoderUserSkillsPath = platformPath.join(
+    getXcoderConfigHomeDir(),
     'skills',
   )
   try {
-    await fs.stat(xclawUserSkillsPath)
-    paths.push(xclawUserSkillsPath)
+    await fs.stat(xcoderUserSkillsPath)
+    paths.push(xcoderUserSkillsPath)
   } catch {
     // Path doesn't exist, skip it
   }
 
-  // xclaw user commands directory (~/.xclaw/commands)
-  const xclawUserCommandsPath = platformPath.join(
-    getXclawConfigHomeDir(),
+  // xcoder user commands directory (~// xcoder/commands)
+  const xcoderUserCommandsPath = platformPath.join(
+    getXcoderConfigHomeDir(),
     'commands',
   )
   try {
-    await fs.stat(xclawUserCommandsPath)
-    paths.push(xclawUserCommandsPath)
+    await fs.stat(xcoderUserCommandsPath)
+    paths.push(xcoderUserCommandsPath)
   } catch {
     // Path doesn't exist, skip it
   }

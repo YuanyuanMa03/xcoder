@@ -22,12 +22,12 @@ export function ThinkingToggle({ currentValue, onSelect, onCancel, isMidConversa
     {
       value: 'true',
       label: 'Enabled',
-      description: 'xclaw will think before responding',
+      description: 'xcoder will think before responding',
     },
     {
       value: 'false',
       label: 'Disabled',
-      description: 'xclaw will respond without extended thinking',
+      description: 'xcoder will respond without extended thinking',
     },
   ];
 

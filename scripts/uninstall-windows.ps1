@@ -1,13 +1,13 @@
-# xclaw Windows Uninstaller
+# xcoder Windows Uninstaller
 $ErrorActionPreference = "Continue"
 
 Write-Host ""
-Write-Host "🐾 卸载 xclaw (Windows)..."
+Write-Host "🐾 卸载 xcoder (Windows)..."
 Write-Host ""
 
 # Remove from install directory
-$installDir = "$env:LOCALAPPDATA\xclaw"
-$cmdPath = "$installDir\xclaw.cmd"
+$installDir = "$env:LOCALAPPDATA\xcoder"
+$cmdPath = "$installDir\xcoder.cmd"
 
 if (Test-Path $cmdPath) {
     Remove-Item $cmdPath -Force
@@ -25,7 +25,7 @@ if ($currentPath -like "*$installDir*") {
 }
 
 # Ask about source directory
-$sourceDir = "$env:USERPROFILE\.xclaw-src"
+$sourceDir = "$env:USERPROFILE\.xcoder-src"
 if (Test-Path $sourceDir) {
     Write-Host ""
     $confirm = Read-Host "是否删除源码目录 $sourceDir? (y/N)"
@@ -38,20 +38,20 @@ if (Test-Path $sourceDir) {
 }
 
 # Ask about config
-$xclawDir = "$env:USERPROFILE\.xclaw"
-if (Test-Path $xclawDir) {
+$xcoderDir = "$env:USERPROFILE\.xcoder"
+if (Test-Path $xcoderDir) {
     Write-Host ""
-    $confirm = Read-Host "是否删除配置文件 $xclawDir? (y/N)"
+    $confirm = Read-Host "是否删除配置文件 $xcoderDir? (y/N)"
     if ($confirm -eq 'y' -or $confirm -eq 'Y') {
-        Remove-Item $xclawDir -Recurse -Force
-        Write-Host "✅ 已删除 $xclawDir"
+        Remove-Item $xcoderDir -Recurse -Force
+        Write-Host "✅ 已删除 $xcoderDir"
     } else {
-        Write-Host "⏭  保留 $xclawDir"
+        Write-Host "⏭  保留 $xcoderDir"
     }
 }
 
 Write-Host ""
-Write-Host "✅ xclaw 卸载完成!"
+Write-Host "✅ xcoder 卸载完成!"
 Write-Host ""
 Write-Host "注意: 请重启终端使 PATH 变更生效"
 Write-Host ""

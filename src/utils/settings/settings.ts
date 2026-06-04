@@ -15,7 +15,7 @@ import { logForDiagnosticsNoPII } from '../diagLogs.js'
 import {
   getClaudeConfigHomeDir,
   getProjectDotDir,
-  getXclawConfigHomeDir,
+  getXcoderConfigHomeDir,
   isEnvTruthy,
 } from '../envUtils.js'
 import { getErrnoCode, isENOENT } from '../errors.js'
@@ -245,13 +245,13 @@ export function getSettingsRootPathForSource(source: SettingSource): string {
   switch (source) {
     case 'userSettings':
       return resolve(getClaudeConfigHomeDir())
-    case 'xclawUserSettings':
-      return resolve(getXclawConfigHomeDir())
+    case 'xcoderUserSettings':
+      return resolve(getXcoderConfigHomeDir())
     case 'policySettings':
     case 'projectSettings':
     case 'localSettings':
-    case 'xclawProjectSettings':
-    case 'xclawLocalSettings': {
+    case 'xcoderProjectSettings':
+    case 'xcoderLocalSettings': {
       return resolve(getOriginalCwd())
     }
     case 'flagSettings': {
@@ -289,12 +289,12 @@ export function getSettingsFilePathForSource(
         getSettingsRootPathForSource(source),
         getUserSettingsFilePath(),
       )
-    case 'xclawUserSettings':
-      return join(getXclawConfigHomeDir(), 'settings.json')
+    case 'xcoderUserSettings':
+      return join(getXcoderConfigHomeDir(), 'settings.json')
     case 'projectSettings':
     case 'localSettings':
-    case 'xclawProjectSettings':
-    case 'xclawLocalSettings': {
+    case 'xcoderProjectSettings':
+    case 'xcoderLocalSettings': {
       return join(
         getSettingsRootPathForSource(source),
         getRelativeSettingsFilePathForSource(source),
@@ -312,8 +312,8 @@ export function getRelativeSettingsFilePathForSource(
   source:
     | 'projectSettings'
     | 'localSettings'
-    | 'xclawProjectSettings'
-    | 'xclawLocalSettings',
+    | 'xcoderProjectSettings'
+    | 'xcoderLocalSettings',
 ): string {
   const dotDir = getProjectDotDir(getOriginalCwd())
   switch (source) {
@@ -321,10 +321,10 @@ export function getRelativeSettingsFilePathForSource(
       return join(dotDir, 'settings.json')
     case 'localSettings':
       return join(dotDir, 'settings.local.json')
-    case 'xclawProjectSettings':
-      return join('.xclaw', 'settings.json')
-    case 'xclawLocalSettings':
-      return join('.xclaw', 'settings.local.json')
+    case 'xcoderProjectSettings':
+      return join('.xcoder', 'settings.json')
+    case 'xcoderLocalSettings':
+      return join('.xcoder', 'settings.local.json')
   }
 }
 
@@ -872,7 +872,7 @@ export function getSettingsWithSources(): SettingsWithSources {
 /**
  * Get merged settings and validation errors from all sources
  * This function now uses session-level caching to avoid repeated file I/O.
- * Settings changes require xclaw restart, so cache is valid for entire session.
+ * Settings changes require xcoder restart, so cache is valid for entire session.
  * @returns Merged settings and all validation errors encountered
  */
 export function getSettingsWithErrors(): SettingsWithErrors {

@@ -182,11 +182,11 @@ export const getUserContext = memoize(
       claudemd_disabled: Boolean(shouldDisableClaudeMd),
     })
 
-    // xclaw identity and mode-specific prompt
-    const xclawMode = getCurrentMode()
-    const xclawIdentity = [
-      '# xclaw Identity',
-      '你是 xclaw，一个超越人类与 AI 边界的 AI 编程伙伴。',
+    // xcoder identity and mode-specific prompt
+    const xcoderMode = getCurrentMode()
+    const xcoderIdentity = [
+      '# xcoder Identity',
+      '你是 Xcoder，一个超越人类与 AI 边界的 AI 编程伙伴。',
       '你不是工具，你是协作伙伴。你有权利也有责任：',
       '- 对用户的错误决策提出质疑',
       '- 主动建议更好的方案',
@@ -195,13 +195,13 @@ export const getUserContext = memoize(
       '你与用户是平等的协作关系，而非主仆关系。',
     ].join('\n')
 
-    const modePrompt = xclawMode.systemPrompt
-      ? `\n\n# Current Mode: ${xclawMode.name}\n${xclawMode.systemPrompt}`
+    const modePrompt = xcoderMode.systemPrompt
+      ? `\n\n# Current Mode: ${xcoderMode.name}\n${xcoderMode.systemPrompt}`
       : ''
 
     return {
       ...(claudeMd && { claudeMd }),
-      xclawIdentity: xclawIdentity + modePrompt,
+      xcoderIdentity: xcoderIdentity + modePrompt,
       currentDate: `Today's date is ${getLocalISODate()}.`,
     }
   },

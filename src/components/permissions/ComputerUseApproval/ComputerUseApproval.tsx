@@ -102,7 +102,7 @@ function ComputerUseTccPanel({
         </Box>
         <Text dimColor>
           Grant the missing permissions in System Settings, then select &quot;Try again&quot;. macOS may require you to
-          restart xclaw after granting Screen Recording.
+          restart Xcoder after granting Screen Recording.
         </Text>
         <Select options={options} onChange={onChange} onCancel={onDone} />
       </Box>

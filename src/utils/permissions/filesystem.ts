@@ -5,17 +5,17 @@ import memoize from 'lodash-es/memoize.js'
 import { homedir, tmpdir } from 'os'
 import { join, normalize, posix, sep } from 'path'
 import { hasAutoMemPathOverride, isAutoMemPath } from 'src/memdir/paths.js'
-import { isAgentMemoryPath } from '@xclaw/builtin-tools/tools/AgentTool/agentMemory.js'
+import { isAgentMemoryPath } from '@xcoder/builtin-tools/tools/AgentTool/agentMemory.js'
 import {
   CLAUDE_FOLDER_PERMISSION_PATTERN,
   FILE_EDIT_TOOL_NAME,
   GLOBAL_CLAUDE_FOLDER_PERMISSION_PATTERN,
-} from '@xclaw/builtin-tools/tools/FileEditTool/constants.js'
+} from '@xcoder/builtin-tools/tools/FileEditTool/constants.js'
 import type { z } from 'zod/v4'
 import { getOriginalCwd, getSessionId } from '../../bootstrap/state.js'
 import { checkStatsigFeatureGate_CACHED_MAY_BE_STALE } from '../../services/analytics/growthbook.js'
 import type { AnyObject, Tool, ToolPermissionContext } from '../../Tool.js'
-import { FILE_READ_TOOL_NAME } from '@xclaw/builtin-tools/tools/FileReadTool/prompt.js'
+import { FILE_READ_TOOL_NAME } from '@xcoder/builtin-tools/tools/FileReadTool/prompt.js'
 import { getCwd } from '../cwd.js'
 import { getClaudeConfigHomeDir, getProjectDotDir } from '../envUtils.js'
 import {
@@ -76,7 +76,7 @@ export const DANGEROUS_DIRECTORIES = [
   '.vscode',
   '.idea',
   '.claude',
-  '.xclaw',
+  '.xcoder',
 ] as const
 
 /**
@@ -212,8 +212,8 @@ export function isClaudeSettingsPath(filePath: string): boolean {
   if (
     normalizedPath.endsWith(`${sep}.claude${sep}settings.json`) ||
     normalizedPath.endsWith(`${sep}.claude${sep}settings.local.json`) ||
-    normalizedPath.endsWith(`${sep}.xclaw${sep}settings.json`) ||
-    normalizedPath.endsWith(`${sep}.xclaw${sep}settings.local.json`)
+    normalizedPath.endsWith(`${sep}.xcoder${sep}settings.json`) ||
+    normalizedPath.endsWith(`${sep}.xcoder${sep}settings.local.json`)
   ) {
     return true
   }
@@ -224,7 +224,7 @@ export function isClaudeSettingsPath(filePath: string): boolean {
   )
 }
 
-// Always ask when xclaw tries to edit its own config files
+// Always ask when xcoder tries to edit its own config files
 function isClaudeConfigFilePath(filePath: string): boolean {
   if (isClaudeSettingsPath(filePath)) {
     return true
@@ -323,7 +323,7 @@ export function getClaudeTempDirName(): string {
  * Uses TMPDIR env var if set, otherwise:
  * - On Unix: /tmp/claude-{uid}/ (resolved to /private/tmp/claude-{uid}/ on macOS)
  * - On Windows: {tmpdir}/claude/ (e.g., C:\Users\{user}\AppData\Local\Temp\claude\)
- * This is a per-user temporary directory used by xclaw for all temp files.
+ * This is a per-user temporary directory used by Xcoder for all temp files.
  *
  * NOTE: We resolve symlinks to ensure this path matches the resolved paths used
  * in permission checks. On macOS, /tmp is a symlink to /private/tmp, so without
@@ -461,7 +461,7 @@ function isDangerousFilePathToAutoEdit(path: string): boolean {
       // git worktrees), not a user-created dangerous directory. Skip the .claude
       // segment when it's followed by 'worktrees'. Any nested .claude directories
       // within the worktree (not followed by 'worktrees') are still blocked.
-      if (dir === '.claude' || dir === '.xclaw') {
+      if (dir === '.claude' || dir === '.xcoder') {
         const nextSegment = pathSegments[i + 1]
         if (
           nextSegment &&
@@ -612,7 +612,7 @@ function hasSuspiciousWindowsPathPattern(path: string): boolean {
  * This function performs comprehensive safety checks including:
  * - Suspicious Windows path patterns (NTFS streams, 8.3 names, long path prefixes, etc.)
  * - Claude config files (.claude/settings.json, .claude/commands/, .claude/agents/)
- * - MCP CLI state files (managed internally by xclaw)
+ * - MCP CLI state files (managed internally by Xcoder)
  * - Dangerous files (.bashrc, .gitconfig, .git/, .vscode/, .idea/, etc.)
  *
  * IMPORTANT: This function checks BOTH the original path AND resolved symlink paths
@@ -754,12 +754,12 @@ function rootPathForSource(source: PermissionRuleSource): string {
     case 'session':
       return expandPath(getOriginalCwd())
     case 'userSettings':
-    case 'xclawUserSettings':
+    case 'xcoderUserSettings':
     case 'policySettings':
     case 'projectSettings':
-    case 'xclawProjectSettings':
+    case 'xcoderProjectSettings':
     case 'localSettings':
-    case 'xclawLocalSettings':
+    case 'xcoderLocalSettings':
     case 'flagSettings':
       return getSettingsRootPathForSource(source)
   }

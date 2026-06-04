@@ -273,30 +273,30 @@ describe('SETTING_SOURCES', () => {
   test('contains all sources in order', () => {
     expect(SETTING_SOURCES).toEqual([
       'userSettings',
-      'xclawUserSettings',
+      'xcoderUserSettings',
       'projectSettings',
-      'xclawProjectSettings',
+      'xcoderProjectSettings',
       'localSettings',
-      'xclawLocalSettings',
+      'xcoderLocalSettings',
       'flagSettings',
       'policySettings',
     ])
   })
 
-  test('xclaw sources come after their Claude counterparts', () => {
+  test('xcoder sources come after their Claude counterparts', () => {
     const sources = Array.from(SETTING_SOURCES)
     const userIdx = sources.indexOf('userSettings')
-    const xclawUserIdx = sources.indexOf('xclawUserSettings')
+    const xcoderUserIdx = sources.indexOf('xcoderUserSettings')
     const projIdx = sources.indexOf('projectSettings')
-    const xclawProjIdx = sources.indexOf('xclawProjectSettings')
+    const xcoderProjIdx = sources.indexOf('xcoderProjectSettings')
     const localIdx = sources.indexOf('localSettings')
-    const xclawLocalIdx = sources.indexOf('xclawLocalSettings')
+    const xcoderLocalIdx = sources.indexOf('xcoderLocalSettings')
 
-    expect(xclawUserIdx).toBeGreaterThan(userIdx)
-    expect(xclawProjIdx).toBeGreaterThan(projIdx)
-    expect(xclawLocalIdx).toBeGreaterThan(localIdx)
-    expect(xclawUserIdx).toBeLessThan(projIdx)
-    expect(xclawProjIdx).toBeLessThan(localIdx)
+    expect(xcoderUserIdx).toBeGreaterThan(userIdx)
+    expect(xcoderProjIdx).toBeGreaterThan(projIdx)
+    expect(xcoderLocalIdx).toBeGreaterThan(localIdx)
+    expect(xcoderUserIdx).toBeLessThan(projIdx)
+    expect(xcoderProjIdx).toBeLessThan(localIdx)
   })
 })
 
@@ -337,17 +337,17 @@ describe('getSettingSourceName', () => {
     expect(getSettingSourceName('policySettings')).toBe('managed')
   })
 
-  test('maps xclawUserSettings to xclaw user', () => {
-    expect(getSettingSourceName('xclawUserSettings')).toBe('xclaw user')
+  test('maps xcoderUserSettings to Xcoder user', () => {
+    expect(getSettingSourceName('xcoderUserSettings')).toBe('xcoder user')
   })
 
-  test('maps xclawProjectSettings to xclaw project', () => {
-    expect(getSettingSourceName('xclawProjectSettings')).toBe('xclaw project')
+  test('maps xcoderProjectSettings to Xcoder project', () => {
+    expect(getSettingSourceName('xcoderProjectSettings')).toBe('xcoder project')
   })
 
-  test('maps xclawLocalSettings to xclaw project, gitignored', () => {
-    expect(getSettingSourceName('xclawLocalSettings')).toBe(
-      'xclaw project, gitignored',
+  test('maps xcoderLocalSettings to Xcoder project, gitignored', () => {
+    expect(getSettingSourceName('xcoderLocalSettings')).toBe(
+      'xcoder project, gitignored',
     )
   })
 })
@@ -365,16 +365,16 @@ describe('getSourceDisplayName', () => {
     expect(getSourceDisplayName('built-in')).toBe('Built-in')
   })
 
-  test('maps xclawUserSettings to Xclaw User', () => {
-    expect(getSourceDisplayName('xclawUserSettings')).toBe('Xclaw User')
+  test('maps xcoderUserSettings to Xcoder User', () => {
+    expect(getSourceDisplayName('xcoderUserSettings')).toBe('Xcoder User')
   })
 
-  test('maps xclawProjectSettings to Xclaw Project', () => {
-    expect(getSourceDisplayName('xclawProjectSettings')).toBe('Xclaw Project')
+  test('maps xcoderProjectSettings to Xcoder Project', () => {
+    expect(getSourceDisplayName('xcoderProjectSettings')).toBe('Xcoder Project')
   })
 
-  test('maps xclawLocalSettings to Xclaw Local', () => {
-    expect(getSourceDisplayName('xclawLocalSettings')).toBe('Xclaw Local')
+  test('maps xcoderLocalSettings to Xcoder Local', () => {
+    expect(getSourceDisplayName('xcoderLocalSettings')).toBe('Xcoder Local')
   })
 })
 

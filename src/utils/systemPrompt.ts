@@ -4,8 +4,8 @@ import {
   logEvent,
 } from '../services/analytics/index.js'
 import type { ToolUseContext } from '../Tool.js'
-import type { AgentDefinition } from '@xclaw/builtin-tools/tools/AgentTool/loadAgentsDir.js'
-import { isBuiltInAgent } from '@xclaw/builtin-tools/tools/AgentTool/loadAgentsDir.js'
+import type { AgentDefinition } from '@xcoder/builtin-tools/tools/AgentTool/loadAgentsDir.js'
+import { isBuiltInAgent } from '@xcoder/builtin-tools/tools/AgentTool/loadAgentsDir.js'
 import { isEnvTruthy } from './envUtils.js'
 import { asSystemPrompt, type SystemPrompt } from './systemPromptType.js'
 
@@ -34,7 +34,7 @@ function isProactiveActive_SAFE_TO_CALL_ANYWHERE(): boolean {
  *      instructions on top of the autonomous agent prompt, like teammates do)
  *    - Otherwise: agent prompt REPLACES default
  * 3. Custom system prompt (if specified via --system-prompt)
- * 4. Default system prompt (the standard xclaw prompt)
+ * 4. Default system prompt (the standard xcoder prompt)
  *
  * Plus appendSystemPrompt is always added at the end if specified (except when override is set).
  */

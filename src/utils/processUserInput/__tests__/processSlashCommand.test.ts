@@ -72,7 +72,7 @@ mock.module('bun:bundle', () => ({
   feature: (name: string) => name === 'KAIROS',
 }))
 
-mock.module('@xclaw/builtin-tools/tools/AgentTool/runAgent.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/AgentTool/runAgent.js', () => ({
   runAgent: async function* () {
     runAgentStartCount += 1
     if (runAgentBlocker) {
@@ -99,7 +99,7 @@ mock.module('@xclaw/builtin-tools/tools/AgentTool/runAgent.js', () => ({
   },
 }))
 
-mock.module('@xclaw/builtin-tools/tools/AgentTool/UI.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/AgentTool/UI.js', () => ({
   AgentPromptDisplay: () => null,
   AgentResponseDisplay: () => null,
   extractLastToolInfo: () => null,

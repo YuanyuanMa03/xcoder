@@ -122,7 +122,7 @@ export function CompanionSprite(): React.ReactNode {
   const focused = useAppState(s => s.footerSelection === 'companion');
   const setAppState = useSetAppState();
   const { columns } = useTerminalSize();
-  const xclawMode = useCurrentMode();
+  const xcoderMode = useCurrentMode();
   const [tick, setTick] = useState(0);
   const lastSpokeTick = useRef(0);
   // Sync-during-render (not useEffect) so the first post-pet render already
@@ -160,7 +160,7 @@ export function CompanionSprite(): React.ReactNode {
   if (!rawCompanion || getGlobalConfig().companionMuted) return null;
 
   // Mode-specific species override: each mode can define a companionSpecies
-  const modeSpecies = xclawMode.companionSpecies;
+  const modeSpecies = xcoderMode.companionSpecies;
   const companion =
     modeSpecies && SPECIES.includes(modeSpecies as Species)
       ? { ...rawCompanion, species: modeSpecies as Species }

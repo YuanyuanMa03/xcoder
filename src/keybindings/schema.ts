@@ -91,7 +91,7 @@ export const KEYBINDING_ACTIONS = [
   'chat:stash',
   'chat:imagePaste',
   'chat:messageActions',
-  'chat:cycleXclawMode',
+  'chat:cycleXcoderMode',
   // Autocomplete menu actions
   'autocomplete:accept',
   'autocomplete:dismiss',
@@ -228,7 +228,7 @@ export const KeybindingsSchema = lazySchema(() =>
         .describe('Array of keybinding blocks by context'),
     })
     .describe(
-      'xclaw keybindings configuration. Customize keyboard shortcuts by context.',
+      'xcoder keybindings configuration. Customize keyboard shortcuts by context.',
     ),
 )
 

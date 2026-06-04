@@ -13,6 +13,7 @@ import { OAuthService } from '../services/oauth/index.js';
 import { getOauthAccountInfo, validateForceLoginOrg } from '../utils/auth.js';
 import { logError } from '../utils/log.js';
 import { getSettings_DEPRECATED, updateSettingsForSource } from '../utils/settings/settings.js';
+import { CHINA_LLM_PROVIDERS, type ProviderPreset, resolveChinaProviderBaseURL } from '../utils/chinaLlmProviders.js';
 import { Select } from './CustomSelect/select.js';
 import { Spinner } from './Spinner.js';
 import TextInput from './TextInput.js';
@@ -55,6 +56,10 @@ type OAuthStatus =
       opusModel: string;
       activeField: 'base_url' | 'api_key' | 'haiku_model' | 'sonnet_model' | 'opus_model';
     } // Gemini Generate Content API platform
+  | { state: 'china_provider_select'; activeIndex: number } // China LLM: pick provider
+  | { state: 'china_mode_select'; provider: ProviderPreset; activeIndex: number } // China LLM: pick access mode
+  | { state: 'china_model_select'; provider: ProviderPreset; mode: 'api' | 'coding-plan'; activeIndex: number } // China LLM: pick model
+  | { state: 'china_apikey'; provider: ProviderPreset; mode: 'api' | 'coding-plan'; modelId: string; apiKey: string } // China LLM: enter API key
   | { state: 'ready_to_start' } // Flow started, waiting for browser to open
   | { state: 'waiting_for_login'; url: string } // Browser opened, waiting for user to login
   | { state: 'creating_api_key' } // Got access token, creating API key
@@ -267,7 +272,7 @@ export function ConsoleOAuthFlow({
         setOAuthStatus({ state: 'success' });
         void sendNotification(
           {
-            message: 'xclaw login successful',
+            message: 'xcoder login successful',
             notificationType: 'auth_success',
           },
           terminal,
@@ -419,7 +424,7 @@ function OAuthStatusMessage({
           <Text bold>
             {startingMessage
               ? startingMessage
-              : `xclaw can be used with your Claude subscription or billed based on API usage through your Console account.`}
+              : `xcoder can be used with your Claude subscription or billed based on API usage through your Console account.`}
           </Text>
 
           <Text>Select login method:</Text>
@@ -444,6 +449,15 @@ function OAuthStatusMessage({
                     </Text>
                   ),
                   value: 'openai_chat_api',
+                },
+                {
+                  label: (
+                    <Text>
+                      China LLM Providers · <Text dimColor>DeepSeek, Zhipu GLM, Qwen, MiMo</Text>
+                      {'\n'}
+                    </Text>
+                  ),
+                  value: 'china_providers',
                 },
                 {
                   label: (
@@ -515,6 +529,9 @@ function OAuthStatusMessage({
                     opusModel: process.env.OPENAI_DEFAULT_OPUS_MODEL ?? '',
                     activeField: 'base_url',
                   });
+                } else if (value === 'china_providers') {
+                  logEvent('tengu_china_providers_selected', {});
+                  setOAuthStatus({ state: 'china_provider_select', activeIndex: 0 });
                 } else if (value === 'gemini_api') {
                   logEvent('tengu_gemini_api_selected', {});
                   setOAuthStatus({
@@ -1151,6 +1168,197 @@ function OAuthStatusMessage({
       );
     }
 
+    case 'china_provider_select': {
+      return (
+        <Box flexDirection="column" gap={1} marginTop={1}>
+          <Text bold>Select China LLM Provider</Text>
+          <Text dimColor>Direct connection, no proxy needed. All providers are OpenAI-compatible.</Text>
+          <Box>
+            <Select
+              options={CHINA_LLM_PROVIDERS.map(p => ({
+                label: (
+                  <Text>
+                    {p.icon} {p.label} · <Text dimColor>{p.description}</Text>
+                    {'\n'}
+                  </Text>
+                ),
+                value: p.id,
+              }))}
+              onChange={value => {
+                const provider = CHINA_LLM_PROVIDERS.find(p => p.id === value);
+                if (!provider) return;
+                logEvent('tengu_china_provider_selected', {});
+                if (provider.codingPlan) {
+                  setOAuthStatus({ state: 'china_mode_select', provider, activeIndex: 0 });
+                } else {
+                  setOAuthStatus({ state: 'china_model_select', provider, mode: 'api', activeIndex: 0 });
+                }
+              }}
+            />
+          </Box>
+        </Box>
+      );
+    }
+
+    case 'china_mode_select': {
+      const { provider } = oauthStatus;
+      const modeOptions = [
+        { id: 'api' as const, label: 'Pay-as-you-go (API)', desc: 'Top up freely, pay per use' },
+        { id: 'coding-plan' as const, label: 'Coding Plan', desc: 'Fixed monthly fee, high usage' },
+      ];
+      return (
+        <Box flexDirection="column" gap={1} marginTop={1}>
+          <Text bold>
+            {provider.icon} {provider.label} — Select Access Mode
+          </Text>
+          <Box>
+            <Select
+              options={modeOptions.map(m => ({
+                label: (
+                  <Text>
+                    {m.label} · <Text dimColor>{m.desc}</Text>
+                    {'\n'}
+                  </Text>
+                ),
+                value: m.id,
+              }))}
+              onChange={value => {
+                logEvent('tengu_china_mode_selected', {});
+                setOAuthStatus({
+                  state: 'china_model_select',
+                  provider,
+                  mode: value as 'api' | 'coding-plan',
+                  activeIndex: 0,
+                });
+              }}
+            />
+          </Box>
+          <Text dimColor>
+            No plan? Select "Pay-as-you-go"
+            {provider.id === 'zhipu' ? ' · GLM-4.7-Flash is free forever' : ''}
+          </Text>
+        </Box>
+      );
+    }
+
+    case 'china_model_select': {
+      const { provider, mode: accessMode } = oauthStatus;
+      const models = provider.models;
+      return (
+        <Box flexDirection="column" gap={1} marginTop={1}>
+          <Text bold>
+            {provider.icon} {provider.label} — Select Model
+          </Text>
+          <Box>
+            <Select
+              options={models.map(m => {
+                const priceLabel =
+                  m.inputPricePerMTok === 0 && m.outputPricePerMTok === 0
+                    ? 'Free'
+                    : `¥${m.inputPricePerMTok}/¥${m.outputPricePerMTok}`;
+                const tagLabel = m.tags?.length ? ` [${m.tags.join(', ')}]` : '';
+                return {
+                  label: (
+                    <Text>
+                      {m.label} ·{' '}
+                      <Text dimColor>
+                        {priceLabel} · {m.contextWindow}
+                        {tagLabel}
+                      </Text>
+                      {'\n'}
+                    </Text>
+                  ),
+                  value: m.id,
+                };
+              })}
+              onChange={value => {
+                logEvent('tengu_china_model_selected', {});
+                setOAuthStatus({ state: 'china_apikey', provider, mode: accessMode, modelId: value, apiKey: '' });
+              }}
+            />
+          </Box>
+        </Box>
+      );
+    }
+
+    case 'china_apikey': {
+      const { provider, mode: accessMode, modelId } = oauthStatus;
+
+      const [chinaKeyValue, setChinaKeyValue] = useState('');
+      const [chinaKeyCursor, setChinaKeyCursor] = useState(0);
+      const [chinaKeyError, setChinaKeyError] = useState<string | null>(null);
+
+      const doChinaSave = useCallback(() => {
+        if (!chinaKeyValue.trim()) {
+          setChinaKeyError('Please enter an API key');
+          return;
+        }
+        const baseUrl = resolveChinaProviderBaseURL(provider.id, accessMode);
+        const env: Record<string, string> = {
+          OPENAI_BASE_URL: baseUrl,
+          OPENAI_API_KEY: chinaKeyValue.trim(),
+          OPENAI_DEFAULT_SONNET_MODEL: modelId,
+          OPENAI_DEFAULT_HAIKU_MODEL: modelId,
+          OPENAI_DEFAULT_OPUS_MODEL: modelId,
+        };
+        const { error } = updateSettingsForSource('userSettings', {
+          modelType: 'openai' as any,
+          env,
+        } as any);
+        if (error) {
+          setOAuthStatus({
+            state: 'error',
+            message: 'Failed to save settings. Please try again.',
+            toRetry: { state: 'china_apikey', provider, mode: accessMode, modelId, apiKey: chinaKeyValue },
+          });
+        } else {
+          for (const [k, v] of Object.entries(env)) process.env[k] = v;
+          logEvent('tengu_china_login_success', {});
+          setOAuthStatus({ state: 'success' });
+          void onDone();
+        }
+      }, [chinaKeyValue, provider, accessMode, modelId, onDone, setOAuthStatus]);
+
+      useKeybinding(
+        'confirm:no',
+        () => {
+          setOAuthStatus({ state: 'china_model_select', provider, mode: accessMode, activeIndex: 0 });
+        },
+        { context: 'Confirmation' },
+      );
+
+      return (
+        <Box flexDirection="column" gap={1} marginTop={1}>
+          <Text bold>
+            {provider.icon} {provider.label} API Key
+          </Text>
+          <Box flexDirection="column" gap={0}>
+            <Text dimColor> Get your key: {provider.apiKeyPage}</Text>
+            <Text dimColor> {provider.freeTier}</Text>
+            <Text dimColor> Key format: {provider.keyFormat}</Text>
+          </Box>
+          <Box>
+            <Text>API Key: </Text>
+            <TextInput
+              value={chinaKeyValue}
+              onChange={v => {
+                setChinaKeyValue(v);
+                setChinaKeyError(null);
+              }}
+              onSubmit={doChinaSave}
+              cursorOffset={chinaKeyCursor}
+              onChangeCursorOffset={setChinaKeyCursor}
+              columns={useTerminalSize().columns - 12}
+              mask="*"
+              focus={true}
+            />
+          </Box>
+          {chinaKeyError ? <Text color="error">{chinaKeyError}</Text> : null}
+          <Text dimColor>Enter to confirm · Esc to go back</Text>
+        </Box>
+      );
+    }
+
     case 'platform_setup':
       return (
         <Box flexDirection="column" gap={1} marginTop={1}>
@@ -1158,8 +1366,8 @@ function OAuthStatusMessage({
 
           <Box flexDirection="column" gap={1}>
             <Text>
-              xclaw supports Amazon Bedrock, Microsoft Foundry, and Vertex AI. Set the required environment variables,
-              then restart xclaw.
+              xcoder supports Amazon Bedrock, Microsoft Foundry, and Vertex AI. Set the required environment variables,
+              then restart Xcoder.
             </Text>
 
             <Text>
@@ -1235,7 +1443,7 @@ function OAuthStatusMessage({
         <Box flexDirection="column" gap={1}>
           <Box>
             <Spinner />
-            <Text>Creating API key for xclaw…</Text>
+            <Text>Creating API key for Xcoder…</Text>
           </Box>
         </Box>
       );

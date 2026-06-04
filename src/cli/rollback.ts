@@ -1,5 +1,5 @@
 /**
- * `claude rollback [target]` — roll back to a previous xclaw version.
+ * `claude rollback [target]` — roll back to a previous xcoder version.
  *
  * ANT-only command (USER_TYPE === "ant").
  *

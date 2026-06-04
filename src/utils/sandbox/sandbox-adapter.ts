@@ -50,10 +50,10 @@ import type { SettingsJson } from '../settings/types.js'
 // Settings Converter
 // ============================================================================
 
-import { BASH_TOOL_NAME } from '@xclaw/builtin-tools/tools/BashTool/toolName.js'
-import { FILE_EDIT_TOOL_NAME } from '@xclaw/builtin-tools/tools/FileEditTool/constants.js'
-import { FILE_READ_TOOL_NAME } from '@xclaw/builtin-tools/tools/FileReadTool/prompt.js'
-import { WEB_FETCH_TOOL_NAME } from '@xclaw/builtin-tools/tools/WebFetchTool/prompt.js'
+import { BASH_TOOL_NAME } from '@xcoder/builtin-tools/tools/BashTool/toolName.js'
+import { FILE_EDIT_TOOL_NAME } from '@xcoder/builtin-tools/tools/FileEditTool/constants.js'
+import { FILE_READ_TOOL_NAME } from '@xcoder/builtin-tools/tools/FileReadTool/prompt.js'
+import { WEB_FETCH_TOOL_NAME } from '@xcoder/builtin-tools/tools/WebFetchTool/prompt.js'
 import { errorMessage } from '../errors.js'
 import { getClaudeTempDir } from '../permissions/filesystem.js'
 import type { PermissionRuleValue } from '../permissions/PermissionRule.js'
@@ -82,9 +82,9 @@ function permissionRuleExtractPrefix(permissionRule: string): string | null {
 }
 
 /**
- * Resolve xclaw-specific path patterns for sandbox-runtime.
+ * Resolve xcoder-specific path patterns for sandbox-runtime.
  *
- * xclaw uses special path prefixes in permission rules:
+ * xcoder uses special path prefixes in permission rules:
  * - `//path` → absolute from filesystem root (becomes `/path`)
  * - `/path` → relative to settings file directory (becomes `$SETTINGS_DIR/path`)
  * - `~/path` → passed through (sandbox-runtime handles this)
@@ -165,7 +165,7 @@ function shouldAllowManagedReadPathsOnly(): boolean {
 }
 
 /**
- * Convert xclaw settings format to SandboxRuntimeConfig format
+ * Convert xcoder settings format to SandboxRuntimeConfig format
  * (Function exported for testing)
  *
  * @param settings Merged settings (used for sandbox config like network, ripgrep, etc.)
@@ -229,7 +229,7 @@ export function convertToSandboxRuntimeConfig(
   const allowRead: string[] = []
 
   // Always deny writes to settings.json files to prevent sandbox escape
-  // This blocks settings in the original working directory (where xclaw started)
+  // This blocks settings in the original working directory (where xcoder started)
   const settingsPaths = SETTING_SOURCES.map(source =>
     getSettingsFilePathForSource(source),
   ).filter((p): p is string => p !== undefined)

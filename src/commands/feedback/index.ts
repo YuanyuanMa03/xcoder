@@ -7,7 +7,7 @@ const feedback = {
   aliases: ['bug'],
   type: 'local-jsx',
   name: 'feedback',
-  description: `Submit feedback about xclaw`,
+  description: `Submit feedback about.xcoder`,
   argumentHint: '[report]',
   isEnabled: () =>
     !(

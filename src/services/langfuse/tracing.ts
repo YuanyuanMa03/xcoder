@@ -1,5 +1,5 @@
 /**
- * Langfuse tracing — disabled in xclaw.
+ * Langfuse tracing — disabled in Xcoder.
  * All functions are no-ops. The @langfuse/tracing package is not installed.
  */
 

@@ -33,17 +33,17 @@ else
 fi
 
 # Install dir
-INSTALL_DIR="${XCLAW_DIR:-$HOME/.xclaw-src}"
+INSTALL_DIR="${XCODER_DIR:-$HOME/.xcoder-src}"
 
 # Clone or update
 echo ""
 if [ -d "$INSTALL_DIR/.git" ]; then
-  echo "📦 Updating xclaw..."
+  echo "📦 Updating xcoder..."
   cd "$INSTALL_DIR"
   git pull --quiet
 else
-  echo "📦 Cloning xclaw..."
-  git clone --quiet https://github.com/YuanyuanMa03/xclaw.git "$INSTALL_DIR"
+  echo "📦 Cloning xcoder..."
+  git clone --quiet https://github.com/YuanyuanMa03/xcoder.git "$INSTALL_DIR"
   cd "$INSTALL_DIR"
 fi
 
@@ -74,7 +74,7 @@ chmod +x dist/cli-node.js
 # Link globally
 BIN_DIR="$HOME/.local/bin"
 mkdir -p "$BIN_DIR"
-ln -sf "$INSTALL_DIR/dist/cli-node.js" "$BIN_DIR/xclaw"
+ln -sf "$INSTALL_DIR/dist/cli-node.js" "$BIN_DIR/xcoder"
 
 # Ensure PATH
 SHELL_RC=""
@@ -87,7 +87,7 @@ fi
 if [[ ":$PATH:" != *":$BIN_DIR:"* ]]; then
   if [ -n "$SHELL_RC" ]; then
     echo '' >> "$SHELL_RC"
-    echo '# xclaw' >> "$SHELL_RC"
+    echo '# xcoder' >> "$SHELL_RC"
     echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$SHELL_RC"
   fi
   export PATH="$BIN_DIR:$PATH"
@@ -95,9 +95,9 @@ if [[ ":$PATH:" != *":$BIN_DIR:"* ]]; then
 fi
 
 echo ""
-echo "✅ xclaw installed!"
+echo "✅ xcoder installed!"
 echo ""
-echo "   xclaw --version    # $(xclaw --version 2>/dev/null || echo 'open a new terminal')"
-echo "   xclaw              # start"
+echo "   xcoder --version    # $(xcoder --version 2>/dev/null || echo 'open a new terminal')"
+echo "   xcoder              # start"
 echo "   /login             # configure API on first use"
 echo ""

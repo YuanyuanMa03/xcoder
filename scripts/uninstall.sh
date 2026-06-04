@@ -2,15 +2,15 @@
 set -e
 
 echo ""
-echo "🗑️  Uninstalling xclaw..."
+echo "🗑️  Uninstalling xcoder..."
 echo ""
 
-INSTALL_DIR="${XCLAW_DIR:-$HOME/.xclaw-src}"
+INSTALL_DIR="${XCODER_DIR:-$HOME/.xcoder-src}"
 BIN_DIR="$HOME/.local/bin"
 
 # Remove global link
-rm -f "$BIN_DIR/xclaw"
-echo "✅ Removed $BIN_DIR/xclaw"
+rm -f "$BIN_DIR/xcoder"
+echo "✅ Removed $BIN_DIR/xcoder"
 
 # Ask to remove source
 read -p "Remove source directory ($INSTALL_DIR)? [y/N] " -n 1 -r
@@ -21,11 +21,11 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 # Ask to remove config
-read -p "Remove config (~/.xclaw)? [y/N] " -n 1 -r
+read -p "Remove config (~/.xcoder)? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-  rm -rf "$HOME/.xclaw"
-  echo "✅ Removed ~/.xclaw"
+  rm -rf "$HOME/.xcoder"
+  echo "✅ Removed ~/.xcoder"
 fi
 
 echo ""

@@ -4,7 +4,7 @@ const plugin = {
   type: 'local-jsx',
   name: 'plugin',
   aliases: ['plugins', 'marketplace'],
-  description: 'Manage xclaw plugins',
+  description: 'Manage xcoder plugins',
   immediate: true,
   load: () => import('./plugin.js'),
 } satisfies Command;

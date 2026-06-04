@@ -2,12 +2,12 @@
 set -e
 
 echo ""
-echo "🐾 卸载 xclaw (macOS)..."
+echo "🐾 卸载 xcoder (macOS)..."
 echo ""
 
 # Remove global link
 INSTALL_BIN="/usr/local/bin"
-LINK_PATH="$INSTALL_BIN/xclaw"
+LINK_PATH="$INSTALL_BIN/xcoder"
 
 if [ -L "$LINK_PATH" ]; then
   rm "$LINK_PATH"
@@ -20,7 +20,7 @@ else
 fi
 
 # Ask about source directory
-SOURCE_DIR="$HOME/.xclaw-src"
+SOURCE_DIR="$HOME/.xcoder-src"
 if [ -d "$SOURCE_DIR" ]; then
   echo ""
   read -p "是否删除源码目录 $SOURCE_DIR? (y/N): " -n 1 -r
@@ -35,15 +35,15 @@ fi
 
 # Ask about config
 CONFIG_DIR="$HOME/.claude"
-XCLAW_DIR="$HOME/.xclaw"
+XCODER_DIR="$HOME/.xcoder"
 
 echo ""
 read -p "是否删除配置文件? (y/N): " -n 1 -r
 echo ""
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-  if [ -d "$XCLAW_DIR" ]; then
-    rm -rf "$XCLAW_DIR"
-    echo "✅ 已删除 $XCLAW_DIR"
+  if [ -d "$XCODER_DIR" ]; then
+    rm -rf "$XCODER_DIR"
+    echo "✅ 已删除 $XCODER_DIR"
   fi
   echo "⚠️  ~/.claude 是 Claude Code 共享配置，未删除"
   echo "   如需删除: rm -rf ~/.claude"
@@ -52,5 +52,5 @@ else
 fi
 
 echo ""
-echo "✅ xclaw 卸载完成!"
+echo "✅ xcoder 卸载完成!"
 echo ""

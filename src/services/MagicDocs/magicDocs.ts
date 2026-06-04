@@ -7,14 +7,14 @@
  */
 
 import type { Tool, ToolUseContext } from '../../Tool.js'
-import type { BuiltInAgentDefinition } from '@xclaw/builtin-tools/tools/AgentTool/loadAgentsDir.js'
-import { runAgent } from '@xclaw/builtin-tools/tools/AgentTool/runAgent.js'
-import { FILE_EDIT_TOOL_NAME } from '@xclaw/builtin-tools/tools/FileEditTool/constants.js'
+import type { BuiltInAgentDefinition } from '@xcoder/builtin-tools/tools/AgentTool/loadAgentsDir.js'
+import { runAgent } from '@xcoder/builtin-tools/tools/AgentTool/runAgent.js'
+import { FILE_EDIT_TOOL_NAME } from '@xcoder/builtin-tools/tools/FileEditTool/constants.js'
 import {
   FileReadTool,
   type Output as FileReadToolOutput,
   registerFileReadListener,
-} from '@xclaw/builtin-tools/tools/FileReadTool/FileReadTool.js'
+} from '@xcoder/builtin-tools/tools/FileReadTool/FileReadTool.js'
 import { isFsInaccessible } from '../../utils/errors.js'
 import { cloneFileStateCache } from '../../utils/fileStateCache.js'
 import {

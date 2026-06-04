@@ -1,7 +1,7 @@
 import { feature } from 'bun:bundle'
-import { AGENT_TOOL_NAME } from '@xclaw/builtin-tools/tools/AgentTool/constants.js'
-import { TASK_OUTPUT_TOOL_NAME } from '@xclaw/builtin-tools/tools/TaskOutputTool/constants.js'
-import { TASK_STOP_TOOL_NAME } from '@xclaw/builtin-tools/tools/TaskStopTool/prompt.js'
+import { AGENT_TOOL_NAME } from '@xcoder/builtin-tools/tools/AgentTool/constants.js'
+import { TASK_OUTPUT_TOOL_NAME } from '@xcoder/builtin-tools/tools/TaskOutputTool/constants.js'
+import { TASK_STOP_TOOL_NAME } from '@xcoder/builtin-tools/tools/TaskStopTool/prompt.js'
 import type { PermissionRuleValue } from './PermissionRule.js'
 
 // Dead code elimination: ant-only tool names are conditionally required so
@@ -10,7 +10,7 @@ import type { PermissionRuleValue } from './PermissionRule.js'
 const BRIEF_TOOL_NAME: string | null =
   feature('KAIROS') || feature('KAIROS_BRIEF')
     ? (
-        require('@xclaw/builtin-tools/tools/BriefTool/prompt.js') as typeof import('@xclaw/builtin-tools/tools/BriefTool/prompt.js')
+        require('@xcoder/builtin-tools/tools/BriefTool/prompt.js') as typeof import('@xcoder/builtin-tools/tools/BriefTool/prompt.js')
       ).BRIEF_TOOL_NAME
     : null
 /* eslint-enable @typescript-eslint/no-require-imports */

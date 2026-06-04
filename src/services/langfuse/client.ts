@@ -1,5 +1,5 @@
 /**
- * Langfuse integration — disabled in xclaw.
+ * Langfuse integration — disabled in Xcoder.
  * All functions are no-ops.
  */
 

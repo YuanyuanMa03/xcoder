@@ -91,7 +91,7 @@ export function ApiKeyStep({
           <Box marginBottom={1}>
             <Text>
               {selectedOption === 'existing' ? color('success', theme)('> ') : '  '}
-              Use your existing xclaw API key
+              Use your existing xcoder API key
             </Text>
           </Box>
         )}

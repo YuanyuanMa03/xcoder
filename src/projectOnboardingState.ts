@@ -25,7 +25,7 @@ export function getSteps(): Step[] {
   return [
     {
       key: 'workspace',
-      text: 'Ask xclaw to create a new app or clone a repository',
+      text: 'Ask xcoder to create a new app or clone a repository',
       isComplete: false,
       isCompletable: true,
       isEnabled: isWorkspaceDirEmpty,

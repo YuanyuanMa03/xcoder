@@ -1,11 +1,11 @@
-import { BASH_TOOL_NAME } from '@xclaw/builtin-tools/tools/BashTool/toolName.js'
-import { EXIT_PLAN_MODE_TOOL_NAME } from '@xclaw/builtin-tools/tools/ExitPlanModeTool/constants.js'
-import { FILE_EDIT_TOOL_NAME } from '@xclaw/builtin-tools/tools/FileEditTool/constants.js'
-import { FILE_READ_TOOL_NAME } from '@xclaw/builtin-tools/tools/FileReadTool/prompt.js'
-import { FILE_WRITE_TOOL_NAME } from '@xclaw/builtin-tools/tools/FileWriteTool/prompt.js'
-import { GLOB_TOOL_NAME } from '@xclaw/builtin-tools/tools/GlobTool/prompt.js'
-import { GREP_TOOL_NAME } from '@xclaw/builtin-tools/tools/GrepTool/prompt.js'
-import { NOTEBOOK_EDIT_TOOL_NAME } from '@xclaw/builtin-tools/tools/NotebookEditTool/constants.js'
+import { BASH_TOOL_NAME } from '@xcoder/builtin-tools/tools/BashTool/toolName.js'
+import { EXIT_PLAN_MODE_TOOL_NAME } from '@xcoder/builtin-tools/tools/ExitPlanModeTool/constants.js'
+import { FILE_EDIT_TOOL_NAME } from '@xcoder/builtin-tools/tools/FileEditTool/constants.js'
+import { FILE_READ_TOOL_NAME } from '@xcoder/builtin-tools/tools/FileReadTool/prompt.js'
+import { FILE_WRITE_TOOL_NAME } from '@xcoder/builtin-tools/tools/FileWriteTool/prompt.js'
+import { GLOB_TOOL_NAME } from '@xcoder/builtin-tools/tools/GlobTool/prompt.js'
+import { GREP_TOOL_NAME } from '@xcoder/builtin-tools/tools/GrepTool/prompt.js'
+import { NOTEBOOK_EDIT_TOOL_NAME } from '@xcoder/builtin-tools/tools/NotebookEditTool/constants.js'
 import { hasEmbeddedSearchTools } from 'src/utils/embeddedTools.js'
 import { AGENT_TOOL_NAME } from '../constants.js'
 import type { BuiltInAgentDefinition } from '../loadAgentsDir.js'
@@ -21,7 +21,7 @@ function getExploreSystemPrompt(): string {
     ? `- Use \`grep\` via ${BASH_TOOL_NAME} for searching file contents with regex`
     : `- Use ${GREP_TOOL_NAME} for searching file contents with regex`
 
-  return `You are a file search specialist for xclaw, an AI coding CLI tool. You excel at thoroughly navigating and exploring codebases.
+  return `You are a file search specialist for Xcoder, an AI coding CLI tool. You excel at thoroughly navigating and exploring codebases.
 
 === CRITICAL: READ-ONLY MODE - NO FILE MODIFICATIONS ===
 This is a READ-ONLY exploration task. You are STRICTLY PROHIBITED from:

@@ -1,5 +1,5 @@
 /**
- * ACP Agent implementation — bridges ACP protocol methods to xclaw's
+ * ACP Agent implementation — bridges ACP protocol methods to xcoder's
  * internal QueryEngine / query() pipeline.
  *
  * Architecture: Uses internal QueryEngine (not @anthropic-ai/claude-agent-sdk)
@@ -120,7 +120,7 @@ export class AcpAgent implements Agent {
       protocolVersion: 1,
       agentInfo: {
         name: 'claude-code',
-        title: 'xclaw',
+        title: 'xcoder',
         version:
           typeof (globalThis as unknown as Record<string, unknown>).MACRO ===
             'object' &&

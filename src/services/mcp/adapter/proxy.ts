@@ -1,6 +1,6 @@
 // Host proxy config adapter — bridges proxy/MTLS to mcp-client's ProxyConfig interface
 
-import type { ProxyConfig } from '@xclaw/mcp-client'
+import type { ProxyConfig } from '@xcoder/mcp-client'
 import {
   getProxyFetchOptions,
   getWebSocketProxyAgent,

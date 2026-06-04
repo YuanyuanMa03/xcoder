@@ -26,11 +26,11 @@ export type PersistablePluginScope = Exclude<ExtendedPluginScope, 'flag'>
 export const SETTING_SOURCE_TO_SCOPE = {
   policySettings: 'managed',
   userSettings: 'user',
-  xclawUserSettings: 'user',
+  xcoderUserSettings: 'user',
   projectSettings: 'project',
-  xclawProjectSettings: 'project',
+  xcoderProjectSettings: 'project',
   localSettings: 'local',
-  xclawLocalSettings: 'local',
+  xcoderLocalSettings: 'local',
   flagSettings: 'flag',
 } as const satisfies Record<SettingSource, ExtendedPluginScope>
 

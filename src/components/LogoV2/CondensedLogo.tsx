@@ -12,7 +12,7 @@ import { renderModelSetting } from '../../utils/model/model.js';
 import { OffscreenFreeze } from '../OffscreenFreeze.js';
 import { AnimatedClawd } from './AnimatedClawd.js';
 import { Clawd } from './Clawd.js';
-import { XCLAW_LOGO, XCLAW_NAME, XCLAW_TAGLINE } from '../../constants/xclaw.js';
+import { XCODER_LOGO, XCODER_NAME, XCODER_TAGLINE } from '../../constants/xcoder.js';
 import { useCurrentMode } from '../../modes/store.js';
 import type { Theme } from '../../utils/theme.js';
 import { GuestPassesUpsell, incrementGuestPassesSeenCount, useShowGuestPassesUpsell } from './GuestPassesUpsell.js';
@@ -26,7 +26,7 @@ export function CondensedLogo(): ReactNode {
   const { columns } = useTerminalSize();
   const agent = useAppState(s => s.agent);
   const effortValue = useAppState(s => s.effortValue);
-  const xclawMode = useCurrentMode();
+  const xcoderMode = useCurrentMode();
   const model = useMainLoopModel();
   const modelDisplayName = renderModelSetting(model);
   const { version, cwd, billingType, agentName: agentNameFromSettings } = getLogoDisplayData();
@@ -51,12 +51,12 @@ export function CondensedLogo(): ReactNode {
   // Show ASCII art logo when terminal is wide enough (logo is ~46 chars wide)
   const showAsciiLogo = columns >= 60;
   // Calculate available width for text content
-  // Account for: logo/clawd width + gap (2) + padding (2)
+  // Account for: logo/xcoder width + gap (2) + padding (2)
   const logoWidth = showAsciiLogo ? 48 : 15;
   const textWidth = Math.max(columns - logoWidth, 20);
 
-  // Truncate version to fit within available width, accounting for "xclaw v" prefix
-  const versionPrefix = 'xclaw v';
+  // Truncate version to fit within available width, accounting for .xcoder v" prefix
+  const versionPrefix = 'Xcoder v';
   const truncatedVersion = truncate(version, Math.max(textWidth - versionPrefix.length, 6));
 
   const effortSuffix = getEffortSuffix(model, effortValue);
@@ -83,8 +83,8 @@ export function CondensedLogo(): ReactNode {
       <Box flexDirection="row" gap={2} alignItems="center">
         {showAsciiLogo ? (
           <Box flexDirection="column" alignItems="center">
-            <Text color={(xclawMode.ui.accentColor || 'claude') as keyof Theme}>{XCLAW_LOGO}</Text>
-            <Text dimColor>{XCLAW_TAGLINE}</Text>
+            <Text color={(xcoderMode.ui.accentColor || 'claude') as keyof Theme}>{XCODER_LOGO}</Text>
+            <Text dimColor>{XCODER_TAGLINE}</Text>
           </Box>
         ) : isFullscreenEnvEnabled() ? (
           <AnimatedClawd />
@@ -95,10 +95,10 @@ export function CondensedLogo(): ReactNode {
         {/* Info */}
         <Box flexDirection="column">
           <Text>
-            <Text bold>{XCLAW_NAME}</Text> <Text dimColor>v{truncatedVersion}</Text>
+            <Text bold>{XCODER_NAME}</Text> <Text dimColor>v{truncatedVersion}</Text>
           </Text>
           <Text italic dimColor>
-            {XCLAW_TAGLINE}
+            {XCODER_TAGLINE}
           </Text>
           {shouldSplit ? (
             <>

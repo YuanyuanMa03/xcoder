@@ -4,7 +4,7 @@
  */
 
 /**
- * A session ID uniquely identifies a xclaw session.
+ * A session ID uniquely identifies a xcoder session.
  * Returned by getSessionId().
  */
 export type SessionId = string & { readonly __brand: 'SessionId' }

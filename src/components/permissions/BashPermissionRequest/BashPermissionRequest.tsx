@@ -10,11 +10,11 @@ import {
 } from '../../../services/analytics/index.js';
 import { sanitizeToolNameForAnalytics } from '../../../services/analytics/metadata.js';
 import { useAppState } from '../../../state/AppState.js';
-import { BashTool } from '@xclaw/builtin-tools/tools/BashTool/BashTool.js';
-import { getFirstWordPrefix, getSimpleCommandPrefix } from '@xclaw/builtin-tools/tools/BashTool/bashPermissions.js';
-import { getDestructiveCommandWarning } from '@xclaw/builtin-tools/tools/BashTool/destructiveCommandWarning.js';
-import { parseSedEditCommand } from '@xclaw/builtin-tools/tools/BashTool/sedEditParser.js';
-import { shouldUseSandbox } from '@xclaw/builtin-tools/tools/BashTool/shouldUseSandbox.js';
+import { BashTool } from '@xcoder/builtin-tools/tools/BashTool/BashTool.js';
+import { getFirstWordPrefix, getSimpleCommandPrefix } from '@xcoder/builtin-tools/tools/BashTool/bashPermissions.js';
+import { getDestructiveCommandWarning } from '@xcoder/builtin-tools/tools/BashTool/destructiveCommandWarning.js';
+import { parseSedEditCommand } from '@xcoder/builtin-tools/tools/BashTool/sedEditParser.js';
+import { shouldUseSandbox } from '@xcoder/builtin-tools/tools/BashTool/shouldUseSandbox.js';
 import { getCompoundCommandPrefixesStatic } from '../../../utils/bash/prefix.js';
 import {
   createPromptRuleContent,

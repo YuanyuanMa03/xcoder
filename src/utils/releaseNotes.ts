@@ -26,7 +26,7 @@ const MAX_RELEASE_NOTES_SHOWN = 5
  * 3. Next time the user starts Claude, the cached changelog is available immediately
  */
 export const CHANGELOG_URL =
-  'https://github.com/YuanyuanMa03/xclaw/blob/main/CHANGELOG.md'
+  'https://github.com/YuanyuanMa03.xcoder/blob/main/CHANGELOG.md'
 // Fetch from Claude Code to show upstream updates (with attribution in UI)
 const RAW_CHANGELOG_URL =
   'https://raw.githubusercontent.com/anthropics/claude-code/refs/heads/main/CHANGELOG.md'
@@ -91,7 +91,7 @@ export async function fetchAndStoreChangelog(): Promise<void> {
     return
   }
 
-  // Skip if RAW_CHANGELOG_URL is empty (xclaw doesn't have public changelog)
+  // Skip if RAW_CHANGELOG_URL is empty xcoder doesn't have public changelog)
   if (!RAW_CHANGELOG_URL) {
     return
   }

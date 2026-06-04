@@ -7,7 +7,7 @@ import { useExitOnCtrlCDWithKeybindings } from '../../hooks/useExitOnCtrlCDWithK
 import { Box, Link, Text } from '@anthropic/ink';
 import { useKeybinding } from '../../keybindings/useKeybinding.js';
 import { getMcpConfigsByScope } from '../../services/mcp/config.js';
-import { BASH_TOOL_NAME } from '@xclaw/builtin-tools/tools/BashTool/toolName.js';
+import { BASH_TOOL_NAME } from '@xcoder/builtin-tools/tools/BashTool/toolName.js';
 import { checkHasTrustDialogAccepted, saveCurrentProjectConfig } from '../../utils/config.js';
 import { getCwd } from '../../utils/cwd.js';
 import { getFsImplementation } from '../../utils/fsOperations.js';
@@ -177,7 +177,7 @@ export function TrustDialog({ onDone, commands }: Props): React.ReactNode {
           Quick safety check: Is this a project you created or one you trust? (Like your own code, a well-known open
           source project, or work from your team). If not, take a moment to review what{"'"}s in this folder first.
         </Text>
-        <Text>xclaw{"'"}ll be able to read, edit, and execute files here.</Text>
+        <Text>Xcoder{"'"}ll be able to read, edit, and execute files here.</Text>
 
         <Text dimColor>
           <Link url="https://code.claude.com/docs/en/security">Security guide</Link>

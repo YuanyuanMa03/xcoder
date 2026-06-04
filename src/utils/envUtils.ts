@@ -14,26 +14,26 @@ export const getClaudeConfigHomeDir = memoize(
   () => process.env.CLAUDE_CONFIG_DIR,
 )
 
-export const getXclawConfigHomeDir = memoize(
+export const getXcoderConfigHomeDir = memoize(
   (): string => {
     return (
-      process.env.XCLAW_CONFIG_DIR ?? join(homedir(), '.xclaw')
+      process.env.XCODER_CONFIG_DIR ?? join(homedir(), '.xcoder')
     ).normalize('NFC')
   },
-  () => process.env.XCLAW_CONFIG_DIR,
+  () => process.env.XCODER_CONFIG_DIR,
 )
 
 /**
  * Get the project-level dot directory name.
- * Priority: .claude/ (share with Claude Code) → .xclaw/ → default .xclaw/
+ * Priority: .claude/ (share with Claude Code) → .xcoder/ → default .xcoder/
  * Memoized per cwd to avoid repeated existsSync on hot paths.
  */
 export const getProjectDotDir = memoize(
-  (projectCwd?: string): '.xclaw' | '.claude' => {
+  (projectCwd?: string): '.xcoder' | '.claude' => {
     const cwd = projectCwd || process.cwd()
     if (existsSync(join(cwd, '.claude'))) return '.claude'
-    if (existsSync(join(cwd, '.xclaw'))) return '.xclaw'
-    return '.xclaw'
+    if (existsSync(join(cwd, '.xcoder'))) return '.xcoder'
+    return '.xcoder'
   },
   (projectCwd?: string) => projectCwd || process.cwd(),
 )
@@ -148,7 +148,7 @@ export function isRunningOnHomespace(): boolean {
 }
 
 /**
- * Conservative check for whether xclaw is running inside a protected
+ * Conservative check for whether xcoder is running inside a protected
  * (privileged or ASL3+) COO namespace or cluster.
  *
  * Conservative means: when signals are ambiguous, assume protected. We would

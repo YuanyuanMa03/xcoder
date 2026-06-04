@@ -1,5 +1,5 @@
 /**
- * UDS Messaging Layer — Unix Domain Socket IPC for xclaw instances.
+ * UDS Messaging Layer — Unix Domain Socket IPC for Xcoder instances.
  *
  * Each session auto-creates a UDS server so peer sessions can send messages.
  * Protocol: newline-delimited JSON (NDJSON), one message per line.

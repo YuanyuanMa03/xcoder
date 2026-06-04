@@ -93,8 +93,9 @@ export default defineConfig({
 
       output: {
         format: 'es',
-        // Single-file build: no code splitting, all dynamic imports inlined
-        codeSplitting: false,
+        // Code splitting reduces RSS from ~1GB to ~300MB by allowing the runtime
+        // to lazily parse chunks instead of eagerly parsing a single monolithic bundle.
+        chunkFileNames: 'chunks/[name]-[hash].js',
         entryFileNames: 'cli.js',
       },
 
@@ -116,6 +117,7 @@ export default defineConfig({
   // Compile-time constant replacement (MACRO.* defines)
   define: {
     ...getMacroDefines(),
+    'process.env.NODE_ENV': JSON.stringify('production'),
   },
 
   resolve: {

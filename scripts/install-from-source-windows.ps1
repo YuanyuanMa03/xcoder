@@ -1,17 +1,17 @@
-# xclaw Windows Installer (from source)
+# xcoder Windows Installer (from source)
 $ErrorActionPreference = "Stop"
 
 Write-Host ""
-Write-Host " ██╗  ██╗ ██████╗██╗      █████╗ ██╗    ██╗"
-Write-Host " ╚██╗██╔╝██╔════╝██║     ██╔══██╗██║    ██║"
-Write-Host "  ╚███╔╝ ██║     ██║     ███████║██║ █╗ ██║"
-Write-Host "  ██╔██╗ ██║     ██║     ██╔══██║██║███╗██║"
-Write-Host " ██╔╝ ██╗╚██████╗███████╗██║  ██║╚███╔███╔╝"
-Write-Host " ╚═╝  ╚═╝ ╚═════╝╚══════╝╚═╝  ╚═╝ ╚══╝╚══╝"
+Write-Host "██╗  ██╗ ██████╗ ██████╗ ██████╗ ███████╗██████╗"
+Write-Host "╚██╗██╔╝██╔════╝██╔═══██╗██╔══██╗██╔════╝██╔══██╗"
+Write-Host " ╚███╔╝ ██║     ██║   ██║██║  ██║█████╗  ██████╔╝"
+Write-Host " ██╔██╗ ██║     ██║   ██║██║  ██║██╔══╝  ██╔══██╗"
+Write-Host "██╔╝ ██╗╚██████╗╚██████╔╝██████╔╝███████╗██║  ██║"
+Write-Host "╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝"
 Write-Host ""
 Write-Host "  超越人类与 AI 的边界"
 Write-Host ""
-Write-Host "📦 从源码安装 xclaw (Windows)..."
+Write-Host "📦 从源码安装 xcoder (Windows)..."
 Write-Host ""
 
 # Check for Git
@@ -59,7 +59,7 @@ if (-not $HAS_BUN -and -not $HAS_NODE) {
 }
 
 # Clone repo
-$INSTALL_DIR = "$env:USERPROFILE\.xclaw-src"
+$INSTALL_DIR = "$env:USERPROFILE\.xcoder-src"
 Write-Host ""
 Write-Host "📥 克隆仓库到 $INSTALL_DIR..."
 
@@ -68,7 +68,7 @@ if (Test-Path $INSTALL_DIR) {
     Set-Location $INSTALL_DIR
     git pull
 } else {
-    git clone https://github.com/YuanyuanMa03/xclaw.git $INSTALL_DIR
+    git clone https://github.com/YuanyuanMa03/xcoder.git $INSTALL_DIR
     Set-Location $INSTALL_DIR
 }
 
@@ -100,14 +100,14 @@ if (-not (Test-Path "dist\cli-node.js")) {
 Write-Host ""
 Write-Host "🔗 全局安装..."
 
-$installBin = "$env:LOCALAPPDATA\xclaw"
+$installBin = "$env:LOCALAPPDATA\xcoder"
 if (-not (Test-Path $installBin)) {
     New-Item -ItemType Directory -Path $installBin -Force | Out-Null
 }
 
 # Create batch wrapper
 $batchContent = "@echo off`nnode `"$INSTALL_DIR\dist\cli-node.js`" %*"
-Set-Content -Path "$installBin\xclaw.cmd" -Value $batchContent
+Set-Content -Path "$installBin\xcoder.cmd" -Value $batchContent
 
 # Add to PATH if not already there
 $currentPath = [Environment]::GetEnvironmentVariable("Path", "User")
@@ -118,11 +118,11 @@ if ($currentPath -notlike "*$installBin*") {
 }
 
 Write-Host ""
-Write-Host "✅ xclaw 已全局安装!"
+Write-Host "✅ xcoder 已全局安装!"
 Write-Host ""
 Write-Host "🚀 开始使用:"
-Write-Host "   xclaw              # 启动"
-Write-Host "   xclaw --version    # 查看版本"
+Write-Host "   xcoder              # 启动"
+Write-Host "   xcoder --version    # 查看版本"
 Write-Host ""
 Write-Host "📝 首次配置:"
 Write-Host "   启动后输入 /login 配置 API"

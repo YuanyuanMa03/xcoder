@@ -50,13 +50,13 @@ import {
   type ToolCallProgress,
   toolMatchesName,
 } from '../../Tool.js'
-import { ListMcpResourcesTool } from '@xclaw/builtin-tools/tools/ListMcpResourcesTool/ListMcpResourcesTool.js'
+import { ListMcpResourcesTool } from '@xcoder/builtin-tools/tools/ListMcpResourcesTool/ListMcpResourcesTool.js'
 import {
   type MCPProgress,
   MCPTool,
-} from '@xclaw/builtin-tools/tools/MCPTool/MCPTool.js'
-import { createMcpAuthTool } from '@xclaw/builtin-tools/tools/McpAuthTool/McpAuthTool.js'
-import { ReadMcpResourceTool } from '@xclaw/builtin-tools/tools/ReadMcpResourceTool/ReadMcpResourceTool.js'
+} from '@xcoder/builtin-tools/tools/MCPTool/MCPTool.js'
+import { createMcpAuthTool } from '@xcoder/builtin-tools/tools/McpAuthTool/McpAuthTool.js'
+import { ReadMcpResourceTool } from '@xcoder/builtin-tools/tools/ReadMcpResourceTool/ReadMcpResourceTool.js'
 import { createAbortController } from '../../utils/abortController.js'
 import { count } from '../../utils/array.js'
 import {
@@ -125,8 +125,8 @@ import {
   buildConnectedServer,
   DEFAULT_CONNECTION_TIMEOUT_MS,
   MAX_MCP_DESCRIPTION_LENGTH as PKG_MAX_MCP_DESCRIPTION_LENGTH,
-} from '@xclaw/mcp-client'
-import { recursivelySanitizeUnicode } from '@xclaw/mcp-client'
+} from '@xcoder/mcp-client'
+import { recursivelySanitizeUnicode } from '@xcoder/mcp-client'
 
 /* eslint-disable @typescript-eslint/no-require-imports */
 const fetchMcpSkillsForClient = feature('MCP_SKILLS')
@@ -138,7 +138,7 @@ const fetchMcpSkillsForClient = feature('MCP_SKILLS')
 import { UnauthorizedError } from '@modelcontextprotocol/sdk/client/auth.js'
 import type { AssistantMessage } from 'src/types/message.js'
 /* eslint-enable @typescript-eslint/no-require-imports */
-import { classifyMcpToolForCollapse } from '@xclaw/builtin-tools/tools/MCPTool/classifyForCollapse.js'
+import { classifyMcpToolForCollapse } from '@xcoder/builtin-tools/tools/MCPTool/classifyForCollapse.js'
 import { clearKeychainCache } from '../../utils/secureStorage/macOsKeychainHelpers.js'
 import { sleep } from '../../utils/sleep.js'
 import {
@@ -998,7 +998,7 @@ export const connectToServer = memoize(
       const client = new Client(
         {
           name: 'claude-code',
-          title: 'xclaw',
+          title: 'xcoder',
           version: MACRO.VERSION ?? 'unknown',
           description: "Anthropic's agentic coding tool",
           websiteUrl: PRODUCT_URL,
@@ -3301,7 +3301,7 @@ export async function setupSdkMcpClients(
       const client = new Client(
         {
           name: 'claude-code',
-          title: 'xclaw',
+          title: 'xcoder',
           version: MACRO.VERSION ?? 'unknown',
           description: "Anthropic's agentic coding tool",
           websiteUrl: PRODUCT_URL,

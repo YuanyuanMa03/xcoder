@@ -883,19 +883,19 @@ export const getMemoryFiles = memoize(
         pathInWorkingPath(dir, canonicalRoot) &&
         !pathInWorkingPath(dir, gitRoot)
 
-      // Try reading XCLAW.md / CLAUDE.md (Project) - only if projectSettings is enabled
+      // Try reading XCODER.md / CLAUDE.md (Project) - only if projectSettings is enabled
       if (isSettingSourceEnabled('projectSettings') && !skipProject) {
-        // XCLAW.md takes priority over CLAUDE.md
-        const xclawProjectPath = join(dir, 'XCLAW.md')
-        const xclawLoaded = await processMemoryFile(
-          xclawProjectPath,
+        // XCODER.md takes priority over CLAUDE.md
+        const xcoderProjectPath = join(dir, 'XCODER.md')
+        const xcoderLoaded = await processMemoryFile(
+          xcoderProjectPath,
           'Project',
           processedPaths,
           includeExternal,
         )
-        result.push(...xclawLoaded)
+        result.push(...xcoderLoaded)
 
-        // Also try CLAUDE.md (backward compat, skipped if XCLAW.md was found)
+        // Also try CLAUDE.md (backward compat, skipped if XCODER.md was found)
         const projectPath = join(dir, 'CLAUDE.md')
         result.push(
           ...(await processMemoryFile(
@@ -906,11 +906,11 @@ export const getMemoryFiles = memoize(
           )),
         )
 
-        // Try reading .xclaw/XCLAW.md and .claude/CLAUDE.md (Project)
-        const dotXclawPath = join(dir, '.xclaw', 'XCLAW.md')
+        // Try reading .xcoder/XCODER.md and .claude/CLAUDE.md (Project)
+        const dotXcoderPath = join(dir, '.xcoder', 'XCODER.md')
         result.push(
           ...(await processMemoryFile(
-            dotXclawPath,
+            dotXcoderPath,
             'Project',
             processedPaths,
             includeExternal,
@@ -926,11 +926,11 @@ export const getMemoryFiles = memoize(
           )),
         )
 
-        // Try reading .xclaw/rules/*.md and .claude/rules/*.md files (Project)
-        const xclawRulesDir = join(dir, '.xclaw', 'rules')
+        // Try reading .xcoder/rules/*.md and .claude/rules/*.md files (Project)
+        const xcoderRulesDir = join(dir, '.xcoder', 'rules')
         result.push(
           ...(await processMdRules({
-            rulesDir: xclawRulesDir,
+            rulesDir: xcoderRulesDir,
             type: 'Project',
             processedPaths,
             includeExternal,
@@ -949,12 +949,12 @@ export const getMemoryFiles = memoize(
         )
       }
 
-      // Try reading XCLAW.local.md / CLAUDE.local.md (Local) - only if localSettings is enabled
+      // Try reading XCODER.local.md / CLAUDE.local.md (Local) - only if localSettings is enabled
       if (isSettingSourceEnabled('localSettings')) {
-        const xclawLocalPath = join(dir, 'XCLAW.local.md')
+        const xcoderLocalPath = join(dir, 'XCODER.local.md')
         result.push(
           ...(await processMemoryFile(
-            xclawLocalPath,
+            xcoderLocalPath,
             'Local',
             processedPaths,
             includeExternal,
@@ -979,11 +979,11 @@ export const getMemoryFiles = memoize(
     if (isEnvTruthy(process.env.CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD)) {
       const additionalDirs = getAdditionalDirectoriesForClaudeMd()
       for (const dir of additionalDirs) {
-        // Try reading XCLAW.md / CLAUDE.md from the additional directory
-        const xclawProjectPath = join(dir, 'XCLAW.md')
+        // Try reading XCODER.md / CLAUDE.md from the additional directory
+        const xcoderProjectPath = join(dir, 'XCODER.md')
         result.push(
           ...(await processMemoryFile(
-            xclawProjectPath,
+            xcoderProjectPath,
             'Project',
             processedPaths,
             includeExternal,
@@ -999,11 +999,11 @@ export const getMemoryFiles = memoize(
           )),
         )
 
-        // Try reading .xclaw/XCLAW.md and .claude/CLAUDE.md from the additional directory
-        const dotXclawPath = join(dir, '.xclaw', 'XCLAW.md')
+        // Try reading .xcoder/XCODER.md and .claude/CLAUDE.md from the additional directory
+        const dotXcoderPath = join(dir, '.xcoder', 'XCODER.md')
         result.push(
           ...(await processMemoryFile(
-            dotXclawPath,
+            dotXcoderPath,
             'Project',
             processedPaths,
             includeExternal,
@@ -1019,11 +1019,11 @@ export const getMemoryFiles = memoize(
           )),
         )
 
-        // Try reading .xclaw/rules/*.md and .claude/rules/*.md files from the additional directory
-        const xclawRulesDir = join(dir, '.xclaw', 'rules')
+        // Try reading .xcoder/rules/*.md and .claude/rules/*.md files from the additional directory
+        const xcoderRulesDir = join(dir, '.xcoder', 'rules')
         result.push(
           ...(await processMdRules({
-            rulesDir: xclawRulesDir,
+            rulesDir: xcoderRulesDir,
             type: 'Project',
             processedPaths,
             includeExternal,
@@ -1320,12 +1320,12 @@ export async function getMemoryFilesForNestedDirectory(
 ): Promise<MemoryFileInfo[]> {
   const result: MemoryFileInfo[] = []
 
-  // Process project memory files (XCLAW.md, CLAUDE.md and their .xclaw/.claude variants)
+  // Process project memory files (XCODER.md, CLAUDE.md and their .xcoder/.claude variants)
   if (isSettingSourceEnabled('projectSettings')) {
-    const xclawProjectPath = join(dir, 'XCLAW.md')
+    const xcoderProjectPath = join(dir, 'XCODER.md')
     result.push(
       ...(await processMemoryFile(
-        xclawProjectPath,
+        xcoderProjectPath,
         'Project',
         processedPaths,
         false,
@@ -1340,10 +1340,10 @@ export async function getMemoryFilesForNestedDirectory(
         false,
       )),
     )
-    const dotXclawPath = join(dir, '.xclaw', 'XCLAW.md')
+    const dotXcoderPath = join(dir, '.xcoder', 'XCODER.md')
     result.push(
       ...(await processMemoryFile(
-        dotXclawPath,
+        dotXcoderPath,
         'Project',
         processedPaths,
         false,
@@ -1360,12 +1360,12 @@ export async function getMemoryFilesForNestedDirectory(
     )
   }
 
-  // Process local memory file (XCLAW.local.md, CLAUDE.local.md)
+  // Process local memory file (XCODER.local.md, CLAUDE.local.md)
   if (isSettingSourceEnabled('localSettings')) {
-    const xclawLocalPath = join(dir, 'XCLAW.local.md')
+    const xcoderLocalPath = join(dir, 'XCODER.local.md')
     result.push(
       ...(await processMemoryFile(
-        xclawLocalPath,
+        xcoderLocalPath,
         'Local',
         processedPaths,
         false,
@@ -1377,15 +1377,15 @@ export async function getMemoryFilesForNestedDirectory(
     )
   }
 
-  const xclawRulesDir = join(dir, '.xclaw', 'rules')
+  const xcoderRulesDir = join(dir, '.xcoder', 'rules')
   const rulesDir = join(dir, '.claude', 'rules')
 
-  // Process project unconditional .xclaw/rules/*.md and .claude/rules/*.md files
+  // Process project unconditional .xcoder/rules/*.md and .claude/rules/*.md files
   // Use a separate processedPaths set to avoid marking conditional rule files as processed
   const unconditionalProcessedPaths = new Set(processedPaths)
   result.push(
     ...(await processMdRules({
-      rulesDir: xclawRulesDir,
+      rulesDir: xcoderRulesDir,
       type: 'Project',
       processedPaths: unconditionalProcessedPaths,
       includeExternal: false,
@@ -1402,11 +1402,11 @@ export async function getMemoryFilesForNestedDirectory(
     })),
   )
 
-  // Process project conditional .xclaw/rules/*.md and .claude/rules/*.md files
+  // Process project conditional .xcoder/rules/*.md and .claude/rules/*.md files
   result.push(
     ...(await processConditionedMdRules(
       targetPath,
-      xclawRulesDir,
+      xcoderRulesDir,
       'Project',
       processedPaths,
       false,
@@ -1444,13 +1444,13 @@ export async function getConditionalRulesForCwdLevelDirectory(
   targetPath: string,
   processedPaths: Set<string>,
 ): Promise<MemoryFileInfo[]> {
-  const xclawRulesDir = join(dir, '.xclaw', 'rules')
+  const xcoderRulesDir = join(dir, '.xcoder', 'rules')
   const rulesDir = join(dir, '.claude', 'rules')
   const result: MemoryFileInfo[] = []
   result.push(
     ...(await processConditionedMdRules(
       targetPath,
-      xclawRulesDir,
+      xcoderRulesDir,
       'Project',
       processedPaths,
       false,
@@ -1563,20 +1563,20 @@ export function isMemoryFilePath(filePath: string): boolean {
   const name = basename(filePath)
   const normalizedPath = normalizePathForComparison(filePath)
 
-  // XCLAW.md, CLAUDE.md, XCLAW.local.md, or CLAUDE.local.md anywhere
+  // XCODER.md, CLAUDE.md, XCODER.local.md, or CLAUDE.local.md anywhere
   if (
-    name === 'XCLAW.md' ||
+    name === 'XCODER.md' ||
     name === 'CLAUDE.md' ||
-    name === 'XCLAW.local.md' ||
+    name === 'XCODER.local.md' ||
     name === 'CLAUDE.local.md'
   ) {
     return true
   }
 
-  // .md files in .xclaw/rules/ or .claude/rules/ directories
+  // .md files in .xcoder/rules/ or .claude/rules/ directories
   if (
     name.endsWith('.md') &&
-    (normalizedPath.includes('/.xclaw/rules/') ||
+    (normalizedPath.includes('// xcoder/rules/') ||
       normalizedPath.includes('/.claude/rules/'))
   ) {
     return true

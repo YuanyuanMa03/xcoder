@@ -84,60 +84,63 @@ mock.module('src/constants/systemPromptSections.js', () => ({
 }))
 
 // Tool name mocks
-mock.module('@xclaw/builtin-tools/tools/BashTool/toolName.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/BashTool/toolName.js', () => ({
   BASH_TOOL_NAME: 'Bash',
 }))
-mock.module('@xclaw/builtin-tools/tools/FileReadTool/prompt.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/FileReadTool/prompt.js', () => ({
   FILE_READ_TOOL_NAME: 'Read',
 }))
-mock.module('@xclaw/builtin-tools/tools/FileEditTool/constants.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/FileEditTool/constants.js', () => ({
   FILE_EDIT_TOOL_NAME: 'Edit',
 }))
-mock.module('@xclaw/builtin-tools/tools/FileWriteTool/prompt.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/FileWriteTool/prompt.js', () => ({
   FILE_WRITE_TOOL_NAME: 'Write',
 }))
-mock.module('@xclaw/builtin-tools/tools/GlobTool/prompt.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/GlobTool/prompt.js', () => ({
   GLOB_TOOL_NAME: 'Glob',
 }))
-mock.module('@xclaw/builtin-tools/tools/GrepTool/prompt.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/GrepTool/prompt.js', () => ({
   GREP_TOOL_NAME: 'Grep',
 }))
-mock.module('@xclaw/builtin-tools/tools/AgentTool/constants.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/AgentTool/constants.js', () => ({
   AGENT_TOOL_NAME: 'Agent',
   VERIFICATION_AGENT_TYPE: 'verification',
 }))
-mock.module('@xclaw/builtin-tools/tools/AgentTool/forkSubagent.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/AgentTool/forkSubagent.js', () => ({
   isForkSubagentEnabled: () => false,
 }))
-mock.module('@xclaw/builtin-tools/tools/AgentTool/builtInAgents.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/AgentTool/builtInAgents.js', () => ({
   areExplorePlanAgentsEnabled: () => false,
 }))
 mock.module(
-  '@xclaw/builtin-tools/tools/AgentTool/built-in/exploreAgent.js',
+  '@xcoder/builtin-tools/tools/AgentTool/built-in/exploreAgent.js',
   () => ({
     EXPLORE_AGENT: { agentType: 'explore' },
     EXPLORE_AGENT_MIN_QUERIES: 5,
   }),
 )
-mock.module('@xclaw/builtin-tools/tools/AskUserQuestionTool/prompt.js', () => ({
-  ASK_USER_QUESTION_TOOL_NAME: 'AskUserQuestion',
-}))
-mock.module('@xclaw/builtin-tools/tools/TodoWriteTool/constants.js', () => ({
+mock.module(
+  '@xcoder/builtin-tools/tools/AskUserQuestionTool/prompt.js',
+  () => ({
+    ASK_USER_QUESTION_TOOL_NAME: 'AskUserQuestion',
+  }),
+)
+mock.module('@xcoder/builtin-tools/tools/TodoWriteTool/constants.js', () => ({
   TODO_WRITE_TOOL_NAME: 'TodoWrite',
 }))
-mock.module('@xclaw/builtin-tools/tools/TaskCreateTool/constants.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/TaskCreateTool/constants.js', () => ({
   TASK_CREATE_TOOL_NAME: 'TaskCreate',
 }))
-mock.module('@xclaw/builtin-tools/tools/DiscoverSkillsTool/prompt.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/DiscoverSkillsTool/prompt.js', () => ({
   DISCOVER_SKILLS_TOOL_NAME: 'DiscoverSkills',
 }))
-mock.module('@xclaw/builtin-tools/tools/SkillTool/constants.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/SkillTool/constants.js', () => ({
   SKILL_TOOL_NAME: 'Skill',
 }))
-mock.module('@xclaw/builtin-tools/tools/SleepTool/prompt.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/SleepTool/prompt.js', () => ({
   SLEEP_TOOL_NAME: 'Sleep',
 }))
-mock.module('@xclaw/builtin-tools/tools/REPLTool/constants.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/REPLTool/constants.js', () => ({
   isReplModeEnabled: () => false,
 }))
 

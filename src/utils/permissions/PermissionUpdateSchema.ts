@@ -28,16 +28,16 @@ export const permissionUpdateDestinationSchema = lazySchema(() =>
   z.enum([
     // User settings (global)
     'userSettings',
-    // xclaw user settings (global overlay)
-    'xclawUserSettings',
+    // xcoder user settings (global overlay)
+    'xcoderUserSettings',
     // Project settings (shared per-directory)
     'projectSettings',
-    // xclaw project settings (per-directory overlay)
-    'xclawProjectSettings',
+    // xcoder project settings (per-directory overlay)
+    'xcoderProjectSettings',
     // Local settings (gitignored)
     'localSettings',
-    // xclaw local settings (gitignored overlay)
-    'xclawLocalSettings',
+    // xcoder local settings (gitignored overlay)
+    'xcoderLocalSettings',
     // In-memory for the current session only
     'session',
     // From the command line arguments

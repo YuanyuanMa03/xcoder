@@ -1,5 +1,5 @@
 /**
- * Permission bridge: maps xclaw's canUseTool / PermissionDecision
+ * Permission bridge: maps xcoder's canUseTool / PermissionDecision
  * system to ACP's requestPermission() flow.
  *
  * Supports:

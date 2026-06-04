@@ -70,7 +70,7 @@ export function TeleportRepoMismatchDialog({
           <Box flexDirection="column" gap={1}>
             {errorMessage && <Text color="error">{errorMessage}</Text>}
             <Text>
-              Open xclaw in <Text bold>{targetRepo}</Text>:
+              Open xcoder in <Text bold>{targetRepo}</Text>:
             </Text>
           </Box>
 

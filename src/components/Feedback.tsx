@@ -41,7 +41,7 @@ const GITHUB_URL_LIMIT = 7250;
 const GITHUB_ISSUES_REPO_URL =
   process.env.USER_TYPE === 'ant'
     ? 'https://github.com/anthropics/claude-cli-internal/issues'
-    : 'https://github.com/YuanyuanMa03/xclaw/issues';
+    : 'https://github.com/YuanyuanMa03.xcoder/issues';
 
 type Props = {
   abortSignal: AbortSignal;
@@ -398,7 +398,7 @@ export function Feedback({
           </Box>
           <Box marginTop={1}>
             <Text wrap="wrap" dimColor>
-              We will use your feedback to debug related issues or to improve xclaw&apos;s functionality (eg. to reduce
+              We will use your feedback to debug related issues or to improve.xcoder&apos;s functionality (eg. to reduce
               the risk of bugs occurring in the future).
             </Text>
           </Box>
@@ -509,8 +509,8 @@ async function generateTitle(description: string, abortSignal: AbortSignal): Pro
   try {
     const response = await queryHaiku({
       systemPrompt: asSystemPrompt([
-        'Generate a concise, technical issue title (max 80 chars) for a public GitHub issue based on this bug report for xclaw.',
-        'xclaw is an agentic coding CLI based on the Anthropic API.',
+        'Generate a concise, technical issue title (max 80 chars) for a public GitHub issue based on this bug report for Xcoder.',
+        'xcoder is an agentic coding CLI based on the Anthropic API.',
         'The title should:',
         '- Include the type of issue [Bug] or [Feature Request] as the first thing in the title',
         '- Be concise, specific and descriptive of the actual problem',

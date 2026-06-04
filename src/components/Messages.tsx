@@ -16,7 +16,7 @@ import { useShortcutDisplay } from '../keybindings/useShortcutDisplay.js';
 import type { Screen } from '../screens/REPL.js';
 import type { Tools } from '../Tool.js';
 import { findToolByName } from '../Tool.js';
-import type { AgentDefinitionsResult } from '@xclaw/builtin-tools/tools/AgentTool/loadAgentsDir.js';
+import type { AgentDefinitionsResult } from '@xcoder/builtin-tools/tools/AgentTool/loadAgentsDir.js';
 import type {
   AssistantMessage,
   Message as MessageType,
@@ -105,12 +105,12 @@ const proactiveModule = feature('PROACTIVE') || feature('KAIROS') ? require('../
 const BRIEF_TOOL_NAME: string | null =
   feature('KAIROS') || feature('KAIROS_BRIEF')
     ? (
-        require('@xclaw/builtin-tools/tools/BriefTool/prompt.js') as typeof import('@xclaw/builtin-tools/tools/BriefTool/prompt.js')
+        require('@xcoder/builtin-tools/tools/BriefTool/prompt.js') as typeof import('@xcoder/builtin-tools/tools/BriefTool/prompt.js')
       ).BRIEF_TOOL_NAME
     : null;
 const SEND_USER_FILE_TOOL_NAME: string | null = feature('KAIROS')
   ? (
-      require('@xclaw/builtin-tools/tools/SendUserFileTool/prompt.js') as typeof import('@xclaw/builtin-tools/tools/SendUserFileTool/prompt.js')
+      require('@xcoder/builtin-tools/tools/SendUserFileTool/prompt.js') as typeof import('@xcoder/builtin-tools/tools/SendUserFileTool/prompt.js')
     ).SEND_USER_FILE_TOOL_NAME
   : null;
 

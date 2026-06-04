@@ -36,7 +36,7 @@ import {
   type Tools,
   toolMatchesName,
 } from '../../Tool.js'
-import type { AgentDefinition } from '@xclaw/builtin-tools/tools/AgentTool/loadAgentsDir.js'
+import type { AgentDefinition } from '@xcoder/builtin-tools/tools/AgentTool/loadAgentsDir.js'
 import {
   type ConnectorTextBlock,
   type ConnectorTextDelta,
@@ -195,7 +195,7 @@ import {
   formatDeferredToolLine,
   isDeferredTool,
   TOOL_SEARCH_TOOL_NAME,
-} from '@xclaw/builtin-tools/tools/ToolSearchTool/prompt.js'
+} from '@xcoder/builtin-tools/tools/ToolSearchTool/prompt.js'
 import { count } from '../../utils/array.js'
 import { insertBlockAfterToolResults } from '../../utils/contentArray.js'
 import { validateBoundedIntEnvVar } from '../../utils/envValidation.js'
@@ -3444,7 +3444,7 @@ export async function queryHaiku({
 type QueryWithModelOptions = Omit<Options, 'getToolPermissionContext'>
 
 /**
- * Query a specific model through the xclaw infrastructure.
+ * Query a specific model through the Xcoder infrastructure.
  * This goes through the full query pipeline including proper authentication,
  * betas, and headers - unlike direct API calls.
  */

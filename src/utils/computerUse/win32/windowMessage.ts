@@ -549,7 +549,7 @@ public class ConsoleInput {
 
 /**
  * Send a key to a console window via WriteConsoleInput (Console Input Buffer).
- * This is required for terminal apps like xclaw REPL that read stdin in raw mode.
+ * This is required for terminal apps like Xcoder REPL that read stdin in raw mode.
  */
 export function consoleKey(
   hwnd: string,

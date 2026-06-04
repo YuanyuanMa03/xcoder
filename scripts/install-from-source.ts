@@ -16,7 +16,7 @@ async function main() {
   console.log('')
   console.log('  超越人类与 AI 的边界')
   console.log('')
-  console.log('📦 从源码安装 xclaw...')
+  console.log('📦 从源码安装 xcoder...')
   console.log('')
 
   // Check for Bun
@@ -81,7 +81,7 @@ async function main() {
   if (isWindows) {
     // Windows: create batch wrapper
     const localAppData = process.env.LOCALAPPDATA || ''
-    const installDir = join(localAppData, 'xclaw')
+    const installDir = join(localAppData, 'xcoder')
 
     // Create directory
     await $`mkdir -p ${installDir}`.quiet()
@@ -90,7 +90,7 @@ async function main() {
     const batchContent = `@echo off
 node "${join(ROOT, 'dist', 'cli-node.js')}" %*
 `
-    await Bun.write(join(installDir, 'xclaw.cmd'), batchContent)
+    await Bun.write(join(installDir, 'xcoder.cmd'), batchContent)
 
     // Add to PATH
     const currentPath = process.env.PATH || ''
@@ -100,7 +100,7 @@ node "${join(ROOT, 'dist', 'cli-node.js')}" %*
     }
 
     console.log('')
-    console.log(`✅ xclaw 已安装到: ${installDir}`)
+    console.log(`✅ xcoder 已安装到: ${installDir}`)
   } else {
     // macOS/Linux: create symlink
     let installDir = '/usr/local/bin'
@@ -117,21 +117,21 @@ node "${join(ROOT, 'dist', 'cli-node.js')}" %*
     }
 
     // Create symlink
-    const linkPath = join(installDir, 'xclaw')
+    const linkPath = join(installDir, 'xcoder')
     await $`ln -sf ${distCli} ${linkPath}`.quiet()
     await $`chmod +x ${distCli}`.quiet()
 
     console.log('')
-    console.log(`✅ xclaw 已安装到: ${linkPath}`)
+    console.log(`✅ xcoder 已安装到: ${linkPath}`)
   }
 
   console.log('')
   console.log('🚀 安装完成!')
   console.log('')
   console.log('使用方式:')
-  console.log('   xclaw              # 启动')
-  console.log('   xclaw --version    # 查看版本')
-  console.log('   xclaw --help       # 查看帮助')
+  console.log('   xcoder              # 启动')
+  console.log('   xcoder --version    # 查看版本')
+  console.log('   xcoder --help       # 查看帮助')
   console.log('')
   console.log('首次配置:')
   console.log('   启动后输入 /login 配置 API')

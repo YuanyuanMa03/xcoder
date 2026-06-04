@@ -7,13 +7,13 @@ import {
   loadMarkdownFilesForSubdir,
 } from '../markdownConfigLoader'
 
-describe('getProjectDirsUpToHome with xclaw overlay', () => {
+describe('getProjectDirsUpToHome with Xcoder overlay', () => {
   let tmpDir: string
 
   beforeEach(() => {
     tmpDir = join(
       tmpdir(),
-      `xclaw-test-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+      `xcoder-test-${Date.now()}-${Math.random().toString(36).slice(2)}`,
     )
     mkdirSync(tmpDir, { recursive: true })
   })
@@ -22,64 +22,64 @@ describe('getProjectDirsUpToHome with xclaw overlay', () => {
     rmSync(tmpDir, { recursive: true, force: true })
   })
 
-  test('returns both .claude and .xclaw dirs when both exist', () => {
+  test('returns both .claude and .xcoder dirs when both exist', () => {
     mkdirSync(join(tmpDir, '.claude', 'skills'), { recursive: true })
-    mkdirSync(join(tmpDir, '.xclaw', 'skills'), { recursive: true })
+    mkdirSync(join(tmpDir, '.xcoder', 'skills'), { recursive: true })
 
     const dirs = getProjectDirsUpToHome('skills', tmpDir)
     const hasClaude = dirs.some(d => d.includes('.claude'))
-    const hasXclaw = dirs.some(d => d.includes('.xclaw'))
+    const hasXcoder = dirs.some(d => d.includes('.xcoder'))
     expect(hasClaude).toBe(true)
-    expect(hasXclaw).toBe(true)
+    expect(hasXcoder).toBe(true)
   })
 
-  test('returns only .claude when .xclaw does not exist', () => {
+  test('returns only .claude when .xcoder does not exist', () => {
     mkdirSync(join(tmpDir, '.claude', 'skills'), { recursive: true })
 
     const dirs = getProjectDirsUpToHome('skills', tmpDir)
     const hasClaude = dirs.some(d => d.includes('.claude'))
-    const hasXclaw = dirs.some(d => d.includes('.xclaw'))
+    const hasXcoder = dirs.some(d => d.includes('.xcoder'))
     expect(hasClaude).toBe(true)
-    expect(hasXclaw).toBe(false)
+    expect(hasXcoder).toBe(false)
   })
 
-  test('returns only .xclaw when .claude does not exist', () => {
-    mkdirSync(join(tmpDir, '.xclaw', 'skills'), { recursive: true })
+  test('returns only .xcoder when .claude does not exist', () => {
+    mkdirSync(join(tmpDir, '.xcoder', 'skills'), { recursive: true })
 
     const dirs = getProjectDirsUpToHome('skills', tmpDir)
     const hasClaude = dirs.some(d => d.includes('.claude'))
-    const hasXclaw = dirs.some(d => d.includes('.xclaw'))
+    const hasXcoder = dirs.some(d => d.includes('.xcoder'))
     expect(hasClaude).toBe(false)
-    expect(hasXclaw).toBe(true)
+    expect(hasXcoder).toBe(true)
   })
 
-  test('returns empty array when neither .claude nor .xclaw exist', () => {
+  test('returns empty array when neither .claude nor .xcoder exist', () => {
     const dirs = getProjectDirsUpToHome('skills', tmpDir)
     expect(dirs).toEqual([])
   })
 })
 
-describe('loadMarkdownFilesForSubdir user-level xclaw', () => {
+describe('loadMarkdownFilesForSubdir user-level xcoder', () => {
   let tmpDir: string
   let origClaudeConfigDir: string | undefined
-  let origXclawConfigDir: string | undefined
+  let origXcoderConfigDir: string | undefined
   let origNativeFileSearch: string | undefined
 
   beforeEach(() => {
     tmpDir = join(
       tmpdir(),
-      `xclaw-user-test-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+      `xcoder-user-test-${Date.now()}-${Math.random().toString(36).slice(2)}`,
     )
     mkdirSync(tmpDir, { recursive: true })
     origClaudeConfigDir = process.env.CLAUDE_CONFIG_DIR
-    origXclawConfigDir = process.env.XCLAW_CONFIG_DIR
+    origXcoderConfigDir = process.env.XCODER_CONFIG_DIR
     origNativeFileSearch = process.env.CLAUDE_CODE_USE_NATIVE_FILE_SEARCH
     process.env.CLAUDE_CONFIG_DIR = join(tmpDir, '.claude')
-    process.env.XCLAW_CONFIG_DIR = join(tmpDir, '.xclaw')
+    process.env.XCODER_CONFIG_DIR = join(tmpDir, '.xcoder')
     // Use native file search in tests — ripgrep subprocess can hang in bun test
     process.env.CLAUDE_CODE_USE_NATIVE_FILE_SEARCH = '1'
     mkdirSync(join(tmpDir, '.claude', 'skills'), { recursive: true })
-    mkdirSync(join(tmpDir, '.xclaw', 'skills'), { recursive: true })
+    mkdirSync(join(tmpDir, '.xcoder', 'skills'), { recursive: true })
   })
 
   afterEach(() => {
@@ -88,10 +88,10 @@ describe('loadMarkdownFilesForSubdir user-level xclaw', () => {
     } else {
       delete process.env.CLAUDE_CONFIG_DIR
     }
-    if (origXclawConfigDir !== undefined) {
-      process.env.XCLAW_CONFIG_DIR = origXclawConfigDir
+    if (origXcoderConfigDir !== undefined) {
+      process.env.XCODER_CONFIG_DIR = origXcoderConfigDir
     } else {
-      delete process.env.XCLAW_CONFIG_DIR
+      delete process.env.XCODER_CONFIG_DIR
     }
     if (origNativeFileSearch !== undefined) {
       process.env.CLAUDE_CODE_USE_NATIVE_FILE_SEARCH = origNativeFileSearch
@@ -107,34 +107,34 @@ describe('loadMarkdownFilesForSubdir user-level xclaw', () => {
       '---\nname: claude-user\n---\nClaude user skill',
     )
     writeFileSync(
-      join(tmpDir, '.xclaw', 'skills', 'xclaw-user.md'),
-      '---\nname: xclaw-user\n---\nXclaw user skill',
+      join(tmpDir, '.xcoder', 'skills', 'xcoder-user.md'),
+      '---\nname: xcoder-user\n---\nXcoder user skill',
     )
 
     const files = await loadMarkdownFilesForSubdir('skills', tmpDir)
     const filePaths = files.map(f => f.filePath)
     expect(filePaths.some(p => p.includes('claude-user.md'))).toBe(true)
-    expect(filePaths.some(p => p.includes('xclaw-user.md'))).toBe(true)
+    expect(filePaths.some(p => p.includes('xcoder-user.md'))).toBe(true)
   })
 })
 
 describe('name-based deduplication', () => {
   let tmpDir: string
   let origClaudeConfigDir: string | undefined
-  let origXclawConfigDir: string | undefined
+  let origXcoderConfigDir: string | undefined
   let origNativeFileSearch: string | undefined
 
   beforeEach(() => {
     tmpDir = join(
       tmpdir(),
-      `xclaw-dedup-test-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+      `xcoder-dedup-test-${Date.now()}-${Math.random().toString(36).slice(2)}`,
     )
     mkdirSync(tmpDir, { recursive: true })
     origClaudeConfigDir = process.env.CLAUDE_CONFIG_DIR
-    origXclawConfigDir = process.env.XCLAW_CONFIG_DIR
+    origXcoderConfigDir = process.env.XCODER_CONFIG_DIR
     origNativeFileSearch = process.env.CLAUDE_CODE_USE_NATIVE_FILE_SEARCH
     process.env.CLAUDE_CONFIG_DIR = join(tmpDir, '.claude')
-    process.env.XCLAW_CONFIG_DIR = join(tmpDir, '.xclaw')
+    process.env.XCODER_CONFIG_DIR = join(tmpDir, '.xcoder')
     process.env.CLAUDE_CODE_USE_NATIVE_FILE_SEARCH = '1'
   })
 
@@ -144,10 +144,10 @@ describe('name-based deduplication', () => {
     } else {
       delete process.env.CLAUDE_CONFIG_DIR
     }
-    if (origXclawConfigDir !== undefined) {
-      process.env.XCLAW_CONFIG_DIR = origXclawConfigDir
+    if (origXcoderConfigDir !== undefined) {
+      process.env.XCODER_CONFIG_DIR = origXcoderConfigDir
     } else {
-      delete process.env.XCLAW_CONFIG_DIR
+      delete process.env.XCODER_CONFIG_DIR
     }
     if (origNativeFileSearch !== undefined) {
       process.env.CLAUDE_CODE_USE_NATIVE_FILE_SEARCH = origNativeFileSearch
@@ -157,23 +157,23 @@ describe('name-based deduplication', () => {
     rmSync(tmpDir, { recursive: true, force: true })
   })
 
-  test('xclaw skill overrides claude skill with same relative path', async () => {
+  test('xcoder skill overrides claude skill with same relative path', async () => {
     mkdirSync(join(tmpDir, '.claude', 'skills', 'foo'), { recursive: true })
     writeFileSync(
       join(tmpDir, '.claude', 'skills', 'foo', 'SKILL.md'),
       '---\nname: foo\n---\nClaude version',
     )
 
-    mkdirSync(join(tmpDir, '.xclaw', 'skills', 'foo'), { recursive: true })
+    mkdirSync(join(tmpDir, '.xcoder', 'skills', 'foo'), { recursive: true })
     writeFileSync(
-      join(tmpDir, '.xclaw', 'skills', 'foo', 'SKILL.md'),
-      '---\nname: foo\n---\nXclaw version',
+      join(tmpDir, '.xcoder', 'skills', 'foo', 'SKILL.md'),
+      '---\nname: foo\n---\nXcoder version',
     )
 
     const files = await loadMarkdownFilesForSubdir('skills', tmpDir)
     const fooFiles = files.filter(f => f.filePath.includes('foo'))
     expect(fooFiles).toHaveLength(1)
-    expect(fooFiles[0]!.content).toContain('Xclaw version')
+    expect(fooFiles[0]!.content).toContain('Xcoder version')
   })
 
   test('both skills loaded when relative paths differ', async () => {
@@ -183,9 +183,9 @@ describe('name-based deduplication', () => {
       '---\nname: alpha\n---\nAlpha',
     )
 
-    mkdirSync(join(tmpDir, '.xclaw', 'skills', 'beta'), { recursive: true })
+    mkdirSync(join(tmpDir, '.xcoder', 'skills', 'beta'), { recursive: true })
     writeFileSync(
-      join(tmpDir, '.xclaw', 'skills', 'beta', 'SKILL.md'),
+      join(tmpDir, '.xcoder', 'skills', 'beta', 'SKILL.md'),
       '---\nname: beta\n---\nBeta',
     )
 

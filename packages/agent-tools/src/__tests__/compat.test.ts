@@ -7,7 +7,7 @@ import type {
   ToolResult,
   ValidationResult,
   PermissionResult,
-} from '@xclaw/agent-tools'
+} from '@xcoder/agent-tools'
 import type { Tool as HostTool } from '../../../../src/Tool.js'
 
 describe('agent-tools compatibility', () => {

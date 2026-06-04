@@ -1,5 +1,5 @@
 // @ant/model-provider
-// Model provider abstraction layer for xclaw
+// Model provider abstraction layer for Xcoder
 //
 // This package owns the model calling logic and provides:
 // - Core query functions (queryModelWithStreaming, etc.)

@@ -10,7 +10,7 @@ import { logError } from '../../utils/log.js';
 import { countCharInString } from '../../utils/stringUtils.js';
 import { MessageActionsSelectedContext } from '../messageActions.js';
 import { HighlightedThinkingText } from './HighlightedThinkingText.js';
-import { XCLAW_CLAW_MARK } from '../../constants/xclaw.js';
+import { XCODER_CLAW_MARK } from '../../constants/xcoder.js';
 
 type Props = {
   addMargin: boolean;
@@ -85,7 +85,7 @@ export function UserPromptMessage({ addMargin, param: { text }, isTranscriptMode
       backgroundColor={isSelected ? 'messageActionsBackground' : useBriefLayout ? undefined : 'userMessageBackground'}
       paddingRight={useBriefLayout ? 0 : 1}
     >
-      {!useBriefLayout && <Text dimColor>{XCLAW_CLAW_MARK} </Text>}
+      {!useBriefLayout && <Text dimColor>{XCODER_CLAW_MARK} </Text>}
       <HighlightedThinkingText
         text={displayText}
         useBriefLayout={useBriefLayout}

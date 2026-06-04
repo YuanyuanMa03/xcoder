@@ -100,7 +100,7 @@ Guidelines:
     if (appState.replBridgeEnabled) {
       try {
         const { uploadBriefAttachment } = await import(
-          '@xclaw/builtin-tools/tools/BriefTool/upload.js'
+          '@xcoder/builtin-tools/tools/BriefTool/upload.js'
         )
         fileUuid = await uploadBriefAttachment(file_path, fileSize, {
           replBridgeEnabled: true,

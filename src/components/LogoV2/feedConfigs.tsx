@@ -46,7 +46,7 @@ export function createWhatsNewFeed(releaseNotes: string[]): FeedConfig {
 
   const emptyMessage = process.env.USER_TYPE === 'ant' ? 'Unable to fetch latest commits' : 'No recent updates';
 
-  // xclaw is based on Claude Code - show upstream updates with attribution
+  // xcoder is based on Claude Code - show upstream updates with attribution
   const title = "What's new (Claude Code upstream)";
 
   return {
@@ -71,7 +71,7 @@ export function createProjectOnboardingFeed(steps: Step[]): FeedConfig {
 
   const warningText =
     getCwd() === homedir()
-      ? 'Note: You have launched xclaw in your home directory. For the best experience, launch it in a project directory instead.'
+      ? 'Note: You have launched xcoder in your home directory. For the best experience, launch it in a project directory instead.'
       : undefined;
 
   if (warningText) {
@@ -89,8 +89,8 @@ export function createProjectOnboardingFeed(steps: Step[]): FeedConfig {
 export function createGuestPassesFeed(): FeedConfig {
   const reward = getCachedReferrerReward();
   const subtitle = reward
-    ? `Share xclaw and earn ${formatCreditAmount(reward)} of extra usage`
-    : 'Share xclaw with friends';
+    ? `Share xcoder and earn ${formatCreditAmount(reward)} of extra usage`
+    : 'Share xcoder with friends';
   return {
     title: '3 guest passes',
     lines: [],

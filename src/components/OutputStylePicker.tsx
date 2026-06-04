@@ -8,7 +8,7 @@ import type { OptionWithDescription } from './CustomSelect/select.js';
 import { Select } from './CustomSelect/select.js';
 
 const DEFAULT_OUTPUT_STYLE_LABEL = 'Default';
-const DEFAULT_OUTPUT_STYLE_DESCRIPTION = 'xclaw completes coding tasks efficiently and provides concise responses';
+const DEFAULT_OUTPUT_STYLE_DESCRIPTION = 'xcoder completes coding tasks efficiently and provides concise responses';
 
 function mapConfigsToOptions(styles: { [styleName: string]: OutputStyleConfig | null }): OptionWithDescription[] {
   return Object.entries(styles).map(([style, config]) => ({
@@ -67,7 +67,7 @@ export function OutputStylePicker({
     >
       <Box flexDirection="column" gap={1}>
         <Box marginTop={1}>
-          <Text dimColor>This changes how xclaw communicates with you</Text>
+          <Text dimColor>This changes how xcoder communicates with you</Text>
         </Box>
         {isLoading ? (
           <Text dimColor>Loading output styles…</Text>

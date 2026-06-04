@@ -59,7 +59,7 @@ export const PermissionsSchema = lazySchema(() =>
       defaultMode: z
         .enum(PERMISSION_MODES)
         .optional()
-        .describe('Default permission mode when xclaw needs access'),
+        .describe('Default permission mode when xcoder needs access'),
       disableBypassPermissionsMode: z
         .enum(['disable'])
         .optional()
@@ -254,7 +254,7 @@ export const SettingsSchema = lazySchema(() =>
       $schema: z
         .literal(CLAUDE_CODE_SETTINGS_SCHEMA_URL)
         .optional()
-        .describe('JSON Schema reference for xclaw settings'),
+        .describe('JSON Schema reference for Xcoder settings'),
       apiKeyHelper: z
         .string()
         .optional()
@@ -287,7 +287,7 @@ export const SettingsSchema = lazySchema(() =>
                   .describe('IdP issuer URL for OIDC discovery'),
                 clientId: z
                   .string()
-                  .describe("xclaw's client_id registered at the IdP"),
+                  .describe("xcoder's client_id registered at the IdP"),
                 callbackPort: z
                   .number()
                   .int()
@@ -328,7 +328,7 @@ export const SettingsSchema = lazySchema(() =>
         ),
       env: EnvironmentVariablesSchema()
         .optional()
-        .describe('Environment variables to set for xclaw sessions'),
+        .describe('Environment variables to set for xcoder sessions'),
       // Attribution for commits and PRs
       attribution: z
         .object({
@@ -350,7 +350,7 @@ export const SettingsSchema = lazySchema(() =>
         .optional()
         .describe(
           'Customize attribution text for commits and PRs. ' +
-            'Each field defaults to the standard xclaw attribution if not set.',
+            'Each field defaults to the standard xcoder attribution if not set.',
         ),
       includeCoAuthoredBy: z
         .boolean()
@@ -378,7 +378,7 @@ export const SettingsSchema = lazySchema(() =>
       model: z
         .string()
         .optional()
-        .describe('Override the default model used by xclaw'),
+        .describe('Override the default model used by Xcoder'),
       // Enterprise allowlist of models
       availableModels: z
         .array(z.string())

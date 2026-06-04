@@ -6,7 +6,7 @@ import {
   AGENT_COLOR_TO_THEME_COLOR,
   AGENT_COLORS,
   type AgentColorName,
-} from '@xclaw/builtin-tools/tools/AgentTool/agentColorManager.js';
+} from '@xcoder/builtin-tools/tools/AgentTool/agentColorManager.js';
 import type { PromptInputMode } from 'src/types/textInputTypes.js';
 import { getTeammateColor } from 'src/utils/teammate.js';
 import type { Theme } from 'src/utils/theme.js';
@@ -70,19 +70,19 @@ export function PromptInputModeIndicator({
   viewingAgentColor,
 }: Props): React.ReactNode {
   const teammateColor = getTeammateThemeColor();
-  const xclawMode = getCurrentMode();
+  const xcoderMode = getCurrentMode();
 
   // Mode transition animation: briefly flash the mode name when it changes
   const [transitioning, setTransitioning] = useState(false);
-  const prevSlugRef = useRef(xclawMode.slug);
+  const prevSlugRef = useRef(xcoderMode.slug);
   useEffect(() => {
-    if (prevSlugRef.current !== xclawMode.slug) {
-      prevSlugRef.current = xclawMode.slug;
+    if (prevSlugRef.current !== xcoderMode.slug) {
+      prevSlugRef.current = xcoderMode.slug;
       setTransitioning(true);
       const timer = setTimeout(() => setTransitioning(false), 800);
       return () => clearTimeout(timer);
     }
-  }, [xclawMode.slug]);
+  }, [xcoderMode.slug]);
 
   // Convert viewed teammate's color to theme color
   // Falls back to PromptChar's default (subtle for ants, undefined for external)
@@ -90,14 +90,14 @@ export function PromptInputModeIndicator({
 
   return (
     <Box alignItems="flex-start" alignSelf="flex-start" flexWrap="nowrap" justifyContent="flex-start">
-      {xclawMode.ui.promptPrefix && (
+      {xcoderMode.ui.promptPrefix && (
         <Text
-          color={xclawMode.ui.accentColor as keyof Theme}
+          color={xcoderMode.ui.accentColor as keyof Theme}
           dimColor={isLoading && !transitioning}
           bold={transitioning}
           inverse={transitioning}
         >
-          [{xclawMode.ui.promptPrefix}]&nbsp;
+          [{xcoderMode.ui.promptPrefix}]&nbsp;
         </Text>
       )}
       {viewingAgentName ? (

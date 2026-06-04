@@ -1,4 +1,7 @@
 #!/usr/bin/env bun
+// Performance shim MUST be the very first import — prevents JSC's C++ Vector
+// from growing without bound in long-running sessions.
+import '../utils/performanceShim.js';
 import { feature } from 'bun:bundle';
 import { isEnvTruthy } from '../utils/envUtils.js';
 
@@ -75,11 +78,11 @@ async function main(): Promise<void> {
   // Fast-path for --version/-v: zero module loading needed
   if (args.length === 1 && (args[0] === '--version' || args[0] === '-v' || args[0] === '-V')) {
     // MACRO.VERSION is inlined at build time
-    console.log(`${MACRO.VERSION} (xclaw)`);
+    console.log(`${MACRO.VERSION} (xcoder)`);
     return;
   }
 
-  // `xclaw resume [arg]` → `xclaw --resume [arg]` convenience alias
+  // `xcoder resume [arg]` → `xcoder --resume [arg]` convenience alias
   if (args[0] === 'resume') {
     process.argv = [process.argv[0]!, process.argv[1]!, '--resume', ...args.slice(1)];
   }
@@ -131,7 +134,7 @@ async function main(): Promise<void> {
 
   if (args[0] === 'weixin') {
     profileCheckpoint('cli_weixin_path');
-    const { handleWeixinCli } = await import('@xclaw/weixin');
+    const { handleWeixinCli } = await import('@xcoder/weixin');
     const { enableConfigs } = await import('../utils/config.js');
     const { initializeAnalyticsSink } = await import('../services/analytics/sink.js');
     const { shutdownDatadog } = await import('../services/analytics/datadog.js');

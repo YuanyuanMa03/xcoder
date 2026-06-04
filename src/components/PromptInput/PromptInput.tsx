@@ -52,8 +52,8 @@ import {
   AGENT_COLOR_TO_THEME_COLOR,
   AGENT_COLORS,
   type AgentColorName,
-} from '@xclaw/builtin-tools/tools/AgentTool/agentColorManager.js';
-import type { AgentDefinition } from '@xclaw/builtin-tools/tools/AgentTool/loadAgentsDir.js';
+} from '@xcoder/builtin-tools/tools/AgentTool/agentColorManager.js';
+import type { AgentDefinition } from '@xcoder/builtin-tools/tools/AgentTool/loadAgentsDir.js';
 import type { Message } from '../../types/message.js';
 import type { PermissionMode } from '../../types/permissions.js';
 import type { BaseTextInputProps, PromptInputMode, VimMode } from '../../types/textInputTypes.js';
@@ -83,7 +83,7 @@ import { cacheImagePath, storeImage } from '../../utils/imageStore.js';
 import { isMacosOptionChar, MACOS_OPTION_SPECIAL_CHARS } from '../../utils/keyboardShortcuts.js';
 import { logError } from '../../utils/log.js';
 import { isOpus1mMergeEnabled, modelDisplayString } from '../../utils/model/model.js';
-import { cycleMode as cycleXclawMode, getCurrentMode } from '../../modes/store.js';
+import { cycleMode as cycleXcoderMode, getCurrentMode } from '../../modes/store.js';
 import { cyclePermissionMode, getNextPermissionMode } from '../../utils/permissions/getNextPermissionMode.js';
 import { getPlatform } from '../../utils/platform.js';
 import type { ProcessUserInputContext } from '../../utils/processUserInput/processUserInput.js';
@@ -878,7 +878,7 @@ function PromptInput({
     if (feature('ULTRAPLAN') && ultraplanTriggers.length) {
       addNotification({
         key: 'ultraplan-active',
-        text: 'This prompt will launch an ultraplan session in xclaw on the web',
+        text: 'This prompt will launch an ultraplan session in Xcoder on the web',
         priority: 'immediate',
         timeoutMs: 5000,
       });
@@ -1700,9 +1700,9 @@ function PromptInput({
   // onHistoryUp/onHistoryDown props to TextInput, so that useTextInput's
   // upOrHistoryUp/downOrHistoryDown can try cursor movement first and only
   // fall through to history when the cursor can't move further.
-  const handleCycleXclawMode = useCallback(() => {
-    const next = cycleXclawMode();
-    // Sync permission mode with xclaw mode
+  const handleCycleXcoderMode = useCallback(() => {
+    const next = cycleXcoderMode();
+    // Sync permission mode with xcoder mode
     const permMode = next.permissions.defaultMode;
     setAppState(prev => ({
       ...prev,
@@ -1717,7 +1717,7 @@ function PromptInput({
     });
     addNotification({
       text: `${next.icon} Mode: ${next.name} (${next.slug}) — permissions: ${permMode}`,
-      key: 'xclaw-mode-cycle',
+      key: 'xcoder-mode-cycle',
       priority: 'medium',
     });
   }, [addNotification, setAppState, setToolPermissionContext, toolPermissionContext]);
@@ -1732,7 +1732,7 @@ function PromptInput({
       'chat:thinkingToggle': handleThinkingToggle,
       'chat:cycleMode': handleCycleMode,
       'chat:imagePaste': handleImagePaste,
-      'chat:cycleXclawMode': handleCycleXclawMode,
+      'chat:cycleXcoderMode': handleCycleXcoderMode,
     }),
     [
       handleUndo,
@@ -1743,7 +1743,7 @@ function PromptInput({
       handleThinkingToggle,
       handleCycleMode,
       handleImagePaste,
-      handleCycleXclawMode,
+      handleCycleXcoderMode,
     ],
   );
 
@@ -2398,10 +2398,10 @@ function PromptInput({
       return modeColors[mode];
     }
 
-    // xclaw: use mode accent color for prompt border
-    const xclawMode = getCurrentMode();
-    if (xclawMode.slug !== 'default' && xclawMode.ui.accentColor) {
-      return xclawMode.ui.accentColor as keyof Theme;
+    /// xcoder: use mode accent color for prompt border
+    const xcoderMode = getCurrentMode();
+    if (xcoderMode.slug !== 'default' && xcoderMode.ui.accentColor) {
+      return xcoderMode.ui.accentColor as keyof Theme;
     }
 
     // In-process teammates run headless - don't apply teammate colors to leader UI

@@ -35,7 +35,7 @@ export async function sendNotification(
   })
 }
 
-const DEFAULT_TITLE = 'xclaw'
+const DEFAULT_TITLE = 'xcoder'
 
 async function sendToChannel(
   channel: string,

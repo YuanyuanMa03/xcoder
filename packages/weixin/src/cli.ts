@@ -40,8 +40,8 @@ async function runLogin(clear = false): Promise<void> {
         `  Connected since: ${existing.savedAt}`,
         '',
         'Run `ccb weixin login clear` to disconnect.',
-        'Restart xclaw with:',
-        '  xclaw --channels plugin:weixin@builtin',
+        'Restart Xcoder with:',
+        '  xcoder --channels plugin:weixin@builtin',
       ].join('\n') + '\n',
     )
     return
@@ -76,8 +76,8 @@ async function runLogin(clear = false): Promise<void> {
       `  User ID: ${result.userId || 'unknown'}`,
       `  Base URL: ${result.baseUrl || DEFAULT_BASE_URL}`,
       '',
-      'Restart xclaw with:',
-      '  xclaw --channels plugin:weixin@builtin',
+      'Restart Xcoder with:',
+      '  xcoder --channels plugin:weixin@builtin',
     ].join('\n') + '\n',
   )
 }

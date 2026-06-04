@@ -1,5 +1,5 @@
 /**
- * Sandbox types for the xclaw Agent SDK
+ * Sandbox types for the Xcoder Agent SDK
  *
  * This file is the single source of truth for sandbox configuration types.
  * Both the SDK and the settings validation import from here.

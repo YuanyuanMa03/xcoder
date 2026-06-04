@@ -122,22 +122,22 @@ afterEach(() => {
 describe('Agent Teams lifecycle', () => {
   test('runs TeamCreate -> spawn -> TaskUpdate -> SendMessage -> TeamDelete', async () => {
     const { TeamCreateTool } = await import(
-      '@xclaw/builtin-tools/tools/TeamCreateTool/TeamCreateTool.js'
+      '@xcoder/builtin-tools/tools/TeamCreateTool/TeamCreateTool.js'
     )
     const { spawnTeammate } = await import(
-      '@xclaw/builtin-tools/tools/shared/spawnMultiAgent.js'
+      '@xcoder/builtin-tools/tools/shared/spawnMultiAgent.js'
     )
     const { TaskCreateTool } = await import(
-      '@xclaw/builtin-tools/tools/TaskCreateTool/TaskCreateTool.js'
+      '@xcoder/builtin-tools/tools/TaskCreateTool/TaskCreateTool.js'
     )
     const { TaskUpdateTool } = await import(
-      '@xclaw/builtin-tools/tools/TaskUpdateTool/TaskUpdateTool.js'
+      '@xcoder/builtin-tools/tools/TaskUpdateTool/TaskUpdateTool.js'
     )
     const { SendMessageTool } = await import(
-      '@xclaw/builtin-tools/tools/SendMessageTool/SendMessageTool.js'
+      '@xcoder/builtin-tools/tools/SendMessageTool/SendMessageTool.js'
     )
     const { TeamDeleteTool } = await import(
-      '@xclaw/builtin-tools/tools/TeamDeleteTool/TeamDeleteTool.js'
+      '@xcoder/builtin-tools/tools/TeamDeleteTool/TeamDeleteTool.js'
     )
 
     const context = {
@@ -214,7 +214,7 @@ describe('Agent Teams lifecycle', () => {
 
   test('TeamDelete waits for active teammates to become inactive before cleanup', async () => {
     const { TeamDeleteTool } = await import(
-      '@xclaw/builtin-tools/tools/TeamDeleteTool/TeamDeleteTool.js'
+      '@xcoder/builtin-tools/tools/TeamDeleteTool/TeamDeleteTool.js'
     )
     const now = Date.now()
     writeTeamConfig('alpha', {

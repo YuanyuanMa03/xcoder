@@ -1,12 +1,12 @@
 # Remote Control Server (RCS)
 
-Remote Control Server 是 xclaw 的远程控制后端，允许你通过浏览器 Web UI 远程监控和操作 xclaw 会话。
+Remote Control Server 是 Xcoder 的远程控制后端，允许你通过浏览器 Web UI 远程监控和操作 Xcoder 会话。
 
 ## 功能
 
-- **会话管理** — 创建、监控、归档 xclaw 会话
+- **会话管理** — 创建、监控、归档 Xcoder 会话
 - **实时消息流** — WebSocket / SSE 双向传输，实时查看对话和工具调用
-- **权限审批** — 在 Web UI 中审批 xclaw 的工具权限请求
+- **权限审批** — 在 Web UI 中审批 Xcoder 的工具权限请求
 - **多环境管理** — 注册多个运行环境，支持心跳和断线重连
 - **认证安全** — API Key + JWT 双层认证
 
@@ -20,7 +20,7 @@ docker run -d \
   -p 3000:3000 \
   -e RCS_API_KEYS=your-api-key-here \
   -v rcs-data:/app/data \
-  ghcr.io/yuanyuanma03/xclaw/remote-control-server:latest
+  ghcr.io/yuanyuanma03/xcoder/remote-control-server:latest
 ```
 
 ## 环境变量
@@ -44,11 +44,11 @@ docker run -d \
 | `RCS_JWT_EXPIRES_IN` | `3600` | JWT 令牌有效期（秒） |
 | `RCS_DISCONNECT_TIMEOUT` | `300` | 断线判定超时（秒） |
 
-## xclaw 客户端配置
+## Xcoder 客户端配置
 
 ### 连接到自托管服务器
 
-在 xclaw 所在环境设置以下变量：
+在 Xcoder 所在环境设置以下变量：
 
 ```bash
 # 指向你的 RCS 服务器地址
@@ -61,7 +61,7 @@ export CLAUDE_BRIDGE_OAUTH_TOKEN="your-api-key-here"
 然后启动远程控制模式：
 
 ```bash
-xclaw --remote-control
+xcoder --remote-control
 ```
 
 > **注意**：远程控制功能需要启用 `BRIDGE_MODE` feature flag。开发模式下默认启用。
@@ -103,7 +103,7 @@ volumes:
 
 
 ```sh
-ACP_RCS_URL=http://localhost:3000 ACP_RCS_TOKEN=test-my-key acp-link xclaw-bun -- --acp
+ACP_RCS_URL=http://localhost:3000 ACP_RCS_TOKEN=test-my-key acp-link xcoder-bun -- --acp
 ```
 
 ## 反向代理配置
@@ -139,7 +139,7 @@ rcs.example.com {
 
 ```
 ┌─────────────┐     WebSocket/SSE      ┌──────────────────┐
-│  xclaw │ ◄──────────────────► │  Remote Control  │
+│  Xcoder │ ◄──────────────────► │  Remote Control  │
 │  (Bridge CLI)│     HTTP API          │     Server       │
 └─────────────┘                        │                  │
                                        │  ┌────────────┐  │

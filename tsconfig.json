@@ -14,14 +14,14 @@
     "types": ["bun"],
     "paths": {
       "src/*": ["./src/*"],
-      "@xclaw/builtin-tools/*": ["./packages/builtin-tools/src/*"],
-      "@xclaw/builtin-tools": ["./packages/builtin-tools/src/index.ts"],
-      "@xclaw/mcp-client/*": ["./packages/mcp-client/src/*"],
-      "@xclaw/mcp-client": ["./packages/mcp-client/src/index.ts"],
-      "@xclaw/agent-tools/*": ["./packages/agent-tools/src/*"],
-      "@xclaw/agent-tools": ["./packages/agent-tools/src/index.ts"],
-      "@xclaw/weixin/*": ["./packages/weixin/src/*"],
-      "@xclaw/weixin": ["./packages/weixin/src/index.ts"]
+      "@xcoder/builtin-tools/*": ["./packages/builtin-tools/src/*"],
+      "@xcoder/builtin-tools": ["./packages/builtin-tools/src/index.ts"],
+      "@xcoder/mcp-client/*": ["./packages/mcp-client/src/*"],
+      "@xcoder/mcp-client": ["./packages/mcp-client/src/index.ts"],
+      "@xcoder/agent-tools/*": ["./packages/agent-tools/src/*"],
+      "@xcoder/agent-tools": ["./packages/agent-tools/src/index.ts"],
+      "@xcoder/weixin/*": ["./packages/weixin/src/*"],
+      "@xcoder/weixin": ["./packages/weixin/src/index.ts"]
     }
   },
   "include": [

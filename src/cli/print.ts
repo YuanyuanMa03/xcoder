@@ -37,7 +37,7 @@ import {
   type AgentDefinition,
   isBuiltInAgent,
   parseAgentsFromJson,
-} from '@xclaw/builtin-tools/tools/AgentTool/loadAgentsDir.js'
+} from '@xcoder/builtin-tools/tools/AgentTool/loadAgentsDir.js'
 import type { Message, NormalizedUserMessage } from 'src/types/message.js'
 import type { QueuedCommand } from 'src/types/textInputTypes.js'
 import {
@@ -200,7 +200,7 @@ import {
   getInitJsonSchema,
   setSdkAgentProgressSummariesEnabled,
 } from 'src/bootstrap/state.js'
-import { createSyntheticOutputTool } from '@xclaw/builtin-tools/tools/SyntheticOutputTool/SyntheticOutputTool.js'
+import { createSyntheticOutputTool } from '@xcoder/builtin-tools/tools/SyntheticOutputTool/SyntheticOutputTool.js'
 import { parseSessionIdentifier } from 'src/utils/sessionUrl.js'
 import {
   hydrateRemoteSession,
@@ -377,7 +377,7 @@ const cronSchedulerModule =
 const cronJitterConfigModule =
   require('../utils/cronJitterConfig.js') as typeof import('../utils/cronJitterConfig.js')
 const cronGate =
-  require('@xclaw/builtin-tools/tools/ScheduleCronTool/prompt.js') as typeof import('@xclaw/builtin-tools/tools/ScheduleCronTool/prompt.js')
+  require('@xcoder/builtin-tools/tools/ScheduleCronTool/prompt.js') as typeof import('@xcoder/builtin-tools/tools/ScheduleCronTool/prompt.js')
 const extractMemoriesModule = feature('EXTRACT_MEMORIES')
   ? (require('../services/extractMemories/extractMemories.js') as typeof import('../services/extractMemories/extractMemories.js'))
   : null
@@ -5156,7 +5156,7 @@ async function loadInitialMessages(
               getActiveAgentsFromList,
             } =
               // eslint-disable-next-line @typescript-eslint/no-require-imports
-              require('@xclaw/builtin-tools/tools/AgentTool/loadAgentsDir.js') as typeof import('@xclaw/builtin-tools/tools/AgentTool/loadAgentsDir.js')
+              require('@xcoder/builtin-tools/tools/AgentTool/loadAgentsDir.js') as typeof import('@xcoder/builtin-tools/tools/AgentTool/loadAgentsDir.js')
             getAgentDefinitionsWithOverrides.cache.clear?.()
             const freshAgentDefs = await getAgentDefinitionsWithOverrides(
               getCwd(),
@@ -5267,7 +5267,7 @@ async function loadInitialMessages(
       )
       if (!parsedSessionId) {
         let errorMessage =
-          'Error: --resume requires a valid session ID when used with --print. Usage: xclaw -p --resume <session-id>'
+          'Error: --resume requires a valid session ID when used with --print. Usage: xcoder -p --resume <session-id>'
         if (typeof options.resume === 'string') {
           errorMessage += `. Session IDs must be in UUID format (e.g., 550e8400-e29b-41d4-a716-446655440000). Provided value "${options.resume}" is not a valid UUID`
         }
@@ -5358,7 +5358,7 @@ async function loadInitialMessages(
           // Refresh agent definitions to reflect the mode switch
           const { getAgentDefinitionsWithOverrides, getActiveAgentsFromList } =
             // eslint-disable-next-line @typescript-eslint/no-require-imports
-            require('@xclaw/builtin-tools/tools/AgentTool/loadAgentsDir.js') as typeof import('@xclaw/builtin-tools/tools/AgentTool/loadAgentsDir.js')
+            require('@xcoder/builtin-tools/tools/AgentTool/loadAgentsDir.js') as typeof import('@xcoder/builtin-tools/tools/AgentTool/loadAgentsDir.js')
           getAgentDefinitionsWithOverrides.cache.clear?.()
           const freshAgentDefs = await getAgentDefinitionsWithOverrides(
             getCwd(),

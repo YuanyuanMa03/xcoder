@@ -435,7 +435,7 @@ function BriefSpinner({ mode, overrideMessage }: BriefSpinnerProps): React.React
   const connText = connStatus === 'reconnecting' ? 'Reconnecting' : 'Disconnected';
 
   // Dots padded to a fixed 3 columns so the right-aligned count doesn't
-  // jitter as the cycle advances. xclaw: claw mark animation.
+  // jitter as the cycle advances..xcoder: claw mark animation.
   const dotFrame = Math.floor(time / 300) % 3;
   const clawFrames = ['❯  ', '❯❯ ', '❯❯❯'];
   const dots = reducedMotion ? '…  ' : clawFrames[dotFrame];

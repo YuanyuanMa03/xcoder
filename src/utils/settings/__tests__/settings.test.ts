@@ -4,34 +4,34 @@ import {
   getRelativeSettingsFilePathForSource,
 } from '../settings'
 
-describe('xclaw settings file paths', () => {
-  test('getRelativeSettingsFilePathForSource returns xclaw project path', () => {
-    expect(getRelativeSettingsFilePathForSource('xclawProjectSettings')).toBe(
-      '.xclaw/settings.json',
+describe('xcoder settings file paths', () => {
+  test('getRelativeSettingsFilePathForSource returns xcoder project path', () => {
+    expect(getRelativeSettingsFilePathForSource('xcoderProjectSettings')).toBe(
+      '.xcoder/settings.json',
     )
   })
 
-  test('getRelativeSettingsFilePathForSource returns xclaw local path', () => {
-    expect(getRelativeSettingsFilePathForSource('xclawLocalSettings')).toBe(
-      '.xclaw/settings.local.json',
+  test('getRelativeSettingsFilePathForSource returns xcoder local path', () => {
+    expect(getRelativeSettingsFilePathForSource('xcoderLocalSettings')).toBe(
+      '.xcoder/settings.local.json',
     )
   })
 
-  test('getSettingsFilePathForSource returns xclaw user settings path', () => {
-    const path = getSettingsFilePathForSource('xclawUserSettings')
-    expect(path).toContain('.xclaw')
+  test('getSettingsFilePathForSource returns xcoder user settings path', () => {
+    const path = getSettingsFilePathForSource('xcoderUserSettings')
+    expect(path).toContain('.xcoder')
     expect(path).toContain('settings.json')
   })
 
-  test('getSettingsFilePathForSource returns path for xclaw project settings', () => {
-    const path = getSettingsFilePathForSource('xclawProjectSettings')
-    expect(path).toContain('.xclaw')
+  test('getSettingsFilePathForSource returns path for Xcoder project settings', () => {
+    const path = getSettingsFilePathForSource('xcoderProjectSettings')
+    expect(path).toContain('.xcoder')
     expect(path).toContain('settings.json')
   })
 
-  test('getSettingsFilePathForSource returns path for xclaw local settings', () => {
-    const path = getSettingsFilePathForSource('xclawLocalSettings')
-    expect(path).toContain('.xclaw')
+  test('getSettingsFilePathForSource returns path for Xcoder local settings', () => {
+    const path = getSettingsFilePathForSource('xcoderLocalSettings')
+    expect(path).toContain('.xcoder')
     expect(path).toContain('settings.local.json')
   })
 })

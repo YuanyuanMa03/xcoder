@@ -183,7 +183,7 @@ export function Config({
   const showDefaultViewPicker =
     feature('KAIROS') || feature('KAIROS_BRIEF')
       ? (
-          require('@xclaw/builtin-tools/tools/BriefTool/BriefTool.js') as typeof import('@xclaw/builtin-tools/tools/BriefTool/BriefTool.js')
+          require('@xcoder/builtin-tools/tools/BriefTool/BriefTool.js') as typeof import('@xcoder/builtin-tools/tools/BriefTool/BriefTool.js')
         ).isBriefEntitled()
       : false;
   /* eslint-enable @typescript-eslint/no-require-imports */
@@ -947,7 +947,7 @@ export function Config({
       : []),
     {
       id: 'claudeInChromeDefaultEnabled',
-      label: 'xclaw Chrome enabled by default',
+      label: 'xcoder Chrome enabled by default',
       value: globalConfig.claudeInChromeDefaultEnabled ?? true,
       type: 'boolean' as const,
       onChange(enabled: boolean) {
@@ -1211,7 +1211,7 @@ export function Config({
     });
     // Check for API key changes
     // On homespace, ANTHROPIC_API_KEY is preserved in process.env for child
-    // processes but ignored by xclaw itself (see auth.ts).
+    // processes but ignored by Xcoder itself (see auth.ts).
     const effectiveApiKey = isRunningOnHomespace() ? undefined : process.env.ANTHROPIC_API_KEY;
     const initialUsingCustomKey = Boolean(
       effectiveApiKey &&

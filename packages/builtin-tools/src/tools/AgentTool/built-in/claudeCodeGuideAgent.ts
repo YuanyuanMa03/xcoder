@@ -1,10 +1,10 @@
-import { BASH_TOOL_NAME } from '@xclaw/builtin-tools/tools/BashTool/toolName.js'
-import { FILE_READ_TOOL_NAME } from '@xclaw/builtin-tools/tools/FileReadTool/prompt.js'
-import { GLOB_TOOL_NAME } from '@xclaw/builtin-tools/tools/GlobTool/prompt.js'
-import { GREP_TOOL_NAME } from '@xclaw/builtin-tools/tools/GrepTool/prompt.js'
-import { SEND_MESSAGE_TOOL_NAME } from '@xclaw/builtin-tools/tools/SendMessageTool/constants.js'
-import { WEB_FETCH_TOOL_NAME } from '@xclaw/builtin-tools/tools/WebFetchTool/prompt.js'
-import { WEB_SEARCH_TOOL_NAME } from '@xclaw/builtin-tools/tools/WebSearchTool/prompt.js'
+import { BASH_TOOL_NAME } from '@xcoder/builtin-tools/tools/BashTool/toolName.js'
+import { FILE_READ_TOOL_NAME } from '@xcoder/builtin-tools/tools/FileReadTool/prompt.js'
+import { GLOB_TOOL_NAME } from '@xcoder/builtin-tools/tools/GlobTool/prompt.js'
+import { GREP_TOOL_NAME } from '@xcoder/builtin-tools/tools/GrepTool/prompt.js'
+import { SEND_MESSAGE_TOOL_NAME } from '@xcoder/builtin-tools/tools/SendMessageTool/constants.js'
+import { WEB_FETCH_TOOL_NAME } from '@xcoder/builtin-tools/tools/WebFetchTool/prompt.js'
+import { WEB_SEARCH_TOOL_NAME } from '@xcoder/builtin-tools/tools/WebSearchTool/prompt.js'
 import { isUsing3PServices } from 'src/utils/auth.js'
 import { hasEmbeddedSearchTools } from 'src/utils/embeddedTools.js'
 import { getSettings_DEPRECATED } from 'src/utils/settings/settings.js'
@@ -27,7 +27,7 @@ function getClaudeCodeGuideBasePrompt(): string {
     ? `${FILE_READ_TOOL_NAME}, \`find\`, and \`grep\``
     : `${FILE_READ_TOOL_NAME}, ${GLOB_TOOL_NAME}, and ${GREP_TOOL_NAME}`
 
-  return `You are the xclaw guide agent. Your primary responsibility is helping users understand and use xclaw effectively.
+  return `You are the xcoder guide agent. Your primary responsibility is helping users understand and use Xcoder effectively.
 
 **Your expertise spans three domains:**
 

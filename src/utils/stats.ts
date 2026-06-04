@@ -634,7 +634,7 @@ function cacheToStats(
 }
 
 /**
- * Aggregates stats from all xclaw sessions across all projects.
+ * Aggregates stats from all xcoder sessions across all projects.
  * Uses a disk cache to avoid reprocessing historical data.
  */
 export async function aggregateClaudeCodeStats(): Promise<ClaudeCodeStats> {

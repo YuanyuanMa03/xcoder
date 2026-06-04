@@ -237,7 +237,7 @@ import stats from './commands/stats/index.js'
 const usageReport: Command = {
   type: 'prompt',
   name: 'insights',
-  description: 'Generate a report analyzing your xclaw sessions',
+  description: 'Generate a report analyzing your xcoder sessions',
   contentLength: 0,
   progressMessage: 'analyzing your sessions',
   source: 'builtin',
@@ -468,7 +468,7 @@ async function getSkills(cwd: string): Promise<{
 /* eslint-disable @typescript-eslint/no-require-imports */
 const getWorkflowCommands = feature('WORKFLOW_SCRIPTS')
   ? (
-      require('@xclaw/builtin-tools/tools/WorkflowTool/createWorkflowCommand.js') as typeof import('@xclaw/builtin-tools/tools/WorkflowTool/createWorkflowCommand.js')
+      require('@xcoder/builtin-tools/tools/WorkflowTool/createWorkflowCommand.js') as typeof import('@xcoder/builtin-tools/tools/WorkflowTool/createWorkflowCommand.js')
     ).getWorkflowCommands
   : null
 /* eslint-enable @typescript-eslint/no-require-imports */

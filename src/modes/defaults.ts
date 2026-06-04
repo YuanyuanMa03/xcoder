@@ -1,7 +1,7 @@
-import type { XclawMode } from './types.js'
+import type { XcoderMode } from './types.js'
 import { DR_SHARP_SYSTEM_PROMPT } from '../personas/sharp.js'
 
-export const DEFAULT_MODES: XclawMode[] = [
+export const DEFAULT_MODES: XcoderMode[] = [
   {
     name: '默认',
     slug: 'default',

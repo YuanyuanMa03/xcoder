@@ -475,7 +475,7 @@ export const FileEditTool = buildTool({
     // 5. Write to disk
     writeTextContent(absoluteFilePath, updatedFile, encoding, endings)
 
-    // xclaw: accountability tracking
+    /// xcoder: accountability tracking
     try {
       const { isAccountabilityEnabled, addAccountabilityEntry } = await import(
         '../../../../../src/hooks/useCodeAccountability.js'

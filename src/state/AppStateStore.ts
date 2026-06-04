@@ -15,9 +15,9 @@ import {
   type ToolPermissionContext,
 } from '../Tool.js'
 import type { TaskState } from '../tasks/types.js'
-import type { AgentColorName } from '@xclaw/builtin-tools/tools/AgentTool/agentColorManager.js'
-import type { AgentDefinitionsResult } from '@xclaw/builtin-tools/tools/AgentTool/loadAgentsDir.js'
-import type { AllowedPrompt } from '@xclaw/builtin-tools/tools/ExitPlanModeTool/ExitPlanModeV2Tool.js'
+import type { AgentColorName } from '@xcoder/builtin-tools/tools/AgentTool/agentColorManager.js'
+import type { AgentDefinitionsResult } from '@xcoder/builtin-tools/tools/AgentTool/loadAgentsDir.js'
+import type { AllowedPrompt } from '@xcoder/builtin-tools/tools/ExitPlanModeTool/ExitPlanModeV2Tool.js'
 import type { AgentId } from '../types/ids.js'
 import type { Message, UserMessage } from '../types/message.js'
 import type { LoadedPlugin, PluginError } from '../types/plugin.js'

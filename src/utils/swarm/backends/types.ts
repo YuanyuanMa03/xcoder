@@ -1,5 +1,5 @@
-import type { AgentColorName } from '@xclaw/builtin-tools/tools/AgentTool/agentColorManager.js'
-import type { CustomAgentDefinition } from '@xclaw/builtin-tools/tools/AgentTool/loadAgentsDir.js'
+import type { AgentColorName } from '@xcoder/builtin-tools/tools/AgentTool/agentColorManager.js'
+import type { CustomAgentDefinition } from '@xcoder/builtin-tools/tools/AgentTool/loadAgentsDir.js'
 import type { ToolUseContext } from '../../../Tool.js'
 
 /**

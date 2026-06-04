@@ -1,5 +1,5 @@
 /**
- * Main entrypoint for xclaw Agent SDK types.
+ * Main entrypoint for Xcoder Agent SDK types.
  *
  * This file re-exports the public SDK API from:
  * - sdk/coreTypes.ts - Common serializable types (messages, configs)

@@ -1,5 +1,5 @@
 /**
- * MDM (Mobile Device Management) profile enforcement for xclaw managed settings.
+ * MDM (Mobile Device Management) profile enforcement for Xcoder managed settings.
  *
  * Reads enterprise settings from OS-level MDM configuration:
  * - macOS: `com.anthropic.claudecode` preference domain

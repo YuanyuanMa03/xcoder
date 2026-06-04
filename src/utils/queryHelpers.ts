@@ -8,14 +8,14 @@ import type { SDKMessage } from 'src/entrypoints/agentSdkTypes.js'
 import type { CanUseToolFn } from '../hooks/useCanUseTool.js'
 import { runTools } from '../services/tools/toolOrchestration.js'
 import { findToolByName, type Tool, type Tools } from '../Tool.js'
-import { BASH_TOOL_NAME } from '@xclaw/builtin-tools/tools/BashTool/toolName.js'
-import { FILE_EDIT_TOOL_NAME } from '@xclaw/builtin-tools/tools/FileEditTool/constants.js'
-import type { Input as FileReadInput } from '@xclaw/builtin-tools/tools/FileReadTool/FileReadTool.js'
+import { BASH_TOOL_NAME } from '@xcoder/builtin-tools/tools/BashTool/toolName.js'
+import { FILE_EDIT_TOOL_NAME } from '@xcoder/builtin-tools/tools/FileEditTool/constants.js'
+import type { Input as FileReadInput } from '@xcoder/builtin-tools/tools/FileReadTool/FileReadTool.js'
 import {
   FILE_READ_TOOL_NAME,
   FILE_UNCHANGED_STUB,
-} from '@xclaw/builtin-tools/tools/FileReadTool/prompt.js'
-import { FILE_WRITE_TOOL_NAME } from '@xclaw/builtin-tools/tools/FileWriteTool/prompt.js'
+} from '@xcoder/builtin-tools/tools/FileReadTool/prompt.js'
+import { FILE_WRITE_TOOL_NAME } from '@xcoder/builtin-tools/tools/FileWriteTool/prompt.js'
 import type { Message } from '../types/message.js'
 import type { OrphanedPermission } from '../types/textInputTypes.js'
 import { logForDebugging } from './debug.js'
@@ -179,7 +179,7 @@ export function* normalizeMessage(message: Message): Generator<SDKMessage> {
         progressData.type === 'powershell_progress'
       ) {
         // Filter bash progress to send only one per minute
-        // Only emit for xclaw Remote for now
+        // Only emit for Xcoder Remote for now
         if (
           !isEnvTruthy(process.env.CLAUDE_CODE_REMOTE) &&
           !process.env.CLAUDE_CODE_CONTAINER_ID

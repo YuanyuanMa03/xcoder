@@ -75,7 +75,7 @@ export function ClaudeMdExternalIncludesDialog({
       )}
 
       <Text dimColor>
-        Important: Only use xclaw with files you trust. Accessing untrusted files may pose security risks{' '}
+        Important: Only use Xcoder with files you trust. Accessing untrusted files may pose security risks{' '}
         <Link url="https://code.claude.com/docs/en/security" />{' '}
       </Text>
 

@@ -1,6 +1,6 @@
 // Host logger adapter — bridges logMCPDebug/logMCPError to mcp-client's Logger interface
 
-import type { Logger } from '@xclaw/mcp-client'
+import type { Logger } from '@xcoder/mcp-client'
 import { logMCPDebug, logMCPError } from '../../../utils/log.js'
 
 /**

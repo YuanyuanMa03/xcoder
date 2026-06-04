@@ -479,7 +479,7 @@ export async function getIdeLockfilesPaths(): Promise<string[]> {
     const converter = new WindowsToWSLConverter(process.env.WSL_DISTRO_NAME)
     const wslPath = converter.toLocalPath(windowsHome)
     paths.push(resolve(wslPath, '.claude', 'ide'))
-    paths.push(resolve(wslPath, '.xclaw', 'ide'))
+    paths.push(resolve(wslPath, '.xcoder', 'ide'))
   }
 
   // Construct the path based on the standard Windows WSL locations
@@ -505,7 +505,7 @@ export async function getIdeLockfilesPaths(): Promise<string[]> {
         continue // Skip system directories
       }
       paths.push(join(usersDir, user.name, '.claude', 'ide'))
-      paths.push(join(usersDir, user.name, '.xclaw', 'ide'))
+      paths.push(join(usersDir, user.name, '.xcoder', 'ide'))
     }
   } catch (error: unknown) {
     if (isFsInaccessible(error)) {

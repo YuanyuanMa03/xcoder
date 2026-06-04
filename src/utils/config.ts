@@ -19,7 +19,7 @@ import { logForDiagnosticsNoPII } from './diagLogs.js'
 import { getGlobalClaudeFile } from './env.js'
 import {
   getClaudeConfigHomeDir,
-  getXclawConfigHomeDir,
+  getXcoderConfigHomeDir,
   isEnvTruthy,
 } from './envUtils.js'
 import { ConfigParseError, getErrnoCode } from './errors.js'
@@ -377,7 +377,7 @@ export type GlobalConfig = {
   showSpinnerTree?: boolean // Whether to show the teammate spinner tree instead of pills
 
   // First start time tracking
-  firstStartTime?: string // ISO timestamp when xclaw was first started on this machine
+  firstStartTime?: string // ISO timestamp when xcoder was first started on this machine
 
   messageIdleNotifThresholdMs: number // How long the user has to have been idle to get a notification that Claude is done generating
 
@@ -400,8 +400,8 @@ export type GlobalConfig = {
   inputNeededNotifEnabled?: boolean
   agentPushNotifEnabled?: boolean
 
-  // xclaw usage tracking
-  claudeCodeFirstTokenDate?: string // ISO timestamp of the user's first xclaw OAuth token
+  // xcoder usage tracking
+  claudeCodeFirstTokenDate?: string // ISO timestamp of the user's first xcoder OAuth token
 
   // Model switch callout tracking (ant-only)
   modelSwitchCalloutDismissed?: boolean // Whether user chose "Don't show again"
@@ -514,7 +514,7 @@ export type GlobalConfig = {
   lspRecommendationNeverPlugins?: string[] // Plugin IDs to never suggest
   lspRecommendationIgnoredCount?: number // Track ignored recommendations (stops after 5)
 
-  // xclaw hint protocol state (<claude-code-hint /> tags from CLIs/SDKs).
+  // xcoder hint protocol state (<claude-code-hint /> tags from CLIs/SDKs).
   // Nested by hint type so future types (docs, mcp, ...) slot in without new
   // top-level keys.
   claudeCodeHints?: {
@@ -1791,11 +1791,11 @@ export function getMemoryPath(memoryType: MemoryType): string {
 
   switch (memoryType) {
     case 'User':
-      return join(getXclawConfigHomeDir(), 'XCLAW.md')
+      return join(getXcoderConfigHomeDir(), 'XCODER.md')
     case 'Local':
-      return join(cwd, 'XCLAW.local.md')
+      return join(cwd, 'XCODER.local.md')
     case 'Project':
-      return join(cwd, 'XCLAW.md')
+      return join(cwd, 'XCODER.md')
     case 'Managed':
       return join(getManagedFilePath(), 'CLAUDE.md')
     case 'AutoMem':
@@ -1813,7 +1813,7 @@ export function getManagedClaudeRulesDir(): string {
 }
 
 export function getUserClaudeRulesDir(): string {
-  return join(getXclawConfigHomeDir(), 'rules')
+  return join(getXcoderConfigHomeDir(), 'rules')
 }
 
 // Exported for testing only

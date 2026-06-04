@@ -122,11 +122,12 @@ function ClaudeInChromeMenu({
   const isDisabled = isWSL || ((process.env.USER_TYPE as string) !== 'ant' && !isClaudeAISubscriber);
 
   return (
-    <Dialog title="xclaw Chrome (Beta)" onCancel={() => onDone()} color="chromeYellow">
+    <Dialog title="Xcoder Chrome (Beta)" onCancel={() => onDone()} color="chromeYellow">
       <Box flexDirection="column" gap={1}>
         <Text>
-          Claude in Chrome works with the Chrome extension to let you control your browser directly from xclaw. Navigate
-          websites, fill forms, capture screenshots, record GIFs, and debug with console logs and network requests.
+          Claude in Chrome works with the Chrome extension to let you control your browser directly from Xcoder.
+          Navigate websites, fill forms, capture screenshots, record GIFs, and debug with console logs and network
+          requests.
         </Text>
 
         {isWSL && <Text color="error">Claude in Chrome is not supported in WSL at this time.</Text>}

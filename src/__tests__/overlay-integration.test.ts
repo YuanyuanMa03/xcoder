@@ -6,19 +6,19 @@ import { settingsMergeCustomizer } from '../utils/settings/settings'
 import mergeWith from 'lodash-es/mergeWith.js'
 import { loadMarkdownFilesForSubdir } from '../utils/markdownConfigLoader'
 
-describe('xclaw overlay integration', () => {
+describe('xcoder overlay integration', () => {
   let tmpDir: string
   let origClaudeConfigDir: string | undefined
-  let origXclawConfigDir: string | undefined
+  let origXcoderConfigDir: string | undefined
   let origNativeFileSearch: string | undefined
 
   beforeEach(() => {
-    tmpDir = mkdtempSync(join(tmpdir(), 'xclaw-integration-'))
+    tmpDir = mkdtempSync(join(tmpdir(), 'xcoder-integration-'))
     origClaudeConfigDir = process.env.CLAUDE_CONFIG_DIR
-    origXclawConfigDir = process.env.XCLAW_CONFIG_DIR
+    origXcoderConfigDir = process.env.XCODER_CONFIG_DIR
     origNativeFileSearch = process.env.CLAUDE_CODE_USE_NATIVE_FILE_SEARCH
     process.env.CLAUDE_CONFIG_DIR = join(tmpDir, '.claude')
-    process.env.XCLAW_CONFIG_DIR = join(tmpDir, '.xclaw')
+    process.env.XCODER_CONFIG_DIR = join(tmpDir, '.xcoder')
     process.env.CLAUDE_CODE_USE_NATIVE_FILE_SEARCH = '1'
   })
 
@@ -28,10 +28,10 @@ describe('xclaw overlay integration', () => {
     } else {
       delete process.env.CLAUDE_CONFIG_DIR
     }
-    if (origXclawConfigDir !== undefined) {
-      process.env.XCLAW_CONFIG_DIR = origXclawConfigDir
+    if (origXcoderConfigDir !== undefined) {
+      process.env.XCODER_CONFIG_DIR = origXcoderConfigDir
     } else {
-      delete process.env.XCLAW_CONFIG_DIR
+      delete process.env.XCODER_CONFIG_DIR
     }
     if (origNativeFileSearch !== undefined) {
       process.env.CLAUDE_CODE_USE_NATIVE_FILE_SEARCH = origNativeFileSearch
@@ -41,7 +41,7 @@ describe('xclaw overlay integration', () => {
     rmSync(tmpDir, { recursive: true, force: true })
   })
 
-  test('settings merge: xclaw overlays on claude', () => {
+  test('settings merge: xcoder overlays on claude', () => {
     const base = {
       model: 'sonnet',
       permissions: { allow: ['Read'] },
@@ -67,26 +67,26 @@ describe('xclaw overlay integration', () => {
       '---\nname: claude-skill\n---\nClaude skill',
     )
 
-    mkdirSync(join(tmpDir, '.xclaw', 'skills', 'xclaw-skill'), {
+    mkdirSync(join(tmpDir, '.xcoder', 'skills', 'xcoder-skill'), {
       recursive: true,
     })
     writeFileSync(
-      join(tmpDir, '.xclaw', 'skills', 'xclaw-skill', 'SKILL.md'),
-      '---\nname: xclaw-skill\n---\nXclaw skill',
+      join(tmpDir, '.xcoder', 'skills', 'xcoder-skill', 'SKILL.md'),
+      '---\nname: xcoder-skill\n---\nXcoder skill',
     )
 
     const files = await loadMarkdownFilesForSubdir('skills', tmpDir)
     const names = files.map(f => f.frontmatter.name)
     expect(names).toContain('claude-skill')
-    expect(names).toContain('xclaw-skill')
+    expect(names).toContain('xcoder-skill')
   })
 
-  test('standalone: only .xclaw works without .claude', async () => {
-    mkdirSync(join(tmpDir, '.xclaw', 'skills', 'standalone-skill'), {
+  test('standalone: only .xcoder works without .claude', async () => {
+    mkdirSync(join(tmpDir, '.xcoder', 'skills', 'standalone-skill'), {
       recursive: true,
     })
     writeFileSync(
-      join(tmpDir, '.xclaw', 'skills', 'standalone-skill', 'SKILL.md'),
+      join(tmpDir, '.xcoder', 'skills', 'standalone-skill', 'SKILL.md'),
       '---\nname: standalone\n---\nStandalone skill',
     )
 
@@ -95,23 +95,23 @@ describe('xclaw overlay integration', () => {
     expect(names).toContain('standalone')
   })
 
-  test('name collision: xclaw skill wins over claude skill', async () => {
+  test('name collision: xcoder skill wins over claude skill', async () => {
     mkdirSync(join(tmpDir, '.claude', 'skills', 'shared'), { recursive: true })
     writeFileSync(
       join(tmpDir, '.claude', 'skills', 'shared', 'SKILL.md'),
       '---\nname: shared\n---\nClaude version',
     )
 
-    mkdirSync(join(tmpDir, '.xclaw', 'skills', 'shared'), { recursive: true })
+    mkdirSync(join(tmpDir, '.xcoder', 'skills', 'shared'), { recursive: true })
     writeFileSync(
-      join(tmpDir, '.xclaw', 'skills', 'shared', 'SKILL.md'),
-      '---\nname: shared\n---\nXclaw version',
+      join(tmpDir, '.xcoder', 'skills', 'shared', 'SKILL.md'),
+      '---\nname: shared\n---\nXcoder version',
     )
 
     const files = await loadMarkdownFilesForSubdir('skills', tmpDir)
     const sharedFiles = files.filter(f => f.filePath.includes('shared'))
     expect(sharedFiles).toHaveLength(1)
-    expect(sharedFiles[0]!.content).toContain('Xclaw version')
+    expect(sharedFiles[0]!.content).toContain('Xcoder version')
   })
 
   test('commands dual-scan: loads from both directories', async () => {
@@ -121,15 +121,15 @@ describe('xclaw overlay integration', () => {
       '---\nname: claude-cmd\n---\nClaude command',
     )
 
-    mkdirSync(join(tmpDir, '.xclaw', 'commands'), { recursive: true })
+    mkdirSync(join(tmpDir, '.xcoder', 'commands'), { recursive: true })
     writeFileSync(
-      join(tmpDir, '.xclaw', 'commands', 'xclaw-cmd.md'),
-      '---\nname: xclaw-cmd\n---\nXclaw command',
+      join(tmpDir, '.xcoder', 'commands', 'xcoder-cmd.md'),
+      '---\nname: xcoder-cmd\n---\nXcoder command',
     )
 
     const files = await loadMarkdownFilesForSubdir('commands', tmpDir)
     const names = files.map(f => f.frontmatter.name)
     expect(names).toContain('claude-cmd')
-    expect(names).toContain('xclaw-cmd')
+    expect(names).toContain('xcoder-cmd')
   })
 })

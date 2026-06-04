@@ -4,7 +4,7 @@ const peers = {
   type: 'local',
   name: 'peers',
   aliases: ['who'],
-  description: 'List connected xclaw peers',
+  description: 'List connected xcoder peers',
   supportsNonInteractive: true,
   load: () => import('./peers.js'),
 } satisfies Command

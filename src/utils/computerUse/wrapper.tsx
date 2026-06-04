@@ -252,8 +252,8 @@ export function buildSessionContext(): ComputerUseSessionContext {
         });
         tuc().sendOSNotification?.({
           message: escRegistered
-            ? 'xclaw is using your computer · press Esc to stop'
-            : 'xclaw is using your computer · press Ctrl+C to stop',
+            ? 'xcoder is using your computer · press Esc to stop'
+            : 'xcoder is using your computer · press Ctrl+C to stop',
           notificationType: 'computer_use_enter',
         });
       }

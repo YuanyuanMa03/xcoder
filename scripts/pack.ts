@@ -5,10 +5,10 @@ import { join } from 'path'
 const ROOT = join(import.meta.dir, '..')
 const DIST = join(ROOT, 'dist')
 const VERSION = '1.0.0'
-const NAME = `xclaw-${VERSION}`
+const NAME = `xcoder-${VERSION}`
 
 async function main() {
-  console.log('📦 Packing xclaw distribution...')
+  console.log('📦 Packing xcoder distribution...')
 
   // Ensure dist exists
   await $`ls ${DIST}/cli.js`.quiet()
@@ -61,14 +61,14 @@ echo "📁 安装目录: $INSTALL_DIR"
 echo ""
 
 # Create symlink
-ln -sf "$SCRIPT_DIR/dist/cli-node.js" "$INSTALL_DIR/xclaw"
-chmod +x "$INSTALL_DIR/xclaw"
+ln -sf "$SCRIPT_DIR/dist/cli-node.js" "$INSTALL_DIR/xcoder"
+chmod +x "$INSTALL_DIR/xcoder"
 
-echo "✅ xclaw ${VERSION} 安装成功!"
+echo "✅ xcoder ${VERSION} 安装成功!"
 echo ""
 echo "🚀 开始使用:"
-echo "   xclaw              # 启动"
-echo "   xclaw --version    # 查看版本"
+echo "   xcoder              # 启动"
+echo "   xcoder --version    # 查看版本"
 echo ""
 echo "📝 首次配置:"
 echo "   启动后输入 /login 配置 API"
@@ -121,14 +121,14 @@ echo "📁 安装目录: $INSTALL_DIR"
 echo ""
 
 # Create symlink
-ln -sf "$SCRIPT_DIR/dist/cli-node.js" "$INSTALL_DIR/xclaw"
-chmod +x "$INSTALL_DIR/xclaw"
+ln -sf "$SCRIPT_DIR/dist/cli-node.js" "$INSTALL_DIR/xcoder"
+chmod +x "$INSTALL_DIR/xcoder"
 
-echo "✅ xclaw ${VERSION} 安装成功!"
+echo "✅ xcoder ${VERSION} 安装成功!"
 echo ""
 echo "🚀 开始使用:"
-echo "   xclaw              # 启动"
-echo "   xclaw --version    # 查看版本"
+echo "   xcoder              # 启动"
+echo "   xcoder --version    # 查看版本"
 echo ""
 echo "📝 首次配置:"
 echo "   启动后输入 /login 配置 API"
@@ -136,7 +136,7 @@ echo ""
 `
 
   // Windows install script (PowerShell)
-  const winScript = `# xclaw Windows Installer
+  const winScript = `# xcoder Windows Installer
 $ErrorActionPreference = "Stop"
 
 Write-Host ""
@@ -166,7 +166,7 @@ try {
 }
 
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-$installDir = "$env:LOCALAPPDATA\\xclaw"
+$installDir = "$env:LOCALAPPDATA\\xcoder"
 
 # Create install directory
 if (!(Test-Path $installDir)) {
@@ -181,7 +181,7 @@ Write-Host ""
 $batchContent = @"@echo off
 node "$scriptDir\\dist\\cli-node.js" %*
 "@
-Set-Content -Path "$installDir\\xclaw.cmd" -Value $batchContent
+Set-Content -Path "$installDir\\xcoder.cmd" -Value $batchContent
 
 # Add to PATH if not already there
 $currentPath = [Environment]::GetEnvironmentVariable("Path", "User")
@@ -192,11 +192,11 @@ if ($currentPath -notlike "*$installDir*") {
 }
 
 Write-Host ""
-Write-Host "✅ xclaw ${VERSION} 安装成功!"
+Write-Host "✅ xcoder ${VERSION} 安装成功!"
 Write-Host ""
 Write-Host "🚀 开始使用:"
-Write-Host "   xclaw              # 启动"
-Write-Host "   xclaw --version    # 查看版本"
+Write-Host "   xcoder              # 启动"
+Write-Host "   xcoder --version    # 查看版本"
 Write-Host ""
 Write-Host "📝 首次配置:"
 Write-Host "   启动后输入 /login 配置 API"
@@ -215,7 +215,7 @@ Write-Host ""
   await $`chmod +x ${tmpDir}/install-mac.sh ${tmpDir}/install-linux.sh ${tmpDir}/install-from-source-mac.sh ${tmpDir}/install-from-source-linux.sh`
 
   // Create README
-  const readme = `# xclaw ${VERSION}
+  const readme = `# xcoder ${VERSION}
 
 > 超越人类与 AI 的边界
 
@@ -260,11 +260,11 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 
 \`\`\`bash
 # 一键安装
-curl -fsSL https://raw.githubusercontent.com/YuanyuanMa03/xclaw/main/scripts/install-from-source-mac.sh | bash
+curl -fsSL https://raw.githubusercontent.com/YuanyuanMa03/xcoder/main/scripts/install-from-source-mac.sh | bash
 
 # 或手动安装
-git clone https://github.com/YuanyuanMa03/xclaw.git
-cd xclaw
+git clone https://github.com/YuanyuanMa03/xcoder.git
+cd xcoder
 ./scripts/install-from-source-mac.sh
 \`\`\`
 
@@ -272,11 +272,11 @@ cd xclaw
 
 \`\`\`bash
 # 一键安装
-curl -fsSL https://raw.githubusercontent.com/YuanyuanMa03/xclaw/main/scripts/install-from-source-linux.sh | bash
+curl -fsSL https://raw.githubusercontent.com/YuanyuanMa03/xcoder/main/scripts/install-from-source-linux.sh | bash
 
 # 或手动安装
-git clone https://github.com/YuanyuanMa03/xclaw.git
-cd xclaw
+git clone https://github.com/YuanyuanMa03/xcoder.git
+cd xcoder
 ./scripts/install-from-source-linux.sh
 \`\`\`
 
@@ -284,8 +284,8 @@ cd xclaw
 
 \`\`\`powershell
 # 克隆仓库
-git clone https://github.com/YuanyuanMa03/xclaw.git
-cd xclaw
+git clone https://github.com/YuanyuanMa03/xcoder.git
+cd xcoder
 
 # 运行安装脚本
 .\\scripts\\install-from-source-windows.ps1
@@ -295,8 +295,8 @@ cd xclaw
 
 \`\`\`bash
 # 1. 克隆仓库
-git clone https://github.com/YuanyuanMa03/xclaw.git
-cd xclaw
+git clone https://github.com/YuanyuanMa03/xcoder.git
+cd xcoder
 
 # 2. 安装依赖（需要 Bun 或 Node.js）
 bun install    # 或 npm install
@@ -313,9 +313,9 @@ bun link       # 或 npm link
 ## 使用
 
 \`\`\`bash
-xclaw              # 启动
-xclaw --version    # 查看版本
-xclaw --help       # 查看帮助
+xcoder              # 启动
+xcoder --version    # 查看版本
+xcoder --help       # 查看帮助
 \`\`\`
 
 ## 首次配置
@@ -341,14 +341,14 @@ xclaw --help       # 查看帮助
 
 ### 源码安装的用户
 \`\`\`bash
-cd xclaw
+cd xcoder
 git pull
 bun install && bun run build  # 或 npm install && node build.ts
 \`\`\`
 
 ## 更多信息
 
-- GitHub: https://github.com/YuanyuanMa03/xclaw
+- GitHub: https://github.com/YuanyuanMa03/xcoder
 `
 
   await Bun.write(join(tmpDir, 'README.md'), readme)

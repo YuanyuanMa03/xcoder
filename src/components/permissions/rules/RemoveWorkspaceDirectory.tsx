@@ -48,7 +48,7 @@ export function RemoveWorkspaceDirectory({
       <Box marginX={2} flexDirection="column">
         <Text bold>{directoryPath}</Text>
       </Box>
-      <Text>xclaw will no longer have access to files in this directory.</Text>
+      <Text>Xcoder will no longer have access to files in this directory.</Text>
       <Select
         onChange={handleSelect}
         onCancel={onCancel}

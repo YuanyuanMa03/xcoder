@@ -5,7 +5,7 @@ import { getPlatform } from '../utils/platform.js'
 import type { KeybindingBlock } from './types.js'
 
 /**
- * Default keybindings that match current xclaw behavior.
+ * Default keybindings that match current xcoder behavior.
  * These are loaded first, then user keybindings.json overrides them.
  */
 
@@ -67,7 +67,7 @@ export const DEFAULT_BINDINGS: KeybindingBlock[] = [
       // ctrl+x chord prefix avoids shadowing readline editing keys (ctrl+a/b/e/f/...).
       'ctrl+x ctrl+k': 'chat:killAgents',
       [MODE_CYCLE_KEY]: 'chat:cycleMode',
-      'ctrl+m': 'chat:cycleXclawMode',
+      'ctrl+m': 'chat:cycleXcoderMode',
       'meta+p': 'chat:modelPicker',
       'meta+o': 'chat:fastMode',
       'meta+t': 'chat:thinkingToggle',

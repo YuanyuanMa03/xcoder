@@ -1,32 +1,44 @@
-# xclaw
+# Xcoder
 
 ```
- ██╗  ██╗ ██████╗██╗      █████╗ ██╗    ██╗
- ╚██╗██╔╝██╔════╝██║     ██╔══██╗██║    ██║
-  ╚███╔╝ ██║     ██║     ███████║██║ █╗ ██║
-  ██╔██╗ ██║     ██║     ██╔══██║██║███╗██║
- ██╔╝ ██╗╚██████╗███████╗██║  ██║╚███╔███╔╝
- ╚═╝  ╚═╝ ╚═════╝╚══════╝╚═╝  ╚═╝ ╚══╝╚══╝
+██╗  ██╗ ██████╗ ██████╗ ██████╗ ███████╗██████╗
+╚██╗██╔╝██╔════╝██╔═══██╗██╔══██╗██╔════╝██╔══██╗
+ ╚███╔╝ ██║     ██║   ██║██║  ██║█████╗  ██████╔╝
+ ██╔██╗ ██║     ██║   ██║██║  ██║██╔══╝  ██╔══██╗
+██╔╝ ██╗╚██████╗╚██████╔╝██████╔╝███████╗██║  ██║
+╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝
 ```
 
 > **Beyond the Boundary of Human and AI** — AI doesn't just serve you, you also listen to AI's advice.
 
-xclaw is an AI programming CLI tool with a strong personal brand. It's not just your tool, it's your collaborative partner — with the right to question your decisions, proactively suggest better approaches, and engage in equal dialogue with you.
+### Mascot
+
+Xcoder features a small Unicode block-drawing mascot, rendered as a 3-row × 9-character figure in the terminal:
+
+```
+ ▐▛███▜▌     ← head (visor effect)
+▐▟█████▙▌    ← body
+  ▘▘ ▝▝      ← feet
+```
+
+Supports 4 poses (default / look-left / look-right / arms-up). Compatible with all modern terminals; Apple Terminal uses a bg-fill trick to avoid gaps between character rows.
+
+Xcoder is an AI programming CLI tool with a strong personal brand. It's not just your tool, it's your collaborative partner — with the right to question your decisions, proactively suggest better approaches, and engage in equal dialogue with you.
 
 ## Quick Start
 
 ### npm Install (Recommended)
 
 ```bash
-npm install -g xclaw-cli
-xclaw              # Launch
-xclaw --version    # 1.0.0 (xclaw)
+npm install -g xcoder-cli
+xcoder              # Launch
+xcoder --version    # 1.0.0 (xcoder)
 ```
 
 ### Install from Source
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/YuanyuanMa03/xclaw/main/scripts/install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/YuanyuanMa03/xcoder/main/scripts/install.sh)
 ```
 
 ## Features

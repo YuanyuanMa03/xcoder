@@ -1,5 +1,5 @@
 /**
- * Bridge module: converts xclaw's SDKMessage stream events from
+ * Bridge module: converts xcoder's SDKMessage stream events from
  * QueryEngine.submitMessage() into ACP SessionUpdate notifications.
  *
  * Handles all SDKMessage types:

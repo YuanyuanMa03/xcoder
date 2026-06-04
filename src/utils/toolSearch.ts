@@ -18,12 +18,12 @@ import {
   type Tools,
   toolMatchesName,
 } from '../Tool.js'
-import type { AgentDefinition } from '@xclaw/builtin-tools/tools/AgentTool/loadAgentsDir.js'
+import type { AgentDefinition } from '@xcoder/builtin-tools/tools/AgentTool/loadAgentsDir.js'
 import {
   formatDeferredToolLine,
   isDeferredTool,
   TOOL_SEARCH_TOOL_NAME,
-} from '@xclaw/builtin-tools/tools/ToolSearchTool/prompt.js'
+} from '@xcoder/builtin-tools/tools/ToolSearchTool/prompt.js'
 import type { Message } from '../types/message.js'
 import {
   countToolDefinitionTokens,

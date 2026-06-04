@@ -294,7 +294,7 @@ export const FileWriteTool = buildTool({
     // overwriting a CRLF file or when binaries in cwd poisoned the repo sample.
     writeTextContent(fullFilePath, content, enc, 'LF')
 
-    // xclaw: accountability tracking
+    /// xcoder: accountability tracking
     try {
       const { isAccountabilityEnabled, addAccountabilityEntry } = await import(
         '../../../../../src/hooks/useCodeAccountability.js'

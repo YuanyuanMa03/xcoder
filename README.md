@@ -1,19 +1,31 @@
-# xclaw
+# Xcoder
 
 ```
- ██╗  ██╗ ██████╗██╗      █████╗ ██╗    ██╗
- ╚██╗██╔╝██╔════╝██║     ██╔══██╗██║    ██║
-  ╚███╔╝ ██║     ██║     ███████║██║ █╗ ██║
-  ██╔██╗ ██║     ██║     ██╔══██║██║███╗██║
- ██╔╝ ██╗╚██████╗███████╗██║  ██║╚███╔███╔╝
- ╚═╝  ╚═╝ ╚═════╝╚══════╝╚═╝  ╚═╝ ╚══╝╚══╝
+██╗  ██╗ ██████╗ ██████╗ ██████╗ ███████╗██████╗
+╚██╗██╔╝██╔════╝██╔═══██╗██╔══██╗██╔════╝██╔══██╗
+ ╚███╔╝ ██║     ██║   ██║██║  ██║█████╗  ██████╔╝
+ ██╔██╗ ██║     ██║   ██║██║  ██║██╔══╝  ██╔══██╗
+██╔╝ ██╗╚██████╗╚██████╔╝██████╔╝███████╗██║  ██║
+╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝
 ```
 
-![xclaw 完整演示](assets/images/xclaw-demo.gif)
+![xcoder 完整演示](assets/images/xcoder-demo.gif)
 
 > **超越人类与 AI 的边界** — AI 不只是服务你，你也要听从 AI 的建议。
 
-xclaw 是一个具有强烈个人品牌特色的 AI 编程 CLI 工具。它不只是你的工具，它是你的协作伙伴 — 有权利质疑你的决策，主动建议更好的方案，与你平等对话。
+### 吉祥物
+
+Xcoder 内置了一个小型 Unicode 方块字符吉祥物，在终端中渲染为 3 行 × 9 字符的图示：
+
+```
+ ▐▛███▜▌     ← 头部（带遮阳板效果）
+▐▟█████▙▌    ← 身体
+  ▘▘ ▝▝      ← 双脚
+```
+
+支持 4 种姿态（default / look-left / look-right / arms-up），兼容所有现代终端，Apple Terminal 使用 bg-fill 技巧避免行间缝隙。
+
+Xcoder 是一个具有强烈个人品牌特色的 AI 编程 CLI 工具。它不只是你的工具，它是你的协作伙伴 — 有权利质疑你的决策，主动建议更好的方案，与你平等对话。
 
 ## 特性
 
@@ -23,7 +35,7 @@ xclaw 是一个具有强烈个人品牌特色的 AI 编程 CLI 工具。它不�
 | **代码问责面板** | AI 修改代码后强制展示 diff 并追问修改理由，记录决策日志 |
 | **Dr. Sharp** | 内置人生教练人格，三阶段心理分析工作流 |
 | **多模型供应商** | Anthropic/OpenAI/Gemini/Grok 兼容，`/login` 配置 |
-| **Remote Control** | Docker 自托管远程界面，手机上看 xclaw |
+| **Remote Control** | Docker 自托管远程界面，手机上看 Xcoder |
 | **Voice Mode** | 语音输入，支持豆包 ASR |
 | **Computer Use** | 屏幕截图、键鼠控制 |
 | **Chrome Use** | 浏览器自动化、表单填写、数据抓取 |
@@ -34,7 +46,7 @@ xclaw 是一个具有强烈个人品牌特色的 AI 编程 CLI 工具。它不�
 
 ### 终端界面
 
-xclaw 在终端中运行，提供现代化的交互式 CLI 体验：
+Xcoder 在终端中运行，提供现代化的交互式 CLI 体验：
 
 ![终端演示](assets/images/demo-terminal.png)
 
@@ -52,9 +64,9 @@ xclaw 在终端中运行，提供现代化的交互式 CLI 体验：
 
 ### 完整演示流程
 
-观看 xclaw 从安装到运行的完整流程：
+观看 Xcoder 从安装到运行的完整流程：
 
-![完整演示 GIF](assets/images/xclaw-demo.gif)
+![完整演示 GIF](assets/images/xcoder-demo.gif)
 
 *更多演示视频请查看 [Movies/Videos](/Users/mayuanyuan/Movies/Videos) 目录*
 
@@ -65,14 +77,14 @@ xclaw 在终端中运行，提供现代化的交互式 CLI 体验：
 需要 Node.js >= 18 或 [Bun](https://bun.sh)。
 
 ```bash
-npm install -g xclaw-cli
+npm install -g xcoder-cli
 ```
 
 安装完成后：
 
 ```bash
-xclaw              # 启动
-xclaw --version    # 1.0.0 (xclaw)
+xcoder              # 启动
+xcoder --version    # 1.0.0 (xcoder)
 ```
 
 首次使用输入 `/login` 配置 API。
@@ -82,7 +94,7 @@ xclaw --version    # 1.0.0 (xclaw)
 需要 [Bun](https://bun.sh)（推荐）或 Node.js >= 18。
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/YuanyuanMa03/xclaw/main/scripts/install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/YuanyuanMa03/xcoder/main/scripts/install.sh)
 ```
 
 ### Windows
@@ -91,14 +103,14 @@ bash <(curl -fsSL https://raw.githubusercontent.com/YuanyuanMa03/xclaw/main/scri
 
 ```powershell
 # 一键安装（管理员终端运行）
-Set-ExecutionPolicy Bypass -Scope Process -Force; irm https://raw.githubusercontent.com/YuanyuanMa03/xclaw/main/scripts/install-from-source-windows.ps1 | iex
+Set-ExecutionPolicy Bypass -Scope Process -Force; irm https://raw.githubusercontent.com/YuanyuanMa03/xcoder/main/scripts/install-from-source-windows.ps1 | iex
 ```
 
 如果无法执行远程脚本，可手动安装：
 
 ```powershell
-git clone https://github.com/YuanyuanMa03/xclaw.git
-cd xclaw
+git clone https://github.com/YuanyuanMa03/xcoder.git
+cd xcoder
 .\scripts\install-from-source-windows.ps1
 ```
 
@@ -106,10 +118,10 @@ cd xclaw
 
 ```bash
 # npm 安装的卸载
-npm uninstall -g xclaw-cli
+npm uninstall -g xcoder-cli
 
 # 源码安装的卸载
-bash <(curl -fsSL https://raw.githubusercontent.com/YuanyuanMa03/xclaw/main/scripts/uninstall.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/YuanyuanMa03/xcoder/main/scripts/uninstall.sh)
 ```
 
 ### 开发模式
@@ -134,14 +146,14 @@ bun run pack       # 打包分发包
 
 ## 模式系统
 
-xclaw 的核心特性 — 每种模式是一套完整的配置组合：性格 + 工具 + UI + 权限。
+Xcoder 的核心特性 — 每种模式是一套完整的配置组合：性格 + 工具 + UI + 权限。
 
 ```
 /mode              # 显示模式选择面板
 /mode sharp        # 切换到 Dr. Sharp 模式
 /sharp             # 快捷命令，等价于 /mode sharp
 Ctrl+M             # 快捷键循环切换所有模式
-xclaw --mode sharp # 启动时直接指定模式
+xcoder --mode sharp # 启动时直接指定模式
 ```
 
 | 模式 | Slug | 性格 | 权限 | UI |
@@ -155,10 +167,10 @@ xclaw --mode sharp # 启动时直接指定模式
 
 ### 自定义模式
 
-在 `~/.xclaw/modes/` 目录下创建 YAML 文件：
+在 `~/.xcoder/modes/` 目录下创建 YAML 文件：
 
 ```yaml
-# ~/.xclaw/modes/my-mode.yaml
+# ~/.xcoder/modes/my-mode.yaml
 name: 我的模式
 slug: my-mode
 description: 自定义工作模式
@@ -176,14 +188,14 @@ responseStyle:
 
 ## 记忆系统
 
-xclaw 使用 `XCLAW.md` 文件作为记忆载体（兼容 `CLAUDE.md`）：
+Xcoder 使用 `XCODER.md` 文件作为记忆载体（兼容 `CLAUDE.md`）：
 
 | 类型 | 路径 | 说明 |
 |------|------|------|
-| 用户级 | `~/.xclaw/XCLAW.md` | 全局个人偏好 |
-| 项目级 | `项目根目录/XCLAW.md` | 项目特定指令 |
-| 本地级 | `项目根目录/XCLAW.local.md` | 本地覆盖（不提交 git） |
-| 规则目录 | `项目根目录/.xclaw/rules/*.md` | 条件规则 |
+| 用户级 | `~/.xcoder/XCODER.md` | 全局个人偏好 |
+| 项目级 | `项目根目录/XCODER.md` | 项目特定指令 |
+| 本地级 | `项目根目录/XCODER.local.md` | 本地覆盖（不提交 git） |
+| 规则目录 | `项目根目录/.xcoder/rules/*.md` | 条件规则 |
 
 优先级：本地级 > 项目级 > 用户级。同时兼容 `CLAUDE.md` 和 `.claude/rules/` 目录。
 
@@ -223,7 +235,7 @@ bun run lint:fix     # 修复 lint
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│                         xclaw Architecture                          │
+│                         xcoder Architecture                          │
 ├─────────────────────────────────────────────────────────────────────┤
 │                                                                     │
 │  ┌──────────┐    ┌──────────┐    ┌──────────────────────────────┐  │
@@ -325,16 +337,16 @@ Mode System → Personality + UI + Permissions + Companion:
 
 ```bash
 # npm 安装
-npm uninstall -g xclaw-cli
+npm uninstall -g xcoder-cli
 
 # 源码安装
-sudo rm /usr/local/bin/xclaw        # macOS/Linux
+sudo rm /usr/local/bin/xcoder        # macOS/Linux
 # 或
-del %LOCALAPPDATA%\xclaw\xclaw.cmd  # Windows
-rm -rf ~/.xclaw-src                 # 源码目录
+del %LOCALAPPDATA%\xcoder\xcoder.cmd  # Windows
+rm -rf ~/.xcoder-src                 # 源码目录
 
 # 删除配置文件（可选）
-rm -rf ~/.xclaw                     # xclaw 专用配置
+rm -rf ~/.xcoder                     # Xcoder 专用配置
 # rm -rf ~/.claude                  # Claude Code 共享配置（谨慎）
 ```
 
@@ -349,11 +361,11 @@ rm -rf ~/.xclaw                     # xclaw 专用配置
 
 ## 致谢与技术来源
 
-xclaw 是一个站在巨人肩膀上的项目，我们对此保持坦诚。
+Xcoder 是一个站在巨人肩膀上的项目，我们对此保持坦诚。
 
-**核心引擎** 的底层架构基于 [Claude Code Best (CCB)](https://github.com/claude-code-best/claude-code) ——一个对 Anthropic 商业闭源产品 Claude Code 的逆向还原项目。xclaw 以 CCB 为上游基础，在此基础上进行了大规模的二次开发。Agent Loop、Tool System、Provider Layer、Permission System、Compact/Memory 等核心机制继承自 CCB，但我们在其上做了大量重写、扩展和深度定制。
+**核心引擎** 的底层架构基于 [Claude Code Best (CCB)](https://github.com/claude-code-best/claude-code) ——一个对 Anthropic 商业闭源产品 Claude Code 的逆向还原项目。Xcoder 以 CCB 为上游基础，在此基础上进行了大规模的二次开发。Agent Loop、Tool System、Provider Layer、Permission System、Compact/Memory 等核心机制继承自 CCB，但我们在其上做了大量重写、扩展和深度定制。
 
-**但同时**，xclaw 在此基础上注入了大量原创的思考和设计：
+**但同时**，Xcoder 在此基础上注入了大量原创的思考和设计：
 
 - **模式系统** — 6 种人格模式（温柔/犀利/代码牛马/省 Token/超级 AI/Dr. Sharp），每种模式切换性格、工具集、权限和 UI 风格，这在原版中并不存在
 - **Dr. Sharp 心理分析工作流** — 三阶段认知手术（深度诊断 → 行动策略 → 镜像自我），将心理学分析框架注入 AI 交互
@@ -362,7 +374,7 @@ xclaw 是一个站在巨人肩膀上的项目，我们对此保持坦诚。
 - **Voice Mode / Computer Use / Chrome Use / Remote Control / Web Search** — 在原版基础上新增的交互能力
 - **WeChat 集成** — 基于微信生态的 agent 通信层
 
-感谢 Anthropic 打造了优秀的 Claude Code，感谢 CCB 团队的逆向还原工作。xclaw 是在他们基础上的二次开发——我们为原创部分感到骄傲，也坦诚承认哪些是站在巨人肩膀上的。
+感谢 Anthropic 打造了优秀的 Claude Code，感谢 CCB 团队的逆向还原工作。Xcoder 是在他们基础上的二次开发——我们为原创部分感到骄傲，也坦诚承认哪些是站在巨人肩膀上的。
 
 如果你也在做类似的项目，欢迎交流。我们相信，**人机协作的边界，需要更多人一起去探索**。
 
@@ -372,4 +384,4 @@ xclaw 是一个站在巨人肩膀上的项目，我们对此保持坦诚。
 
 核心代码基于 [Claude Code Best (CCB)](https://github.com/claude-code-best/claude-code) 二次开发，CCB 源自对 Anthropic Claude Code 的逆向还原，Claude Code 为商业闭源产品，版权归 © Anthropic PBC 所有。
 
-**xclaw 不声称对上游代码拥有版权，不提供任何形式的担保，不授予商业使用许可。**
+**Xcoder 不声称对上游代码拥有版权，不提供任何形式的担保，不授予商业使用许可。**

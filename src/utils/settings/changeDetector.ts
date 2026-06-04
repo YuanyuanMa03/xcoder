@@ -40,7 +40,7 @@ const FILE_STABILITY_POLL_INTERVAL_MS = 500
 /**
  * Time window in milliseconds to consider a file change as internal.
  * If a file change occurs within this window after markInternalWrite() is called,
- * it's assumed to be from xclaw itself and won't trigger a notification.
+ * it's assumed to be from Xcoder itself and won't trigger a notification.
  */
 const INTERNAL_WRITE_WINDOW_MS = 5000
 
@@ -254,13 +254,13 @@ function settingSourceToConfigChangeSource(
 ): ConfigChangeSource {
   switch (source) {
     case 'userSettings':
-    case 'xclawUserSettings':
+    case 'xcoderUserSettings':
       return 'user_settings'
     case 'projectSettings':
-    case 'xclawProjectSettings':
+    case 'xcoderProjectSettings':
       return 'project_settings'
     case 'localSettings':
-    case 'xclawLocalSettings':
+    case 'xcoderLocalSettings':
       return 'local_settings'
     case 'flagSettings':
     case 'policySettings':

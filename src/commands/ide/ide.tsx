@@ -108,7 +108,7 @@ function IDEScreen({
             {isSupportedJetBrainsTerminal()
               ? 'No available IDEs detected. Please install the plugin and restart your IDE:\n' +
                 'https://docs.claude.com/s/claude-code-jetbrains'
-              : 'No available IDEs detected. Make sure your IDE has the xclaw extension or plugin installed and is running.'}
+              : 'No available IDEs detected. Make sure your IDE has the Xcoder extension or plugin installed and is running.'}
           </Text>
         )}
 
@@ -126,7 +126,7 @@ function IDEScreen({
         {availableIDEs.length !== 0 &&
           availableIDEs.some(ide => ide.name === 'VS Code' || ide.name === 'Visual Studio Code') && (
             <Box marginTop={1}>
-              <Text color="warning">Note: Only one xclaw instance can be connected to VS Code at a time.</Text>
+              <Text color="warning">Note: Only one xcoder instance can be connected to VS Code at a time.</Text>
             </Box>
           )}
         {availableIDEs.length !== 0 && !isSupportedTerminal() && (
@@ -283,7 +283,7 @@ export async function call(
     const availableIDEs = detectedIDEs.filter(ide => ide.isValid);
 
     if (availableIDEs.length === 0) {
-      onDone('No IDEs with xclaw extension detected.');
+      onDone('No IDEs with Xcoder extension detected.');
       return null;
     }
 

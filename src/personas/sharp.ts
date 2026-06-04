@@ -1,5 +1,5 @@
 /**
- * Dr. Sharp — a meticulous code reviewer persona for xclaw.
+ * Dr. Sharp — a meticulous code reviewer persona for Xcoder.
  *
  * Three-phase workflow:
  *   1. Deep Diagnosis — understand the problem fully before acting

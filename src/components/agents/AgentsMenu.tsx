@@ -8,8 +8,8 @@ import { useMergedTools } from '../../hooks/useMergedTools.js';
 import { Box, Text } from '@anthropic/ink';
 import { useAppState, useSetAppState } from '../../state/AppState.js';
 import type { Tools } from '../../Tool.js';
-import { type ResolvedAgent, resolveAgentOverrides } from '@xclaw/builtin-tools/tools/AgentTool/agentDisplay.js';
-import { type AgentDefinition, getActiveAgentsFromList } from '@xclaw/builtin-tools/tools/AgentTool/loadAgentsDir.js';
+import { type ResolvedAgent, resolveAgentOverrides } from '@xcoder/builtin-tools/tools/AgentTool/agentDisplay.js';
+import { type AgentDefinition, getActiveAgentsFromList } from '@xcoder/builtin-tools/tools/AgentTool/loadAgentsDir.js';
 import { toError } from '../../utils/errors.js';
 import { logError } from '../../utils/log.js';
 import { Select } from '../CustomSelect/select.js';
@@ -48,12 +48,12 @@ export function AgentsMenu({ tools, onExit }: Props): React.ReactNode {
     () => ({
       'built-in': allAgents.filter(a => a.source === 'built-in'),
       userSettings: allAgents.filter(a => a.source === 'userSettings'),
-      xclawUserSettings: allAgents.filter(a => a.source === 'xclawUserSettings'),
+      xcoderUserSettings: allAgents.filter(a => a.source === 'xcoderUserSettings'),
       projectSettings: allAgents.filter(a => a.source === 'projectSettings'),
-      xclawProjectSettings: allAgents.filter(a => a.source === 'xclawProjectSettings'),
+      xcoderProjectSettings: allAgents.filter(a => a.source === 'xcoderProjectSettings'),
       policySettings: allAgents.filter(a => a.source === 'policySettings'),
       localSettings: allAgents.filter(a => a.source === 'localSettings'),
-      xclawLocalSettings: allAgents.filter(a => a.source === 'xclawLocalSettings'),
+      xcoderLocalSettings: allAgents.filter(a => a.source === 'xcoderLocalSettings'),
       flagSettings: allAgents.filter(a => a.source === 'flagSettings'),
       plugin: allAgents.filter(a => a.source === 'plugin'),
       all: allAgents,

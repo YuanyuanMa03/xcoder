@@ -13,7 +13,7 @@ import { logForDebugging } from './debug.js'
 import {
   getClaudeConfigHomeDir,
   getProjectDotDir,
-  getXclawConfigHomeDir,
+  getXcoderConfigHomeDir,
   isEnvTruthy,
 } from './envUtils.js'
 import { isFsInaccessible } from './errors.js'
@@ -255,8 +255,8 @@ export function getProjectDirsUpToHome(
       break
     }
 
-    // Check both .claude/ and .xclaw/ at this directory level.
-    // getProjectDotDir returns the primary (.claude if it exists, else .xclaw),
+    // Check both .claude/ and .xcoder/ at this directory level.
+    // getProjectDotDir returns the primary (.claude if it exists, else .xcoder),
     // then we also check the other one as an overlay.
     const primaryDotDir = getProjectDotDir(current)
     const primarySubdir = join(current, primaryDotDir, subdir)
@@ -268,7 +268,7 @@ export function getProjectDirsUpToHome(
     }
 
     // Also check the other dot dir (overlay)
-    const otherDotDir = primaryDotDir === '.claude' ? '.xclaw' : '.claude'
+    const otherDotDir = primaryDotDir === '.claude' ? '.xcoder' : '.claude'
     const otherSubdir = join(current, otherDotDir, subdir)
     if (otherSubdir !== primarySubdir) {
       try {
@@ -357,9 +357,9 @@ export const loadMarkdownFilesForSubdir = memoize(
       }
     }
 
-    const xclawUserDir = join(getXclawConfigHomeDir(), subdir)
+    const xcoderUserDir = join(getXcoderConfigHomeDir(), subdir)
 
-    const [managedFiles, userFiles, xclawUserFiles, projectFilesNested] =
+    const [managedFiles, userFiles, xcoderUserFiles, projectFilesNested] =
       await Promise.all([
         // Always load managed (policy settings)
         loadMarkdownFiles(managedDir).then(_ =>
@@ -380,17 +380,17 @@ export const loadMarkdownFilesForSubdir = memoize(
               })),
             )
           : Promise.resolve([]),
-        // xclaw user files (~/.xclaw/{subdir})
+        // xcoder user files (~// xcoder/{subdir})
         isSettingSourceEnabled('userSettings')
-          ? loadMarkdownFiles(xclawUserDir)
+          ? loadMarkdownFiles(xcoderUserDir)
               .then(_ =>
                 _.map(file => ({
                   ...file,
-                  baseDir: xclawUserDir,
-                  source: 'xclawUserSettings' as const,
+                  baseDir: xcoderUserDir,
+                  source: 'xcoderUserSettings' as const,
                 })),
               )
-              .catch(() => []) // xclaw dir may not exist
+              .catch(() => []) // xcoder dir may not exist
           : Promise.resolve([]),
         // Conditionally load project files from all directories up to home
         isSettingSourceEnabled('projectSettings') &&
@@ -401,8 +401,8 @@ export const loadMarkdownFilesForSubdir = memoize(
                   _.map(file => ({
                     ...file,
                     baseDir: projectDir,
-                    source: projectDir.includes('.xclaw')
-                      ? ('xclawProjectSettings' as const)
+                    source: projectDir.includes('.xcoder')
+                      ? ('xcoderProjectSettings' as const)
                       : ('projectSettings' as const),
                   })),
                 ),
@@ -414,11 +414,11 @@ export const loadMarkdownFilesForSubdir = memoize(
     // Flatten nested project files array
     const projectFiles = projectFilesNested.flat()
 
-    // Combine all files with priority: managed > user > xclawUser > project
+    // Combine all files with priority: managed > user >xcoderUser > project
     const allFiles = [
       ...managedFiles,
       ...userFiles,
-      ...xclawUserFiles,
+      ...xcoderUserFiles,
       ...projectFiles,
     ]
 
@@ -458,8 +458,8 @@ export const loadMarkdownFilesForSubdir = memoize(
       )
     }
 
-    // Name-based dedup: when same relative path exists in both .claude/ and .xclaw/,
-    // keep the .xclaw/ version (xclaw wins on collision).
+    // Name-based dedup: when same relative path exists in both .claude/ and .xcoder/,
+    // keep the .xcoder/ version .xcoder wins on collision).
     const nameSeen = new Map<string, number>() // relativePath -> index in nameDedupedFiles
     const nameDedupedFiles: MarkdownFile[] = []
 
@@ -472,15 +472,15 @@ export const loadMarkdownFilesForSubdir = memoize(
 
       if (existingIdx !== undefined) {
         const existing = nameDedupedFiles[existingIdx]
-        // If current file is from .xclaw and existing is from .claude, replace
+        // If current file is from .xcoder and existing is from .claude, replace
         if (
-          file.baseDir.includes('.xclaw') &&
+          file.baseDir.includes('.xcoder') &&
           existing &&
-          !existing.baseDir.includes('.xclaw')
+          !existing.baseDir.includes('.xcoder')
         ) {
           nameDedupedFiles[existingIdx] = file
           logForDebugging(
-            `Name dedup: .xclaw '${relativePath}' overrides .claude version`,
+            `Name dedup: .xcoder '${relativePath}' overrides .claude version`,
           )
         }
         // Otherwise skip (existing wins)

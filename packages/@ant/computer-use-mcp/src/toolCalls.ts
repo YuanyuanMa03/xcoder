@@ -3210,7 +3210,7 @@ async function handleOpenTerminal(
   }
 
   const agentNames: Record<string, string> = {
-    claude: 'xclaw',
+    claude: 'xcoder',
     codex: 'Codex',
     gemini: 'Gemini',
     custom: args.command as string,

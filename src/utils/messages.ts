@@ -104,21 +104,21 @@ import type {
   HookEvent,
   SDKAssistantMessageError,
 } from 'src/entrypoints/agentSdkTypes.js'
-import { EXPLORE_AGENT } from '@xclaw/builtin-tools/tools/AgentTool/built-in/exploreAgent.js'
-import { PLAN_AGENT } from '@xclaw/builtin-tools/tools/AgentTool/built-in/planAgent.js'
-import { areExplorePlanAgentsEnabled } from '@xclaw/builtin-tools/tools/AgentTool/builtInAgents.js'
-import { AGENT_TOOL_NAME } from '@xclaw/builtin-tools/tools/AgentTool/constants.js'
-import { ASK_USER_QUESTION_TOOL_NAME } from '@xclaw/builtin-tools/tools/AskUserQuestionTool/prompt.js'
-import { BashTool } from '@xclaw/builtin-tools/tools/BashTool/BashTool.js'
-import { ExitPlanModeV2Tool } from '@xclaw/builtin-tools/tools/ExitPlanModeTool/ExitPlanModeV2Tool.js'
-import { FileEditTool } from '@xclaw/builtin-tools/tools/FileEditTool/FileEditTool.js'
+import { EXPLORE_AGENT } from '@xcoder/builtin-tools/tools/AgentTool/built-in/exploreAgent.js'
+import { PLAN_AGENT } from '@xcoder/builtin-tools/tools/AgentTool/built-in/planAgent.js'
+import { areExplorePlanAgentsEnabled } from '@xcoder/builtin-tools/tools/AgentTool/builtInAgents.js'
+import { AGENT_TOOL_NAME } from '@xcoder/builtin-tools/tools/AgentTool/constants.js'
+import { ASK_USER_QUESTION_TOOL_NAME } from '@xcoder/builtin-tools/tools/AskUserQuestionTool/prompt.js'
+import { BashTool } from '@xcoder/builtin-tools/tools/BashTool/BashTool.js'
+import { ExitPlanModeV2Tool } from '@xcoder/builtin-tools/tools/ExitPlanModeTool/ExitPlanModeV2Tool.js'
+import { FileEditTool } from '@xcoder/builtin-tools/tools/FileEditTool/FileEditTool.js'
 import {
   FILE_READ_TOOL_NAME,
   MAX_LINES_TO_READ,
-} from '@xclaw/builtin-tools/tools/FileReadTool/prompt.js'
-import { FileWriteTool } from '@xclaw/builtin-tools/tools/FileWriteTool/FileWriteTool.js'
-import { GLOB_TOOL_NAME } from '@xclaw/builtin-tools/tools/GlobTool/prompt.js'
-import { GREP_TOOL_NAME } from '@xclaw/builtin-tools/tools/GrepTool/prompt.js'
+} from '@xcoder/builtin-tools/tools/FileReadTool/prompt.js'
+import { FileWriteTool } from '@xcoder/builtin-tools/tools/FileWriteTool/FileWriteTool.js'
+import { GLOB_TOOL_NAME } from '@xcoder/builtin-tools/tools/GlobTool/prompt.js'
+import { GREP_TOOL_NAME } from '@xcoder/builtin-tools/tools/GrepTool/prompt.js'
 import type { DeepImmutable } from 'src/types/utils.js'
 import { getStrictToolResultPairing } from '../bootstrap/state.js'
 import type { SpinnerMode } from '../components/Spinner.js'
@@ -139,11 +139,11 @@ import {
 import {
   FileReadTool,
   type Output as FileReadToolOutput,
-} from '@xclaw/builtin-tools/tools/FileReadTool/FileReadTool.js'
-import { SEND_MESSAGE_TOOL_NAME } from '@xclaw/builtin-tools/tools/SendMessageTool/constants.js'
-import { TASK_CREATE_TOOL_NAME } from '@xclaw/builtin-tools/tools/TaskCreateTool/constants.js'
-import { TASK_OUTPUT_TOOL_NAME } from '@xclaw/builtin-tools/tools/TaskOutputTool/constants.js'
-import { TASK_UPDATE_TOOL_NAME } from '@xclaw/builtin-tools/tools/TaskUpdateTool/constants.js'
+} from '@xcoder/builtin-tools/tools/FileReadTool/FileReadTool.js'
+import { SEND_MESSAGE_TOOL_NAME } from '@xcoder/builtin-tools/tools/SendMessageTool/constants.js'
+import { TASK_CREATE_TOOL_NAME } from '@xcoder/builtin-tools/tools/TaskCreateTool/constants.js'
+import { TASK_OUTPUT_TOOL_NAME } from '@xcoder/builtin-tools/tools/TaskOutputTool/constants.js'
+import { TASK_UPDATE_TOOL_NAME } from '@xcoder/builtin-tools/tools/TaskUpdateTool/constants.js'
 import type { PermissionMode } from '../types/permissions.js'
 import { normalizeToolInput, normalizeToolInputForAPI } from './api.js'
 import { getCurrentProjectConfig } from './config.js'
@@ -236,7 +236,7 @@ export function AUTO_REJECT_MESSAGE(toolName: string): string {
   return `Permission to use ${toolName} has been denied. ${DENIAL_WORKAROUND_GUIDANCE}`
 }
 export function DONT_ASK_REJECT_MESSAGE(toolName: string): string {
-  return `Permission to use ${toolName} has been denied because xclaw is running in don't ask mode. ${DENIAL_WORKAROUND_GUIDANCE}`
+  return `Permission to use ${toolName} has been denied because Xcoder is running in don't ask mode. ${DENIAL_WORKAROUND_GUIDANCE}`
 }
 export const NO_RESPONSE_REQUESTED = 'No response requested.'
 

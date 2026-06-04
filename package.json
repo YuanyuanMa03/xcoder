@@ -1,19 +1,19 @@
 {
-  "name": "xclaw-cli",
+  "name": "xcoder-cli",
   "version": "1.0.2",
-  "description": "xclaw — 超越人类与 AI 边界的 AI 编程 CLI",
+  "description": "Xcoder — 超越人类与 AI 边界的 AI 编程 CLI",
   "type": "module",
-  "author": "xclaw <xclaw@users.noreply.github.com>",
+  "author": "Xcoder <xcoder@users.noreply.github.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/YuanyuanMa03/xclaw.git"
+    "url": "git+https://github.com/YuanyuanMa03/xcoder.git"
   },
-  "homepage": "https://github.com/YuanyuanMa03/xclaw#readme",
+  "homepage": "https://github.com/YuanyuanMa03/xcoder#readme",
   "bugs": {
-    "url": "https://github.com/YuanyuanMa03/xclaw/issues"
+    "url": "https://github.com/YuanyuanMa03/xcoder/issues"
   },
   "keywords": [
-    "xclaw",
+    "xcoder",
     "cli",
     "ai",
     "coding-assistant",
@@ -25,8 +25,8 @@
     "node": ">=18.0.0"
   },
   "bin": {
-    "xclaw": "dist/cli-node.js",
-    "xclaw-bun": "dist/cli-bun.js"
+    "xcoder": "dist/cli-node.js",
+    "xcoder-bun": "dist/cli-bun.js"
   },
   "workspaces": [
     "packages/*",
@@ -97,10 +97,10 @@
     "@aws-sdk/credential-providers": "^3.1037.0",
     "@azure/identity": "^4.13.1",
     "@biomejs/biome": "^2.4.12",
-    "@xclaw/agent-tools": "workspace:*",
-    "@xclaw/builtin-tools": "workspace:*",
-    "@xclaw/mcp-client": "workspace:*",
-    "@xclaw/weixin": "workspace:*",
+    "@xcoder/agent-tools": "workspace:*",
+    "@xcoder/builtin-tools": "workspace:*",
+    "@xcoder/mcp-client": "workspace:*",
+    "@xcoder/weixin": "workspace:*",
     "@commander-js/extra-typings": "^14.0.0",
     "@growthbook/growthbook": "^1.6.5",
     "@modelcontextprotocol/sdk": "^1.29.0",

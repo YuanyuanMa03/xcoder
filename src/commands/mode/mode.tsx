@@ -3,7 +3,7 @@ import { Box, Text } from '@anthropic/ink';
 import { Select } from '../../components/CustomSelect/index.js';
 import type { LocalJSXCommandCall, LocalJSXCommandOnDone } from '../../types/command.js';
 import { getCurrentModeSlug, listModes, setCurrentMode } from '../../modes/store.js';
-import { XCLAW_TAGLINE } from '../../constants/xclaw.js';
+import { XCODER_TAGLINE } from '../../constants/xcoder.js';
 
 function ModePicker({ onDone }: { onDone: LocalJSXCommandOnDone }) {
   const modes = listModes();
@@ -29,7 +29,7 @@ function ModePicker({ onDone }: { onDone: LocalJSXCommandOnDone }) {
     setCurrentMode(slug);
     const target = modes.find(m => m.slug === slug);
     onDone(
-      `${target?.icon} Mode switched to: ${target?.name} (${target?.slug}) — ${target?.description}\n   ${XCLAW_TAGLINE}`,
+      `${target?.icon} Mode switched to: ${target?.name} (${target?.slug}) — ${target?.description}\n   ${XCODER_TAGLINE}`,
       {
         display: 'system',
       },
@@ -74,7 +74,7 @@ export const call: LocalJSXCommandCall = async (onDone, _context, args) => {
     }
     setCurrentMode(slug);
     onDone(
-      `${target.icon} Mode switched to: ${target.name} (${target.slug}) — ${target.description}\n   ${XCLAW_TAGLINE}`,
+      `${target.icon} Mode switched to: ${target.name} (${target.slug}) — ${target.description}\n   ${XCODER_TAGLINE}`,
       {
         display: 'system',
       },

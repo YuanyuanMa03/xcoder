@@ -71,7 +71,7 @@ export async function setup(
   const nodeVersion = process.version.match(/^v(\d+)\./)?.[1]
   if (!nodeVersion || parseInt(nodeVersion, 10) < 18) {
     console.error(
-      chalk.bold.red('Error: xclaw requires Node.js version 18 or higher.'),
+      chalk.bold.red('Error: xcoder requires Node.js version 18 or higher.'),
     )
     process.exit(1)
   }
@@ -411,7 +411,7 @@ export async function setup(
       // (trusted Anthropic-managed launcher intentionally pre-approving everything).
       // Precedent: permissionSetup.ts:861, applySettingsChange.ts:55 (PR #19116)
       process.env.CLAUDE_CODE_ENTRYPOINT !== 'local-agent' &&
-      // Same for CCD (xclaw in Desktop) — apps#29127 passes the flag
+      // Same for CCD (xcoder in Desktop) — apps#29127 passes the flag
       // unconditionally to unlock mid-session bypass switching
       process.env.CLAUDE_CODE_ENTRYPOINT !== 'claude-desktop'
     ) {

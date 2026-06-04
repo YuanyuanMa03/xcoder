@@ -57,7 +57,7 @@ export const DEFAULT_BUILD_FEATURES = [
   'AWAY_SUMMARY', // 离线摘要（用户离开后生成总结）
   'ULTRAPLAN', // 超级规划模式，深度分析后生成实施计划
   'DAEMON', // 守护进程模式，长驻 supervisor 管理后台 worker（非 GB 级主因）
-  // 'ACP', // 已禁用：xclaw 不需要 ACP 协议
+  // 'ACP', // 已禁用：Xcoder 不需要 ACP 协议
   'WORKFLOW_SCRIPTS', // 工作流脚本（.claude/workflows/ 中的 YAML/MD）
   'HISTORY_SNIP', // 历史消息裁剪，压缩上下文窗口
   // 'CONTEXT_COLLAPSE', // 已禁用：实现是空壳 stub，启用后会抑制 auto compact 导致上下文管理完全失效

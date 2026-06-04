@@ -49,7 +49,7 @@ import type {
   BranchAction,
   CommitKind,
   PrAction,
-} from '@xclaw/builtin-tools/tools/shared/gitOperationTracking.js'
+} from '@xcoder/builtin-tools/tools/shared/gitOperationTracking.js'
 import type {
   AssistantMessage,
   CollapsibleMessage,

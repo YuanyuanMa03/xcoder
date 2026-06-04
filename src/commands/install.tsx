@@ -185,12 +185,12 @@ function Install({ onDone, force, target }: InstallProps): React.ReactNode {
   useEffect(() => {
     if (state.type === 'success') {
       // Give success message time to render before exiting
-      setTimeout(onDone, 2000, 'xclaw installation completed successfully', {
+      setTimeout(onDone, 2000, 'xcoder installation completed successfully', {
         display: 'system' as const,
       });
     } else if (state.type === 'error') {
       // Give error message time to render before exiting
-      setTimeout(onDone, 3000, 'xclaw installation failed', {
+      setTimeout(onDone, 3000, 'xcoder installation failed', {
         display: 'system' as const,
       });
     }
@@ -202,7 +202,7 @@ function Install({ onDone, force, target }: InstallProps): React.ReactNode {
 
       {state.type === 'cleaning-npm' && <Text color="warning">Cleaning up old npm installations...</Text>}
 
-      {state.type === 'installing' && <Text color="claude">Installing xclaw native build {state.version}...</Text>}
+      {state.type === 'installing' && <Text color="claude">Installing xcoder native build {state.version}...</Text>}
 
       {state.type === 'setting-up' && <Text color="claude">Setting up launcher and shell integration...</Text>}
 
@@ -213,7 +213,7 @@ function Install({ onDone, force, target }: InstallProps): React.ReactNode {
           <Box>
             <StatusIcon status="success" withSpace />
             <Text color="success" bold>
-              xclaw successfully installed!
+              xcoder successfully installed!
             </Text>
           </Box>
           <Box marginLeft={2} flexDirection="column" gap={1}>
@@ -261,7 +261,7 @@ function Install({ onDone, force, target }: InstallProps): React.ReactNode {
 export const install = {
   type: 'local-jsx' as const,
   name: 'install',
-  description: 'Install xclaw native build',
+  description: 'Install xcoder native build',
   argumentHint: '[options]',
   async call(
     onDone: (result: string, options?: { display?: CommandResultDisplay }) => void,

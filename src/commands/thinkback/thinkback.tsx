@@ -345,8 +345,8 @@ function ThinkbackMenu({
 
   return (
     <Dialog
-      title="Think Back on 2025 with xclaw"
-      subtitle="Generate your 2025 xclaw Think Back (takes a few minutes to run)"
+      title="Think Back on 2025 with Xcoder"
+      subtitle="Generate your 2025 xcoder Think Back (takes a few minutes to run)"
       onCancel={handleCancel}
       color="claude"
     >
@@ -367,13 +367,13 @@ function ThinkbackMenu({
 }
 
 const EDIT_PROMPT =
-  'Use the Skill tool to invoke the "thinkback" skill with mode=edit to modify my existing xclaw year in review animation. Ask me what I want to change. When the animation is ready, tell the user to run /think-back again to play it.';
+  'Use the Skill tool to invoke the "thinkback" skill with mode=edit to modify my existing xcoder year in review animation. Ask me what I want to change. When the animation is ready, tell the user to run /think-back again to play it.';
 
 const FIX_PROMPT =
-  'Use the Skill tool to invoke the "thinkback" skill with mode=fix to fix validation or rendering errors in my existing xclaw year in review animation. Run the validator, identify errors, and fix them. When the animation is ready, tell the user to run /think-back again to play it.';
+  'Use the Skill tool to invoke the "thinkback" skill with mode=fix to fix validation or rendering errors in my existing xcoder year in review animation. Run the validator, identify errors, and fix them. When the animation is ready, tell the user to run /think-back again to play it.';
 
 const REGENERATE_PROMPT =
-  'Use the Skill tool to invoke the "thinkback" skill with mode=regenerate to create a completely new xclaw year in review animation from scratch. Delete the existing animation and start fresh. When the animation is ready, tell the user to run /think-back again to play it.';
+  'Use the Skill tool to invoke the "thinkback" skill with mode=regenerate to create a completely new xcoder year in review animation from scratch. Delete the existing animation and start fresh. When the animation is ready, tell the user to run /think-back again to play it.';
 
 function ThinkbackFlow({
   onDone,

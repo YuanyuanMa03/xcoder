@@ -714,7 +714,7 @@ export function ManageMarketplaces({
         {!isUpdating && !shouldSkipPluginAutoupdate() && selectedMarketplace.autoUpdate && (
           <Box marginTop={1}>
             <Text dimColor>
-              Auto-update enabled. xclaw will automatically update this marketplace and its installed plugins.
+              Auto-update enabled. xcoder will automatically update this marketplace and its installed plugins.
             </Text>
           </Box>
         )}

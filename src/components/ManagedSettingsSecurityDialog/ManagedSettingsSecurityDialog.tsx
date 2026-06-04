@@ -57,7 +57,7 @@ export function ManagedSettingsSecurityDialog({ settings, onAccept, onReject }: 
         <Select
           options={[
             { label: 'Yes, I trust these settings', value: 'accept' },
-            { label: 'No, exit xclaw', value: 'exit' },
+            { label: 'No, exit.xcoder', value: 'exit' },
           ]}
           onChange={value => onChange(value as 'accept' | 'exit')}
           onCancel={() => onChange('exit')}

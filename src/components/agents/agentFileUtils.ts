@@ -2,12 +2,12 @@ import { mkdir, open, unlink } from 'fs/promises'
 import { join } from 'path'
 import type { SettingSource } from 'src/utils/settings/constants.js'
 import { getManagedFilePath } from 'src/utils/settings/managedPath.js'
-import type { AgentMemoryScope } from '@xclaw/builtin-tools/tools/AgentTool/agentMemory.js'
+import type { AgentMemoryScope } from '@xcoder/builtin-tools/tools/AgentTool/agentMemory.js'
 import {
   type AgentDefinition,
   isBuiltInAgent,
   isPluginAgent,
-} from '@xclaw/builtin-tools/tools/AgentTool/loadAgentsDir.js'
+} from '@xcoder/builtin-tools/tools/AgentTool/loadAgentsDir.js'
 import { getCwd } from '../../utils/cwd.js'
 import type { EffortValue } from '../../utils/effort.js'
 import { getClaudeConfigHomeDir } from '../../utils/envUtils.js'
@@ -62,10 +62,10 @@ function getAgentDirectoryPath(location: SettingSource): string {
     case 'flagSettings':
       throw new Error(`Cannot get directory path for ${location} agents`)
     case 'userSettings':
-    case 'xclawUserSettings':
+    case 'xcoderUserSettings':
       return join(getClaudeConfigHomeDir(), AGENT_PATHS.AGENTS_DIR)
     case 'projectSettings':
-    case 'xclawProjectSettings':
+    case 'xcoderProjectSettings':
       return join(getCwd(), AGENT_PATHS.FOLDER_NAME, AGENT_PATHS.AGENTS_DIR)
     case 'policySettings':
       return join(
@@ -74,7 +74,7 @@ function getAgentDirectoryPath(location: SettingSource): string {
         AGENT_PATHS.AGENTS_DIR,
       )
     case 'localSettings':
-    case 'xclawLocalSettings':
+    case 'xcoderLocalSettings':
       return join(getCwd(), AGENT_PATHS.FOLDER_NAME, AGENT_PATHS.AGENTS_DIR)
   }
 }

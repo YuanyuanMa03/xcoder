@@ -2,10 +2,10 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in xclaw, please report it privately:
+If you discover a security vulnerability in Xcoder, please report it privately:
 
 - **Email:** 2942204237@qq.com
-- **GitHub:** Open a private security advisory at [github.com/YuanyuanMa03/xclaw/security](https://github.com/YuanyuanMa03/xclaw/security)
+- **GitHub:** Open a private security advisory at [github.com/YuanyuanMa03/xcoder/security](https://github.com/YuanyuanMa03/xcoder/security)
 
 Please do NOT open a public issue for security vulnerabilities.
 

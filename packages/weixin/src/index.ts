@@ -1,4 +1,4 @@
-// @xclaw/weixin — WeChat channel integration
+// .xcoder/weixin — WeChat channel integration
 
 // Types
 export {

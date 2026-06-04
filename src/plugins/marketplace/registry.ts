@@ -1,12 +1,12 @@
 /**
- * xclaw Plugin Marketplace Registry
+ * xcoder Plugin Marketplace Registry
  *
  * Manages the local plugin marketplace: available plugins index,
  * installation, uninstallation, and discovery.
  *
  * Plugin lifecycle:
  * 1. Available plugins are listed in a bundled index
- * 2. `install` copies plugin files to ~/.xclaw/plugins/<name>/
+ * 2. `install` copies plugin files to ~// xcoder/plugins/<name>/
  * 3. Installed plugins are registered with the plugin system
  * 4. `uninstall` removes the plugin directory
  */
@@ -20,7 +20,7 @@ import {
   writeFileSync,
 } from 'fs'
 import { join } from 'path'
-import { getXclawConfigHomeDir } from '../../utils/envUtils.js'
+import { getXcoderConfigHomeDir } from '../../utils/envUtils.js'
 
 export interface MarketplacePlugin {
   name: string
@@ -47,11 +47,11 @@ export interface InstalledPlugin {
 }
 
 function getMarketplaceDir(): string {
-  return join(getXclawConfigHomeDir(), 'marketplace')
+  return join(getXcoderConfigHomeDir(), 'marketplace')
 }
 
 function getPluginsDir(): string {
-  return join(getXclawConfigHomeDir(), 'plugins')
+  return join(getXcoderConfigHomeDir(), 'plugins')
 }
 
 function getInstalledIndexPath(): string {
@@ -76,7 +76,7 @@ const BUNDLED_INDEX: MarketplacePlugin[] = [
     name: 'code-review',
     description:
       'Automated code review on commit — checks style, bugs, and security',
-    author: 'xclaw',
+    author: 'xcoder',
     version: '1.0.0',
     tags: ['git', 'review', 'quality'],
     source: 'bundled',
@@ -104,7 +104,7 @@ const BUNDLED_INDEX: MarketplacePlugin[] = [
     name: 'git-flow',
     description:
       'Git workflow automation — branch naming, PR templates, merge strategies',
-    author: 'xclaw',
+    author: 'xcoder',
     version: '1.1.0',
     tags: ['git', 'workflow', 'automation'],
     source: 'bundled',
@@ -124,7 +124,7 @@ const BUNDLED_INDEX: MarketplacePlugin[] = [
     name: 'commit-ai',
     description:
       'AI-powered conventional commit message generation from staged changes',
-    author: 'xclaw',
+    author: 'xcoder',
     version: '1.0.0',
     tags: ['git', 'commit', 'ai'],
     source: 'bundled',
@@ -144,7 +144,7 @@ const BUNDLED_INDEX: MarketplacePlugin[] = [
     name: 'changelog-gen',
     description:
       'Generate changelogs from git history with conventional commit parsing',
-    author: 'xclaw',
+    author: 'xcoder',
     version: '1.0.0',
     tags: ['git', 'changelog', 'docs'],
     source: 'bundled',
@@ -263,7 +263,7 @@ export function installPlugin(name: string): {
   // Write a stub entry point
   writeFileSync(
     join(pluginDir, available.entryPoint),
-    `// xclaw plugin: ${available.name}\n// ${available.description}\n// Installed via xclaw marketplace\n\nexport default {\n  name: '${available.name}',\n  version: '${available.version}',\n  activate: () => {\n    console.log('[${available.name}] Plugin activated')\n  },\n}\n`,
+    `// xcoder plugin: ${available.name}\n// ${available.description}\n// Installed via xcoder marketplace\n\nexport default {\n  name: '${available.name}',\n  version: '${available.version}',\n  activate: () => {\n    console.log('[${available.name}] Plugin activated')\n  },\n}\n`,
   )
 
   // Update installed index
@@ -279,7 +279,7 @@ export function installPlugin(name: string): {
 
   return {
     success: true,
-    message: `Plugin "${name}" v${available.version} installed successfully.\nLocation: ${pluginDir}\nRestart xclaw to activate.`,
+    message: `Plugin "${name}" v${available.version} installed successfully.\nLocation: ${pluginDir}\nRestart Xcoder to activate.`,
   }
 }
 
@@ -311,7 +311,7 @@ export function uninstallPlugin(name: string): {
 
   return {
     success: true,
-    message: `Plugin "${name}" uninstalled. Restart xclaw to take effect.`,
+    message: `Plugin "${name}" uninstalled. Restart Xcoder to take effect.`,
   }
 }
 
@@ -331,7 +331,7 @@ export function togglePlugin(name: string): {
   saveInstalledIndex(installed)
   return {
     success: true,
-    message: `Plugin "${name}" ${plugin.enabled ? 'enabled' : 'disabled'}. Restart xclaw to take effect.`,
+    message: `Plugin "${name}" ${plugin.enabled ? 'enabled' : 'disabled'}. Restart Xcoder to take effect.`,
   }
 }
 

@@ -127,9 +127,9 @@ export function ResumeTask({ onSelect, onCancel, isEmbedded = false }: Props): R
       <Box flexDirection="column" padding={1}>
         <Box flexDirection="row">
           <Spinner />
-          <Text bold>Loading xclaw sessions…</Text>
+          <Text bold>Loading xcoder sessions…</Text>
         </Box>
-        <Text dimColor>{retrying ? 'Retrying…' : 'Fetching your xclaw sessions…'}</Text>
+        <Text dimColor>{retrying ? 'Retrying…' : 'Fetching your xcoder sessions…'}</Text>
       </Box>
     );
   }
@@ -138,7 +138,7 @@ export function ResumeTask({ onSelect, onCancel, isEmbedded = false }: Props): R
     return (
       <Box flexDirection="column" padding={1}>
         <Text bold color="error">
-          Error loading xclaw sessions
+          Error loading xcoder sessions
         </Text>
 
         {renderErrorSpecificGuidance(loadErrorType)}
@@ -154,7 +154,7 @@ export function ResumeTask({ onSelect, onCancel, isEmbedded = false }: Props): R
     return (
       <Box flexDirection="column" padding={1}>
         <Text bold>
-          No xclaw sessions found
+          No xcoder sessions found
           {currentRepo && <Text> for {currentRepo}</Text>}
         </Text>
         <Box marginTop={1}>
@@ -308,7 +308,7 @@ function renderErrorSpecificGuidance(errorType: LoadErrorType): React.ReactNode 
     case 'other':
       return (
         <Box marginY={1} flexDirection="row">
-          <Text dimColor>Sorry, xclaw encountered an error</Text>
+          <Text dimColor>Sorry, xcoder encountered an error</Text>
         </Box>
       );
   }

@@ -122,60 +122,63 @@ const TOOL_NAMES = {
   Sleep: 'Sleep',
 }
 
-mock.module('@xclaw/builtin-tools/tools/BashTool/toolName.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/BashTool/toolName.js', () => ({
   BASH_TOOL_NAME: TOOL_NAMES.Bash,
 }))
-mock.module('@xclaw/builtin-tools/tools/FileReadTool/prompt.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/FileReadTool/prompt.js', () => ({
   FILE_READ_TOOL_NAME: TOOL_NAMES.Read,
 }))
-mock.module('@xclaw/builtin-tools/tools/FileEditTool/constants.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/FileEditTool/constants.js', () => ({
   FILE_EDIT_TOOL_NAME: TOOL_NAMES.Edit,
 }))
-mock.module('@xclaw/builtin-tools/tools/FileWriteTool/prompt.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/FileWriteTool/prompt.js', () => ({
   FILE_WRITE_TOOL_NAME: TOOL_NAMES.Write,
 }))
-mock.module('@xclaw/builtin-tools/tools/GlobTool/prompt.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/GlobTool/prompt.js', () => ({
   GLOB_TOOL_NAME: TOOL_NAMES.Glob,
 }))
-mock.module('@xclaw/builtin-tools/tools/GrepTool/prompt.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/GrepTool/prompt.js', () => ({
   GREP_TOOL_NAME: TOOL_NAMES.Grep,
 }))
-mock.module('@xclaw/builtin-tools/tools/AgentTool/constants.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/AgentTool/constants.js', () => ({
   AGENT_TOOL_NAME: TOOL_NAMES.Agent,
   VERIFICATION_AGENT_TYPE: 'verification',
 }))
-mock.module('@xclaw/builtin-tools/tools/AgentTool/forkSubagent.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/AgentTool/forkSubagent.js', () => ({
   isForkSubagentEnabled: () => false,
 }))
-mock.module('@xclaw/builtin-tools/tools/AgentTool/builtInAgents.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/AgentTool/builtInAgents.js', () => ({
   areExplorePlanAgentsEnabled: () => false,
 }))
 mock.module(
-  '@xclaw/builtin-tools/tools/AgentTool/built-in/exploreAgent.js',
+  '@xcoder/builtin-tools/tools/AgentTool/built-in/exploreAgent.js',
   () => ({
     EXPLORE_AGENT: { agentType: 'explore' },
     EXPLORE_AGENT_MIN_QUERIES: 5,
   }),
 )
-mock.module('@xclaw/builtin-tools/tools/AskUserQuestionTool/prompt.js', () => ({
-  ASK_USER_QUESTION_TOOL_NAME: TOOL_NAMES.AskUserQuestion,
-}))
-mock.module('@xclaw/builtin-tools/tools/TodoWriteTool/constants.js', () => ({
+mock.module(
+  '@xcoder/builtin-tools/tools/AskUserQuestionTool/prompt.js',
+  () => ({
+    ASK_USER_QUESTION_TOOL_NAME: TOOL_NAMES.AskUserQuestion,
+  }),
+)
+mock.module('@xcoder/builtin-tools/tools/TodoWriteTool/constants.js', () => ({
   TODO_WRITE_TOOL_NAME: 'TodoWrite',
 }))
-mock.module('@xclaw/builtin-tools/tools/TaskCreateTool/constants.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/TaskCreateTool/constants.js', () => ({
   TASK_CREATE_TOOL_NAME: TOOL_NAMES.TaskCreate,
 }))
-mock.module('@xclaw/builtin-tools/tools/DiscoverSkillsTool/prompt.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/DiscoverSkillsTool/prompt.js', () => ({
   DISCOVER_SKILLS_TOOL_NAME: TOOL_NAMES.DiscoverSkills,
 }))
-mock.module('@xclaw/builtin-tools/tools/SkillTool/constants.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/SkillTool/constants.js', () => ({
   SKILL_TOOL_NAME: TOOL_NAMES.Skill,
 }))
-mock.module('@xclaw/builtin-tools/tools/SleepTool/prompt.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/SleepTool/prompt.js', () => ({
   SLEEP_TOOL_NAME: TOOL_NAMES.Sleep,
 }))
-mock.module('@xclaw/builtin-tools/tools/REPLTool/constants.js', () => ({
+mock.module('@xcoder/builtin-tools/tools/REPLTool/constants.js', () => ({
   isReplModeEnabled: () => false,
 }))
 
@@ -566,9 +569,9 @@ describe('Opus 4.7 Prompt Engineering Audit', () => {
   // TXT 来源: {product_information}
   // ------------------------------------------------------------------
   describe('#13 Product information', () => {
-    test('env info contains xclaw product description', async () => {
+    test('env info contains xcoder product description', async () => {
       const envInfo = await computeSimpleEnvInfo('claude-opus-4-7')
-      expect(envInfo).toContain('xclaw')
+      expect(envInfo).toContain('xcoder')
       expect(envInfo).toContain('CLI')
     })
 

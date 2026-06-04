@@ -10,11 +10,11 @@ import {
   type ResolvedAgent,
   resolveAgentModelDisplay,
   resolveAgentOverrides,
-} from '@xclaw/builtin-tools/tools/AgentTool/agentDisplay.js'
+} from '@xcoder/builtin-tools/tools/AgentTool/agentDisplay.js'
 import {
   getActiveAgentsFromList,
   getAgentDefinitionsWithOverrides,
-} from '@xclaw/builtin-tools/tools/AgentTool/loadAgentsDir.js'
+} from '@xcoder/builtin-tools/tools/AgentTool/loadAgentsDir.js'
 import { getCwd } from '../../utils/cwd.js'
 
 function formatAgent(agent: ResolvedAgent): string {

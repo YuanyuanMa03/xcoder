@@ -104,7 +104,7 @@ export async function daemonMain(args: string[]): Promise<void> {
 
 function printHelp(): void {
   console.log(`
-xclaw Daemon — background process management
+xcoder Daemon — background process management
 
 USAGE
   claude daemon [subcommand]

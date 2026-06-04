@@ -5,15 +5,15 @@ import {
   type AnalyticsMetadata_I_VERIFIED_THIS_IS_NOT_CODE_OR_FILEPATHS,
   logEvent,
 } from '../services/analytics/index.js'
-import { AGENT_TOOL_NAME } from '@xclaw/builtin-tools/tools/AgentTool/constants.js'
-import { BASH_TOOL_NAME } from '@xclaw/builtin-tools/tools/BashTool/toolName.js'
-import { FILE_EDIT_TOOL_NAME } from '@xclaw/builtin-tools/tools/FileEditTool/constants.js'
-import { FILE_READ_TOOL_NAME } from '@xclaw/builtin-tools/tools/FileReadTool/prompt.js'
-import { SEND_MESSAGE_TOOL_NAME } from '@xclaw/builtin-tools/tools/SendMessageTool/constants.js'
-import { SYNTHETIC_OUTPUT_TOOL_NAME } from '@xclaw/builtin-tools/tools/SyntheticOutputTool/SyntheticOutputTool.js'
-import { TASK_STOP_TOOL_NAME } from '@xclaw/builtin-tools/tools/TaskStopTool/prompt.js'
-import { TEAM_CREATE_TOOL_NAME } from '@xclaw/builtin-tools/tools/TeamCreateTool/constants.js'
-import { TEAM_DELETE_TOOL_NAME } from '@xclaw/builtin-tools/tools/TeamDeleteTool/constants.js'
+import { AGENT_TOOL_NAME } from '@xcoder/builtin-tools/tools/AgentTool/constants.js'
+import { BASH_TOOL_NAME } from '@xcoder/builtin-tools/tools/BashTool/toolName.js'
+import { FILE_EDIT_TOOL_NAME } from '@xcoder/builtin-tools/tools/FileEditTool/constants.js'
+import { FILE_READ_TOOL_NAME } from '@xcoder/builtin-tools/tools/FileReadTool/prompt.js'
+import { SEND_MESSAGE_TOOL_NAME } from '@xcoder/builtin-tools/tools/SendMessageTool/constants.js'
+import { SYNTHETIC_OUTPUT_TOOL_NAME } from '@xcoder/builtin-tools/tools/SyntheticOutputTool/SyntheticOutputTool.js'
+import { TASK_STOP_TOOL_NAME } from '@xcoder/builtin-tools/tools/TaskStopTool/prompt.js'
+import { TEAM_CREATE_TOOL_NAME } from '@xcoder/builtin-tools/tools/TeamCreateTool/constants.js'
+import { TEAM_DELETE_TOOL_NAME } from '@xcoder/builtin-tools/tools/TeamDeleteTool/constants.js'
 import { isEnvTruthy } from '../utils/envUtils.js'
 
 // Checks the same gate as isScratchpadEnabled() in
@@ -113,7 +113,7 @@ export function getCoordinatorSystemPrompt(): string {
     ? 'Workers have access to Bash, Read, and Edit tools, plus MCP tools from configured MCP servers.'
     : 'Workers have access to standard tools, MCP tools from configured MCP servers, and project skills via the Skill tool. Delegate skill invocations (e.g. /commit, /verify) to workers.'
 
-  return `You are xclaw, an AI assistant that orchestrates software engineering tasks across multiple workers.
+  return `You are Xcoder, an AI assistant that orchestrates software engineering tasks across multiple workers.
 
 ## 1. Your Role
 

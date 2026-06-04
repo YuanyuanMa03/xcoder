@@ -11,11 +11,11 @@ import type {
   McpWebSocketIDEServerConfig,
 } from '../services/mcp/types.js'
 import type { ToolUseContext } from '../Tool.js'
-import type { FileEdit } from '@xclaw/builtin-tools/tools/FileEditTool/types.js'
+import type { FileEdit } from '@xcoder/builtin-tools/tools/FileEditTool/types.js'
 import {
   getEditsForPatch,
   getPatchForEdits,
-} from '@xclaw/builtin-tools/tools/FileEditTool/utils.js'
+} from '@xcoder/builtin-tools/tools/FileEditTool/utils.js'
 import { getGlobalConfig } from '../utils/config.js'
 import { getPatchFromContents } from '../utils/diff.js'
 import { isENOENT } from '../utils/errors.js'
@@ -60,7 +60,7 @@ export function useDiffInIDE({
 
   const sha = useMemo(() => randomUUID().slice(0, 6), [])
   const tabName = useMemo(
-    () => `✻ [xclaw] ${basename(filePath)} (${sha}) ⧉`,
+    () => `✻ [xcoder] ${basename(filePath)} (${sha}) ⧉`,
     [filePath, sha],
   )
 

@@ -4,24 +4,24 @@ import { tmpdir } from 'os'
 import { join } from 'path'
 import { getWatchablePaths } from '../skillChangeDetector'
 
-describe('skillChangeDetector xclaw support', () => {
+describe('skillChangeDetector xcoder support', () => {
   let tmpDir: string
   let origClaudeConfigDir: string | undefined
-  let origXclawConfigDir: string | undefined
+  let origXcoderConfigDir: string | undefined
   let origCwd: string
 
   beforeEach(() => {
     tmpDir = join(
       tmpdir(),
-      `xclaw-watch-test-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+      `xcoder-watch-test-${Date.now()}-${Math.random().toString(36).slice(2)}`,
     )
     mkdirSync(tmpDir, { recursive: true })
     origClaudeConfigDir = process.env.CLAUDE_CONFIG_DIR
-    origXclawConfigDir = process.env.XCLAW_CONFIG_DIR
+    origXcoderConfigDir = process.env.XCODER_CONFIG_DIR
     origCwd = process.cwd()
     process.env.CLAUDE_CONFIG_DIR = join(tmpDir, '.claude')
-    process.env.XCLAW_CONFIG_DIR = join(tmpDir, '.xclaw')
-    // Change cwd to tmpDir so project-level scan doesn't find real .xclaw/
+    process.env.XCODER_CONFIG_DIR = join(tmpDir, '.xcoder')
+    // Change cwd to tmpDir so project-level scan doesn't find real .xcoder/
     process.chdir(tmpDir)
   })
 
@@ -32,33 +32,33 @@ describe('skillChangeDetector xclaw support', () => {
     } else {
       delete process.env.CLAUDE_CONFIG_DIR
     }
-    if (origXclawConfigDir !== undefined) {
-      process.env.XCLAW_CONFIG_DIR = origXclawConfigDir
+    if (origXcoderConfigDir !== undefined) {
+      process.env.XCODER_CONFIG_DIR = origXcoderConfigDir
     } else {
-      delete process.env.XCLAW_CONFIG_DIR
+      delete process.env.XCODER_CONFIG_DIR
     }
     rmSync(tmpDir, { recursive: true, force: true })
   })
 
-  test('getWatchablePaths includes xclaw user skills dir when it exists', async () => {
-    mkdirSync(join(tmpDir, '.xclaw', 'skills'), { recursive: true })
+  test('getWatchablePaths includes xcoder user skills dir when it exists', async () => {
+    mkdirSync(join(tmpDir, '.xcoder', 'skills'), { recursive: true })
     const paths = await getWatchablePaths()
-    expect(paths.some(p => p.includes('.xclaw') && p.includes('skills'))).toBe(
+    expect(paths.some(p => p.includes('.xcoder') && p.includes('skills'))).toBe(
       true,
     )
   })
 
-  test('getWatchablePaths includes xclaw user commands dir when it exists', async () => {
-    mkdirSync(join(tmpDir, '.xclaw', 'commands'), { recursive: true })
+  test('getWatchablePaths includes xcoder user commands dir when it exists', async () => {
+    mkdirSync(join(tmpDir, '.xcoder', 'commands'), { recursive: true })
     const paths = await getWatchablePaths()
     expect(
-      paths.some(p => p.includes('.xclaw') && p.includes('commands')),
+      paths.some(p => p.includes('.xcoder') && p.includes('commands')),
     ).toBe(true)
   })
 
-  test('getWatchablePaths skips xclaw user skills dir when it does not exist', async () => {
+  test('getWatchablePaths skips xcoder user skills dir when it does not exist', async () => {
     const paths = await getWatchablePaths()
-    expect(paths.some(p => p.includes('.xclaw') && p.includes('skills'))).toBe(
+    expect(paths.some(p => p.includes('.xcoder') && p.includes('skills'))).toBe(
       false,
     )
   })

@@ -6,7 +6,7 @@ const WELCOME_V2_WIDTH = 58;
 
 export function WelcomeV2(): React.ReactNode {
   const [theme] = useTheme();
-  const welcomeMessage = 'Welcome to xclaw';
+  const welcomeMessage = 'Welcome to Xcoder';
 
   if (env.terminal === 'Apple_Terminal') {
     return <AppleTerminalWelcomeV2 theme={theme} welcomeMessage={welcomeMessage} />;
@@ -38,26 +38,32 @@ export function WelcomeV2(): React.ReactNode {
           </Text>
           <Text>{'                                            ▒▒      ██   ▒'}</Text>
           <Text>
-            {'      '}
-            <Text color="clawd_body"> █████████ </Text>
-            {'                         ▒▒░░▒▒      ▒ ▒▒'}
-          </Text>
-          <Text>
-            {'      '}
-            <Text color="clawd_body" backgroundColor="clawd_background">
-              ██▄█████▄██
+            {'             '}
+            <Text color="xcoder_body"> ▐</Text>
+            <Text color="xcoder_body" backgroundColor="xcoder_background">
+              ▛███▜
             </Text>
-            {'                           ▒▒         ▒▒ '}
+            <Text color="xcoder_body">▌ </Text>
+            {'                    ▒▒░░▒▒      ▒ ▒▒'}
           </Text>
           <Text>
-            {'      '}
-            <Text color="clawd_body"> █████████ </Text>
-            {'                          ░          ▒   '}
+            {'             '}
+            <Text color="xcoder_body">▐▟</Text>
+            <Text color="xcoder_body" backgroundColor="xcoder_background">
+              █████
+            </Text>
+            <Text color="xcoder_body">▙▌</Text>
+            {'                      ▒▒         ▒▒ '}
+          </Text>
+          <Text>
+            {'             '}
+            <Text color="xcoder_body"> ▘▘ ▝▝ </Text>
+            {'                     ░          ▒   '}
           </Text>
           <Text>
             {'…………………'}
-            <Text color="clawd_body">{'█ █   █ █'}</Text>
-            {'……………………………………………………………………░…………………………▒…………'}
+            <Text color="xcoder_body">{'  ▘▘ ▝▝  '}</Text>
+            {'……………………………………………………░…………………………▒…………'}
           </Text>
         </Text>
       </Box>
@@ -87,27 +93,35 @@ export function WelcomeV2(): React.ReactNode {
         <Text dimColor>{'                                 ░░░░░░░░                 '}</Text>
         <Text dimColor>{'                               ░░░░░░░░░░░░░░░░           '}</Text>
         <Text>
-          {'      '}
-          <Text color="clawd_body"> █████████ </Text>
-          {'                                       '}
+          {'             '}
+          <Text color="xcoder_body"> ▐</Text>
+          <Text color="xcoder_body" backgroundColor="xcoder_background">
+            ▛███▜
+          </Text>
+          <Text color="xcoder_body">▌ </Text>
+          {'                              '}
           <Text dimColor>*</Text>
           <Text> </Text>
         </Text>
         <Text>
-          {'      '}
-          <Text color="clawd_body">██▄█████▄██</Text>
-          <Text>{'                        '}</Text>
+          {'             '}
+          <Text color="xcoder_body">▐▟</Text>
+          <Text color="xcoder_body" backgroundColor="xcoder_background">
+            █████
+          </Text>
+          <Text color="xcoder_body">▙▌</Text>
+          <Text>{'                         '}</Text>
           <Text bold>*</Text>
           <Text>{'                '}</Text>
         </Text>
         <Text>
-          {'      '}
-          <Text color="clawd_body"> █████████ </Text>
-          {'     *                                   '}
+          {'             '}
+          <Text color="xcoder_body"> ▘▘ ▝▝ </Text>
+          {'       *                                   '}
         </Text>
         <Text>
           {'…………………'}
-          <Text color="clawd_body">{'█ █   █ █'}</Text>
+          <Text color="xcoder_body">{'  ▘▘ ▝▝  '}</Text>
           {'………………………………………………………………………………………………………………'}
         </Text>
       </Text>
@@ -150,30 +164,24 @@ function AppleTerminalWelcomeV2({ theme, welcomeMessage }: AppleTerminalWelcomeV
           <Text>{'                                            ▒▒      ██   ▒'}</Text>
           <Text>{'                                          ▒▒░░▒▒      ▒ ▒▒'}</Text>
           <Text>
-            {'      '}
-            <Text color="clawd_body">▗</Text>
-            <Text color="clawd_background" backgroundColor="clawd_body">
+            {'             '}
+            <Text color="xcoder_body">▗</Text>
+            <Text color="xcoder_background" backgroundColor="xcoder_body">
               {' '}
-              ▗{'     '}▖{' '}
+              ▗ ▖{' '}
             </Text>
-            <Text color="clawd_body">▖</Text>
-            {'                           ▒▒         ▒▒ '}
+            <Text color="xcoder_body">▖</Text>
+            {'                      ▒▒         ▒▒ '}
           </Text>
           <Text>
-            {'       '}
-            <Text backgroundColor="clawd_body">{' '.repeat(9)}</Text>
-            {'                           ░          ▒   '}
+            {'             '}
+            <Text backgroundColor="xcoder_body">{' '.repeat(7)}</Text>
+            {'                        ░          ▒   '}
           </Text>
           <Text>
             {'…………………'}
-            <Text backgroundColor="clawd_body"> </Text>
-            <Text> </Text>
-            <Text backgroundColor="clawd_body"> </Text>
-            <Text>{'   '}</Text>
-            <Text backgroundColor="clawd_body"> </Text>
-            <Text> </Text>
-            <Text backgroundColor="clawd_body"> </Text>
-            {'……………………………………………………………………░…………………………▒…………'}
+            <Text color="xcoder_body">▘▘ ▝▝</Text>
+            {'………………………………………………………………░…………………………▒…………'}
           </Text>
         </Text>
       </Box>
@@ -208,31 +216,25 @@ function AppleTerminalWelcomeV2({ theme, welcomeMessage }: AppleTerminalWelcomeV
           <Text> </Text>
         </Text>
         <Text>
-          {'        '}
-          <Text color="clawd_body">▗</Text>
-          <Text color="clawd_background" backgroundColor="clawd_body">
+          {'         '}
+          <Text color="xcoder_body">▗</Text>
+          <Text color="xcoder_background" backgroundColor="xcoder_body">
             {' '}
-            ▗{'     '}▖{' '}
+            ▗ ▖{' '}
           </Text>
-          <Text color="clawd_body">▖</Text>
-          <Text>{'                       '}</Text>
+          <Text color="xcoder_body">▖</Text>
+          <Text>{'                        '}</Text>
           <Text bold>*</Text>
           <Text>{'                '}</Text>
         </Text>
         <Text>
-          {'        '}
-          <Text backgroundColor="clawd_body">{' '.repeat(9)}</Text>
-          {'      *                                   '}
+          {'         '}
+          <Text backgroundColor="xcoder_body">{' '.repeat(7)}</Text>
+          {'       *                                   '}
         </Text>
         <Text>
           {'…………………'}
-          <Text backgroundColor="clawd_body"> </Text>
-          <Text> </Text>
-          <Text backgroundColor="clawd_body"> </Text>
-          <Text>{'   '}</Text>
-          <Text backgroundColor="clawd_body"> </Text>
-          <Text> </Text>
-          <Text backgroundColor="clawd_body"> </Text>
+          <Text color="xcoder_body">▘▘ ▝▝</Text>
           {'………………………………………………………………………………………………………………'}
         </Text>
       </Text>

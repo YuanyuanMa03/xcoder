@@ -1,5 +1,5 @@
-import type { AgentColorName } from '@xclaw/builtin-tools/tools/AgentTool/agentColorManager.js'
-import { AGENT_COLORS } from '@xclaw/builtin-tools/tools/AgentTool/agentColorManager.js'
+import type { AgentColorName } from '@xcoder/builtin-tools/tools/AgentTool/agentColorManager.js'
+import { AGENT_COLORS } from '@xcoder/builtin-tools/tools/AgentTool/agentColorManager.js'
 import { detectAndGetBackend } from './backends/registry.js'
 import type { PaneBackend } from './backends/types.js'
 

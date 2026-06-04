@@ -61,7 +61,7 @@ import type { ToolInputJSONSchema } from './Tool.js';
 import {
   createSyntheticOutputTool,
   isSyntheticOutputToolEnabled,
-} from '@xclaw/builtin-tools/tools/SyntheticOutputTool/SyntheticOutputTool.js';
+} from '@xcoder/builtin-tools/tools/SyntheticOutputTool/SyntheticOutputTool.js';
 import { getTools } from './tools.js';
 import {
   canUserConfigureAdvisor,
@@ -169,14 +169,14 @@ import { checkQuotaStatus } from './services/claudeAiLimits.js';
 import { getMcpToolsCommandsAndResources, prefetchAllMcpResources } from './services/mcp/client.js';
 import { VALID_INSTALLABLE_SCOPES, VALID_UPDATE_SCOPES } from './services/plugins/pluginCliCommands.js';
 import { initBundledSkills } from './skills/bundled/index.js';
-import type { AgentColorName } from '@xclaw/builtin-tools/tools/AgentTool/agentColorManager.js';
+import type { AgentColorName } from '@xcoder/builtin-tools/tools/AgentTool/agentColorManager.js';
 import {
   getActiveAgentsFromList,
   getAgentDefinitionsWithOverrides,
   isBuiltInAgent,
   isCustomAgent,
   parseAgentsFromJson,
-} from '@xclaw/builtin-tools/tools/AgentTool/loadAgentsDir.js';
+} from '@xcoder/builtin-tools/tools/AgentTool/loadAgentsDir.js';
 import type { LogOption } from './types/logs.js';
 import type { Message as MessageType } from './types/message.js';
 import {
@@ -1093,7 +1093,7 @@ async function run(): Promise<CommanderCommand> {
     // terminal shell integration may mirror the process name to the tab.
     // After init() so settings.json env can also gate this (gh-4765).
     if (!isEnvTruthy(process.env.CLAUDE_CODE_DISABLE_TERMINAL_TITLE)) {
-      process.title = 'xclaw';
+      process.title = 'xcoder';
     }
 
     // Attach logging sinks so subcommand handlers can use logEvent/logError.
@@ -1141,8 +1141,8 @@ async function run(): Promise<CommanderCommand> {
   });
 
   program
-    .name('xclaw')
-    .description(`xclaw - starts an interactive session by default, use -p/--print for non-interactive output`)
+    .name('xcoder')
+    .description(`xcoder - starts an interactive session by default, use -p/--print for non-interactive output`)
     .argument('[prompt]', 'Your prompt', String)
     // Subcommands inherit helpOption via commander's copyInheritedSettings —
     // setting it once here covers mcp, plugin, auth, and all other subcommands.
@@ -1166,7 +1166,7 @@ async function run(): Promise<CommanderCommand> {
     .option('--verbose', 'Override verbose mode setting from config', () => true)
     .option(
       '-p, --print',
-      'Print response and exit (useful for pipes). Note: The workspace trust dialog is skipped when xclaw is run with the -p mode. Only use this flag in directories you trust.',
+      'Print response and exit (useful for pipes). Note: The workspace trust dialog is skipped when xcoder is run with the -p mode. Only use this flag in directories you trust.',
       () => true,
     )
     .option(
@@ -1310,7 +1310,7 @@ async function run(): Promise<CommanderCommand> {
         .choices(PERMISSION_MODES),
     )
     .addOption(
-      new Option('--mode <slug>', 'Default xclaw mode for this session')
+      new Option('--mode <slug>', 'Default xcoder mode for this session')
         .argParser(String)
         .choices(['default', 'gentle', 'sharp', 'workhorse', 'token-saver', 'super-ai']),
     )
@@ -1442,7 +1442,7 @@ async function run(): Promise<CommanderCommand> {
       // Ignore "code" as a prompt - treat it the same as no prompt
       if (prompt === 'code') {
         logEvent('tengu_code_prompt_ignored', {});
-        console.warn(chalk.yellow('Tip: You can launch xclaw with just `claude`'));
+        console.warn(chalk.yellow('Tip: You can launch Xcoder with just `claude`'));
         prompt = undefined;
       }
 
@@ -1531,7 +1531,7 @@ async function run(): Promise<CommanderCommand> {
         includePartialMessages,
       } = options;
 
-      // xclaw: set default mode from CLI flag
+      /// xcoder: set default mode from CLI flag
       if (modeCli) {
         setCurrentMode(modeCli);
       }
@@ -2201,9 +2201,9 @@ async function run(): Promise<CommanderCommand> {
       if ((feature('KAIROS') || feature('KAIROS_BRIEF')) && baseTools.length > 0) {
         /* eslint-disable @typescript-eslint/no-require-imports */
         const { BRIEF_TOOL_NAME, LEGACY_BRIEF_TOOL_NAME } =
-          require('@xclaw/builtin-tools/tools/BriefTool/prompt.js') as typeof import('@xclaw/builtin-tools/tools/BriefTool/prompt.js');
+          require('@xcoder/builtin-tools/tools/BriefTool/prompt.js') as typeof import('@xcoder/builtin-tools/tools/BriefTool/prompt.js');
         const { isBriefEntitled } =
-          require('@xclaw/builtin-tools/tools/BriefTool/BriefTool.js') as typeof import('@xclaw/builtin-tools/tools/BriefTool/BriefTool.js');
+          require('@xcoder/builtin-tools/tools/BriefTool/BriefTool.js') as typeof import('@xcoder/builtin-tools/tools/BriefTool/BriefTool.js');
         /* eslint-enable @typescript-eslint/no-require-imports */
         const parsed = parseToolListFromCLI(baseTools);
         if ((parsed.includes(BRIEF_TOOL_NAME) || parsed.includes(LEGACY_BRIEF_TOOL_NAME)) && isBriefEntitled()) {
@@ -2710,7 +2710,7 @@ async function run(): Promise<CommanderCommand> {
       ) {
         /* eslint-disable @typescript-eslint/no-require-imports */
         const { isBriefEntitled } =
-          require('@xclaw/builtin-tools/tools/BriefTool/BriefTool.js') as typeof import('@xclaw/builtin-tools/tools/BriefTool/BriefTool.js');
+          require('@xcoder/builtin-tools/tools/BriefTool/BriefTool.js') as typeof import('@xcoder/builtin-tools/tools/BriefTool/BriefTool.js');
         /* eslint-enable @typescript-eslint/no-require-imports */
         if (isBriefEntitled()) {
           setUserMsgOptIn(true);
@@ -2728,7 +2728,7 @@ async function run(): Promise<CommanderCommand> {
         const briefVisibility =
           feature('KAIROS') || feature('KAIROS_BRIEF')
             ? (
-                require('@xclaw/builtin-tools/tools/BriefTool/BriefTool.js') as typeof import('@xclaw/builtin-tools/tools/BriefTool/BriefTool.js')
+                require('@xcoder/builtin-tools/tools/BriefTool/BriefTool.js') as typeof import('@xcoder/builtin-tools/tools/BriefTool/BriefTool.js')
               ).isBriefEnabled()
               ? 'Call SendUserMessage at checkpoints to mark where things stand.'
               : 'The user will see any text you output.'
@@ -4033,7 +4033,7 @@ async function run(): Promise<CommanderCommand> {
           }
         }
 
-        // --remote and --teleport both create/resume xclaw Web (CCR) sessions.
+        // --remote and --teleport both create/resume xcoder Web (CCR) sessions.
         // Remote Control (--rc) is a separate feature gated in initReplBridge.ts.
         if (remote !== null || teleport) {
           await waitForPolicyLimitsToLoad();
@@ -4053,7 +4053,7 @@ async function run(): Promise<CommanderCommand> {
           if (!isRemoteTuiEnabled && !hasInitialPrompt) {
             return await exitWithError(
               root,
-              'Error: --remote requires a description.\nUsage: xclaw --remote "your task description"',
+              'Error: --remote requires a description.\nUsage: xcoder --remote "your task description"',
               () => gracefulShutdown(1),
             );
           }
@@ -4504,7 +4504,7 @@ async function run(): Promise<CommanderCommand> {
         );
       }
     })
-    .version(`${MACRO.VERSION} (xclaw)`, '-v, --version', 'Output the version number');
+    .version(`${MACRO.VERSION} (xcoder)`, '-v, --version', 'Output the version number');
 
   // Worktree flags
   program.option('-w, --worktree [name]', 'Create a new git worktree for this session (optionally specify a name)');
@@ -4665,7 +4665,7 @@ async function run(): Promise<CommanderCommand> {
 
   mcp
     .command('serve')
-    .description(`Start the xclaw MCP server`)
+    .description(`Start the xcoder MCP server`)
     .option('-d, --debug', 'Enable debug mode', () => true)
     .option('--verbose', 'Override verbose mode setting from config', () => true)
     .action(async ({ debug, verbose }: { debug?: boolean; verbose?: boolean }) => {
@@ -4743,7 +4743,7 @@ async function run(): Promise<CommanderCommand> {
   if (feature('DIRECT_CONNECT')) {
     program
       .command('server')
-      .description('Start a xclaw session server')
+      .description('Start a xcoder session server')
       .option('--port <number>', 'HTTP port', '0')
       .option('--host <string>', 'Bind address', '0.0.0.0')
       .option('--auth-token <token>', 'Bearer token for auth')
@@ -4831,7 +4831,7 @@ async function run(): Promise<CommanderCommand> {
     program
       .command('ssh <host> [dir]')
       .description(
-        'Run xclaw on a remote host over SSH. Deploys the binary and ' +
+        'Run xcoder on a remote host over SSH. Deploys the binary and ' +
           'tunnels API auth back through your local machine — no remote setup needed.',
       )
       .option('--permission-mode <mode>', 'Permission mode for the remote session')
@@ -4852,7 +4852,7 @@ async function run(): Promise<CommanderCommand> {
         // rewrite predicate didn't match.
         process.stderr.write(
           'Usage: claude ssh <user@host | ssh-config-alias> [dir]\n\n' +
-            "Runs xclaw on a remote Linux host. You don't need to install\n" +
+            "Runs xcoder on a remote Linux host. You don't need to install\n" +
             'anything on the remote or run `claude auth login` there — the binary is\n' +
             'deployed over SSH and API auth tunnels back through your local machine.\n',
         );
@@ -4866,7 +4866,7 @@ async function run(): Promise<CommanderCommand> {
   if (feature('DIRECT_CONNECT')) {
     program
       .command('open <cc-url>')
-      .description('Connect to a xclaw server (internal — use cc:// URLs)')
+      .description('Connect to a xcoder server (internal — use cc:// URLs)')
       .option('-p, --print [prompt]', 'Print mode (headless)')
       .option('--output-format <format>', 'Output format: text, json, stream-json', 'text')
       .action(
@@ -4967,7 +4967,7 @@ async function run(): Promise<CommanderCommand> {
   const pluginCmd = program
     .command('plugin')
     .alias('plugins')
-    .description('Manage xclaw plugins')
+    .description('Manage xcoder plugins')
     .configureHelp(createSortedHelpConfig());
 
   pluginCmd
@@ -4994,7 +4994,7 @@ async function run(): Promise<CommanderCommand> {
   // Marketplace subcommands
   const marketplaceCmd = pluginCmd
     .command('marketplace')
-    .description('Manage xclaw marketplaces')
+    .description('Manage xcoder marketplaces')
     .configureHelp(createSortedHelpConfig());
 
   marketplaceCmd
@@ -5284,7 +5284,7 @@ async function run(): Promise<CommanderCommand> {
   program
     .command('doctor')
     .description(
-      'Check the health of your xclaw auto-updater. Note: The workspace trust dialog is skipped and stdio servers from .mcp.json are spawned for health checks. Only use this command in directories you trust.',
+      'Check the health of your xcoder auto-updater. Note: The workspace trust dialog is skipped and stdio servers from .mcp.json are spawned for health checks. Only use this command in directories you trust.',
     )
     .action(async () => {
       const [{ doctorHandler }, { createRoot }] = await Promise.all([
@@ -5337,20 +5337,20 @@ async function run(): Promise<CommanderCommand> {
   // claude install
   program
     .command('install [target]')
-    .description('Install xclaw native build. Use [target] to specify version (stable, latest, or specific version)')
+    .description('Install xcoder native build. Use [target] to specify version (stable, latest, or specific version)')
     .option('--force', 'Force installation even if already installed')
     .action(async (target: string | undefined, options: { force?: boolean }) => {
       const { installHandler } = await import('./cli/handlers/util.js');
       await installHandler(target, options);
     });
 
-  // xclaw update — update xclaw to the latest version via npm or bun
+  // xcoder update — update xcoder to the latest version via npm or bun
   program
     .command('update')
-    .description('Update xclaw to the latest version')
+    .description('Update xcoder to the latest version')
     .action(async () => {
-      const { updateXclaw } = await import('./cli/updateXclaw.js');
-      await updateXclaw();
+      const { updateXcoder } = await import('./cli/updateXcoder.js');
+      await updateXcoder();
     });
 
   // ant-only commands
@@ -5633,7 +5633,7 @@ function maybeActivateBrief(options: unknown): void {
   // into external builds via BriefTool.ts → prompt.ts.
   /* eslint-disable @typescript-eslint/no-require-imports */
   const { isBriefEntitled } =
-    require('@xclaw/builtin-tools/tools/BriefTool/BriefTool.js') as typeof import('@xclaw/builtin-tools/tools/BriefTool/BriefTool.js');
+    require('@xcoder/builtin-tools/tools/BriefTool/BriefTool.js') as typeof import('@xcoder/builtin-tools/tools/BriefTool/BriefTool.js');
   /* eslint-enable @typescript-eslint/no-require-imports */
   const entitled = isBriefEntitled();
   if (entitled) {

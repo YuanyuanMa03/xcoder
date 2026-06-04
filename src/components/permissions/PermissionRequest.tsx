@@ -1,21 +1,21 @@
 import { feature } from 'bun:bundle';
 import * as React from 'react';
-import { EnterPlanModeTool } from '@xclaw/builtin-tools/tools/EnterPlanModeTool/EnterPlanModeTool.js';
-import { ExitPlanModeV2Tool } from '@xclaw/builtin-tools/tools/ExitPlanModeTool/ExitPlanModeV2Tool.js';
+import { EnterPlanModeTool } from '@xcoder/builtin-tools/tools/EnterPlanModeTool/EnterPlanModeTool.js';
+import { ExitPlanModeV2Tool } from '@xcoder/builtin-tools/tools/ExitPlanModeTool/ExitPlanModeV2Tool.js';
 import { useNotifyAfterTimeout } from '../../hooks/useNotifyAfterTimeout.js';
 import { useKeybinding } from '../../keybindings/useKeybinding.js';
 import type { AnyObject, Tool, ToolUseContext } from '../../Tool.js';
-import { AskUserQuestionTool } from '@xclaw/builtin-tools/tools/AskUserQuestionTool/AskUserQuestionTool.js';
-import { BashTool } from '@xclaw/builtin-tools/tools/BashTool/BashTool.js';
-import { FileEditTool } from '@xclaw/builtin-tools/tools/FileEditTool/FileEditTool.js';
-import { FileReadTool } from '@xclaw/builtin-tools/tools/FileReadTool/FileReadTool.js';
-import { FileWriteTool } from '@xclaw/builtin-tools/tools/FileWriteTool/FileWriteTool.js';
-import { GlobTool } from '@xclaw/builtin-tools/tools/GlobTool/GlobTool.js';
-import { GrepTool } from '@xclaw/builtin-tools/tools/GrepTool/GrepTool.js';
-import { NotebookEditTool } from '@xclaw/builtin-tools/tools/NotebookEditTool/NotebookEditTool.js';
-import { PowerShellTool } from '@xclaw/builtin-tools/tools/PowerShellTool/PowerShellTool.js';
-import { SkillTool } from '@xclaw/builtin-tools/tools/SkillTool/SkillTool.js';
-import { WebFetchTool } from '@xclaw/builtin-tools/tools/WebFetchTool/WebFetchTool.js';
+import { AskUserQuestionTool } from '@xcoder/builtin-tools/tools/AskUserQuestionTool/AskUserQuestionTool.js';
+import { BashTool } from '@xcoder/builtin-tools/tools/BashTool/BashTool.js';
+import { FileEditTool } from '@xcoder/builtin-tools/tools/FileEditTool/FileEditTool.js';
+import { FileReadTool } from '@xcoder/builtin-tools/tools/FileReadTool/FileReadTool.js';
+import { FileWriteTool } from '@xcoder/builtin-tools/tools/FileWriteTool/FileWriteTool.js';
+import { GlobTool } from '@xcoder/builtin-tools/tools/GlobTool/GlobTool.js';
+import { GrepTool } from '@xcoder/builtin-tools/tools/GrepTool/GrepTool.js';
+import { NotebookEditTool } from '@xcoder/builtin-tools/tools/NotebookEditTool/NotebookEditTool.js';
+import { PowerShellTool } from '@xcoder/builtin-tools/tools/PowerShellTool/PowerShellTool.js';
+import { SkillTool } from '@xcoder/builtin-tools/tools/SkillTool/SkillTool.js';
+import { WebFetchTool } from '@xcoder/builtin-tools/tools/WebFetchTool/WebFetchTool.js';
 import type { AssistantMessage } from '../../types/message.js';
 import type { PermissionDecision } from '../../utils/permissions/PermissionResult.js';
 import { AskUserQuestionPermissionRequest } from './AskUserQuestionPermissionRequest/AskUserQuestionPermissionRequest.js';
@@ -34,7 +34,7 @@ import { WebFetchPermissionRequest } from './WebFetchPermissionRequest/WebFetchP
 /* eslint-disable @typescript-eslint/no-require-imports */
 const ReviewArtifactTool = feature('REVIEW_ARTIFACT')
   ? (
-      require('@xclaw/builtin-tools/tools/ReviewArtifactTool/ReviewArtifactTool.js') as typeof import('@xclaw/builtin-tools/tools/ReviewArtifactTool/ReviewArtifactTool.js')
+      require('@xcoder/builtin-tools/tools/ReviewArtifactTool/ReviewArtifactTool.js') as typeof import('@xcoder/builtin-tools/tools/ReviewArtifactTool/ReviewArtifactTool.js')
     ).ReviewArtifactTool
   : null;
 
@@ -46,19 +46,19 @@ const ReviewArtifactPermissionRequest = feature('REVIEW_ARTIFACT')
 
 const WorkflowTool = feature('WORKFLOW_SCRIPTS')
   ? (
-      require('@xclaw/builtin-tools/tools/WorkflowTool/WorkflowTool.js') as typeof import('@xclaw/builtin-tools/tools/WorkflowTool/WorkflowTool.js')
+      require('@xcoder/builtin-tools/tools/WorkflowTool/WorkflowTool.js') as typeof import('@xcoder/builtin-tools/tools/WorkflowTool/WorkflowTool.js')
     ).WorkflowTool
   : null;
 
 const WorkflowPermissionRequest = feature('WORKFLOW_SCRIPTS')
   ? (
-      require('@xclaw/builtin-tools/tools/WorkflowTool/WorkflowPermissionRequest.js') as typeof import('@xclaw/builtin-tools/tools/WorkflowTool/WorkflowPermissionRequest.js')
+      require('@xcoder/builtin-tools/tools/WorkflowTool/WorkflowPermissionRequest.js') as typeof import('@xcoder/builtin-tools/tools/WorkflowTool/WorkflowPermissionRequest.js')
     ).WorkflowPermissionRequest
   : null;
 
 const MonitorTool = feature('MONITOR_TOOL')
   ? (
-      require('@xclaw/builtin-tools/tools/MonitorTool/MonitorTool.js') as typeof import('@xclaw/builtin-tools/tools/MonitorTool/MonitorTool.js')
+      require('@xcoder/builtin-tools/tools/MonitorTool/MonitorTool.js') as typeof import('@xcoder/builtin-tools/tools/MonitorTool/MonitorTool.js')
     ).MonitorTool
   : null;
 
@@ -167,19 +167,19 @@ function getNotificationMessage(toolUseConfirm: ToolUseConfirm): string {
   const toolName = toolUseConfirm.tool.userFacingName(toolUseConfirm.input as never);
 
   if (toolUseConfirm.tool === ExitPlanModeV2Tool) {
-    return 'xclaw needs your approval for the plan';
+    return 'xcoder needs your approval for the plan';
   }
 
   if (toolUseConfirm.tool === EnterPlanModeTool) {
-    return 'xclaw wants to enter plan mode';
+    return 'xcoder wants to enter plan mode';
   }
 
   if (feature('REVIEW_ARTIFACT') && toolUseConfirm.tool === ReviewArtifactTool) {
-    return 'xclaw needs your approval for a review artifact';
+    return 'xcoder needs your approval for a review artifact';
   }
 
   if (!toolName || toolName.trim() === '') {
-    return 'xclaw needs your attention';
+    return 'xcoder needs your attention';
   }
 
   return `Claude needs your permission to use ${toolName}`;

@@ -2,8 +2,8 @@ import { describe, expect, test } from 'bun:test'
 import { settingsMergeCustomizer } from '../settings'
 import mergeWith from 'lodash-es/mergeWith.js'
 
-describe('xclaw settings overlay merge', () => {
-  test('deep merge: xclaw overrides matching fields, preserves others', () => {
+describe('xcoder settings overlay merge', () => {
+  test('deep merge: xcoder overrides matching fields, preserves others', () => {
     const base = {
       model: 'sonnet',
       permissions: { allow: ['Read', 'Edit'] },

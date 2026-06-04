@@ -11,7 +11,7 @@ import { getDesktopUpsellConfig } from '../../components/DesktopUpsell/DesktopUp
 import { color } from '@anthropic/ink'
 import { shouldShowOverageCreditUpsell } from '../../components/LogoV2/OverageCreditUpsell.js'
 import { getShortcutDisplay } from '../../keybindings/shortcutFormat.js'
-import { isKairosCronEnabled } from '@xclaw/builtin-tools/tools/ScheduleCronTool/prompt.js'
+import { isKairosCronEnabled } from '@xcoder/builtin-tools/tools/ScheduleCronTool/prompt.js'
 import { is1PApiCustomer } from '../../utils/auth.js'
 import { countConcurrentSessions } from '../../utils/concurrentSessions.js'
 import { getGlobalConfig } from '../../utils/config.js'
@@ -353,7 +353,8 @@ const externalTips: Tip[] = [
   },
   {
     id: 'paste-images-mac',
-    content: async () => 'Paste images into xclaw using control+v (not cmd+v!)',
+    content: async () =>
+      'Paste images into Xcoder using control+v (not cmd+v!)',
     cooldownSessions: 10,
     isRelevant: async () => getPlatform() === 'macos',
   },
@@ -374,7 +375,7 @@ const externalTips: Tip[] = [
   {
     id: 'continue',
     content: async () =>
-      'Run xclaw --continue or xclaw resume to resume a conversation',
+      'Run xcoder --continue or xcoder resume to resume a conversation',
     cooldownSessions: 10,
     isRelevant: async () => true,
   },
@@ -433,7 +434,7 @@ const externalTips: Tip[] = [
   {
     id: 'desktop-app',
     content: async () =>
-      'Run xclaw locally or remotely using the Claude desktop app: clau.de/desktop',
+      'Run xcoder locally or remotely using the Claude desktop app: clau.de/desktop',
     cooldownSessions: 15,
     isRelevant: async () => getPlatform() !== 'linux',
   },
@@ -441,7 +442,7 @@ const externalTips: Tip[] = [
     id: 'desktop-shortcut',
     content: async (ctx: TipContext) => {
       const blue = color('suggestion', ctx.theme)
-      return `Continue your session in xclaw Desktop with ${blue('/desktop')}`
+      return `Continue your session in Xcoder Desktop with ${blue('/desktop')}`
     },
     cooldownSessions: 15,
     isRelevant: async () => {
@@ -462,7 +463,7 @@ const externalTips: Tip[] = [
   {
     id: 'mobile-app',
     content: async () =>
-      '/mobile to use xclaw from the Claude app on your phone',
+      '/mobile to use Xcoder from the Claude app on your phone',
     cooldownSessions: 15,
     isRelevant: async () => true,
   },
@@ -589,7 +590,7 @@ const externalTips: Tip[] = [
       const claude = color('claude', ctx.theme)
       const reward = getCachedReferrerReward()
       return reward
-        ? `Share xclaw and earn ${claude(formatCreditAmount(reward))} of extra usage · ${claude('/passes')}`
+        ? `Share xcoder and earn ${claude(formatCreditAmount(reward))} of extra usage · ${claude('/passes')}`
         : `You have free guest passes to share · ${claude('/passes')}`
     },
     cooldownSessions: 3,

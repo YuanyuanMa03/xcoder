@@ -14,12 +14,12 @@ import type { QuerySource } from '../../constants/querySource.js'
 import type { CanUseToolFn } from '../../hooks/useCanUseTool.js'
 import type { Tool, ToolUseContext } from '../../Tool.js'
 import type { LocalAgentTaskState } from '../../tasks/LocalAgentTask/LocalAgentTask.js'
-import { FileReadTool } from '@xclaw/builtin-tools/tools/FileReadTool/FileReadTool.js'
+import { FileReadTool } from '@xcoder/builtin-tools/tools/FileReadTool/FileReadTool.js'
 import {
   FILE_READ_TOOL_NAME,
   FILE_UNCHANGED_STUB,
-} from '@xclaw/builtin-tools/tools/FileReadTool/prompt.js'
-import { ToolSearchTool } from '@xclaw/builtin-tools/tools/ToolSearchTool/ToolSearchTool.js'
+} from '@xcoder/builtin-tools/tools/FileReadTool/prompt.js'
+import { ToolSearchTool } from '@xcoder/builtin-tools/tools/ToolSearchTool/ToolSearchTool.js'
 import type { AgentId } from '../../types/ids.js'
 import type {
   AssistantMessage,
