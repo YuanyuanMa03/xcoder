@@ -50,7 +50,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/YuanyuanMa03/xcoder/main/scr
 
 ```powershell
 # 管理员 PowerShell 运行
-Set-ExecutionPolicy Bypass -Scope Process -Force; irm https://raw.githubusercontent.com/YuanyuanMa03/xcoder/main/scripts/install-from-source-windows.ps1 | iex
+Set-ExecutionPolicy Bypass -Scope Process -Force; irm https://raw.githubusercontent.com/YuanyuanMa03/xcoder/main/scripts/install.ps1 | iex
 ```
 
 如果无法执行远程脚本，可手动安装：
@@ -58,7 +58,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; irm https://raw.githubusercont
 ```powershell
 git clone https://github.com/YuanyuanMa03/xcoder.git
 cd xcoder
-.\scripts\install-from-source-windows.ps1
+.\scripts\install.ps1
 ```
 
 ### npm 安装（需已安装 Node.js >= 18）
