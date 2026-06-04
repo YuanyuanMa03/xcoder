@@ -1,6 +1,6 @@
 {
   "name": "@yuanyuan20031001/xcoder",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Xcoder — 超越人类与 AI 边界的 AI 编程 CLI",
   "type": "module",
   "author": "Xcoder <xcoder@users.noreply.github.com>",
@@ -230,5 +230,6 @@
     ]
   },
   "license": "SEE LICENSE IN LICENSE",
-  "main": "dist/cli-node.js"
+  "main": "dist/cli-node.js",
+  "readme": "README.md"
 }
