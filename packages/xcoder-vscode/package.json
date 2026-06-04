@@ -1,0 +1,46 @@
+{
+  "name": "xcoder-vscode",
+  "displayName": "Xcoder",
+  "description": "在 VS Code 中快速启动 Xcoder AI 编程助手",
+  "version": "0.0.1",
+  "publisher": "xcoder",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "xcoder.launch",
+        "title": "Xcoder: 启动",
+        "icon": "$(terminal)"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "xcoder.launch",
+        "key": "ctrl+shift+x",
+        "mac": "cmd+shift+x",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.80.0",
+    "typescript": "^5.0.0"
+  }
+}
