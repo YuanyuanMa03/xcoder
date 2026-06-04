@@ -48,7 +48,7 @@ teach-me
 credentials.json
 
 # Build artifacts
-xclaw-*.tar.gz
+xcoder-*.tar.gz
 
 # Lock file
 bun.lock

@@ -24,7 +24,7 @@ This changelog tracks **xcoder-specific changes**. Upstream changes from Claude 
 ### Fixed
 - Fixed release notes not showing in npm package due to wrong changelog URL
 - Fixed CHANGELOG_URL and GitHub issues URL typos
-- Updated CHANGELOG.md branding from xclaw to xcoder
+- Updated CHANGELOG.md branding to xcoder
 
 ---
 
@@ -41,7 +41,7 @@ This changelog tracks **xcoder-specific changes**. Upstream changes from Claude 
 - Bumped version to 1.0.1 for npm release
 
 ### Fixed
-- Feedback links now correctly point to xclaw GitHub issues instead of claude-code
+- Feedback links now correctly point to xcoder GitHub issues instead of claude-code
 - "What's new" feed now shows "(Claude Code upstream)" attribution for upstream changes
 
 ---
@@ -49,22 +49,22 @@ This changelog tracks **xcoder-specific changes**. Upstream changes from Claude 
 ## [1.0.0] - 2025-01-10
 
 ### Added
-- **xclaw overlay settings system**: User-level settings now override built-in defaults
-  - `~/.xclaw/settings.json` for user configurations
-  - `XCLAW_CONFIG_DIR` environment variable for custom config directory
-  - Dual-source markdown loading (project + xclaw user directories)
-  - Name-based deduplication with xclaw sources taking priority
+- **xcoder overlay settings system**: User-level settings now override built-in defaults
+  - `~/.xcoder/settings.json` for user configurations
+  - `XCODER_CONFIG_DIR` environment variable for custom config directory
+  - Dual-source markdown loading (project + xcoder user directories)
+  - Name-based deduplication with xcoder sources taking priority
 
 - **Cross-platform install scripts**: Improved installation experience for npm global install
 
-- **Branding**: Published to npm as `xclaw-cli` package with xclaw branding
+- **Branding**: Published to npm as `@yuanyuan20031001/xcoder` package
 
 ### Changed
-- MCP Chrome Bridge package references updated for xclaw distribution
+- MCP Chrome Bridge package references updated for xcoder distribution
 
 ### Technical
-- Settings loader now includes xclaw user directory in priority chain
-- Settings detector watches xclaw user directories for changes
+- Settings loader now includes xcoder user directory in priority chain
+- Settings detector watches xcoder user directories for changes
 - Added integration tests for overlay merge functionality
 
 ---
