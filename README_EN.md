@@ -30,7 +30,7 @@ Xcoder is an AI programming CLI tool with a strong personal brand. It's not just
 ### npm Install (Recommended)
 
 ```bash
-npm install -g xcoder-cli
+npm install -g @yuanyuan20031001/xcoder
 xcoder              # Launch
 xcoder --version    # 1.0.0 (xcoder)
 ```
