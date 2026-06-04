@@ -53,7 +53,11 @@ if (-not $HAS_NODE) {
     if (-not $installed) {
         Write-Host "   winget 不可用，直接下载 Node.js 安装包..."
         $arch = if ([Environment]::Is64BitOperatingSystem) { "x64" } else { "x86" }
-        $nodeUrl = "https://nodejs.org/dist/v22.16.0/node-v22.16.0-$arch.msi"
+        # Get latest LTS version from Node.js API
+        $ltsInfo = Invoke-RestMethod -Uri "https://nodejs.org/dist/index.json" -UseBasicParsing
+        $latestLts = ($ltsInfo | Where-Object { $_.lts -ne $false } | Select-Object -First 1).version
+        $nodeUrl = "https://nodejs.org/dist/$latestLts/node-$latestLts-$arch.msi"
+        Write-Host "   下载 Node.js $latestLts..."
         $msiPath = "$env:TEMP\node-installer.msi"
 
         try {

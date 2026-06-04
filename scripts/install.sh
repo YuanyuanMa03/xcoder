@@ -41,11 +41,16 @@ if [ "$HAS_NODE" = false ]; then
             # Method 2: Download pkg directly
             if [ "$installed" = false ]; then
                 echo "   Homebrew 不可用，直接下载 Node.js 安装包..."
+                LATEST_LTS=$(curl -fsSL https://nodejs.org/dist/index.json | python3 -c "
+import json,sys
+data=json.load(sys.stdin)
+print(next(v['version'] for v in data if v.get('lts')))" 2>/dev/null)
                 if [ "$ARCH" = "arm64" ]; then
-                    NODE_URL="https://nodejs.org/dist/v22.16.0/node-v22.16.0-darwin-arm64.pkg"
+                    NODE_URL="https://nodejs.org/dist/$LATEST_LTS/node-$LATEST_LTS-darwin-arm64.pkg"
                 else
-                    NODE_URL="https://nodejs.org/dist/v22.16.0/node-v22.16.0-darwin-x64.pkg"
+                    NODE_URL="https://nodejs.org/dist/$LATEST_LTS/node-$LATEST_LTS-darwin-x64.pkg"
                 fi
+                echo "   下载 Node.js $LATEST_LTS..."
                 PKG_PATH="/tmp/node-installer.pkg"
                 curl -fsSL "$NODE_URL" -o "$PKG_PATH" && \
                     sudo installer -pkg "$PKG_PATH" -target / && \
@@ -80,12 +85,17 @@ if [ "$HAS_NODE" = false ]; then
             # Method 5: Download binary directly
             if [ "$installed" = false ]; then
                 echo "   包管理器不可用，直接下载 Node.js 二进制..."
+                LATEST_LTS=$(curl -fsSL https://nodejs.org/dist/index.json | python3 -c "
+import json,sys
+data=json.load(sys.stdin)
+print(next(v['version'] for v in data if v.get('lts')))" 2>/dev/null)
                 if [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; then
-                    NODE_TAR="node-v22.16.0-linux-arm64"
+                    NODE_TAR="node-$LATEST_LTS-linux-arm64"
                 else
-                    NODE_TAR="node-v22.16.0-linux-x64"
+                    NODE_TAR="node-$LATEST_LTS-linux-x64"
                 fi
-                NODE_URL="https://nodejs.org/dist/v22.16.0/${NODE_TAR}.tar.xz"
+                NODE_URL="https://nodejs.org/dist/$LATEST_LTS/${NODE_TAR}.tar.xz"
+                echo "   下载 Node.js $LATEST_LTS..."
                 INSTALL_DIR="/usr/local"
                 curl -fsSL "$NODE_URL" | sudo tar -xJ -C "$INSTALL_DIR" --strip-components=1 && installed=true
             fi
