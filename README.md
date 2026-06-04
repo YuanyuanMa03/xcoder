@@ -49,7 +49,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/YuanyuanMa03/xcoder/main/scr
 ### Windows
 
 ```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force; irm https://raw.githubusercontent.com/YuanyuanMa03/xcoder/main/scripts/install.ps1 | iex
+irm https://raw.githubusercontent.com/YuanyuanMa03/xcoder/main/scripts/install.ps1 | iex
 ```
 
 如果无法执行远程脚本，可手动安装：
