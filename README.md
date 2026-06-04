@@ -48,7 +48,7 @@
 bash <(curl -fsSL https://raw.githubusercontent.com/YuanyuanMa03/xcoder/main/scripts/install.sh)
 ```
 
-自动检测 Bun 或 Node.js（>= 18），自动克隆、构建、创建 `xcoder` 命令。
+自动检测 Node.js（>= 18），未安装时自动安装，然后通过 npm 全局安装 xcoder。
 
 ### Windows
 
