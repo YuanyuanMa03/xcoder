@@ -14,6 +14,16 @@ Write-Host ""
 Write-Host "📦 从源码安装 xcoder (Windows)..."
 Write-Host ""
 
+# Refresh PATH from registry so tools installed by winget/npm/bun are visible
+# in the current session without requiring a terminal restart.
+function Refresh-Path {
+    $machinePath = [Environment]::GetEnvironmentVariable("Path", "Machine")
+    $userPath = [Environment]::GetEnvironmentVariable("Path", "User")
+    $env:Path = "$machinePath;$userPath"
+}
+
+Refresh-Path
+
 # Check for Git
 try {
     $gitVer = git --version
@@ -22,6 +32,8 @@ try {
     Write-Host "❌ 需要 Git"
     Write-Host "   下载: https://git-scm.com/download/win"
     Write-Host "   或运行: winget install Git.Git"
+    Write-Host ""
+    Write-Host "   安装后请重新打开 PowerShell 再运行此脚本。"
     exit 1
 }
 
@@ -55,6 +67,8 @@ if (-not $HAS_BUN -and -not $HAS_NODE) {
     Write-Host "   安装 Node: https://nodejs.org"
     Write-Host "   或运行: winget install OpenJS.NodeJS.LTS"
     Write-Host "   安装 Bun: powershell -c `"irm bun.sh/install.ps1 | iex`""
+    Write-Host ""
+    Write-Host "   安装后请重新打开 PowerShell 再运行此脚本。"
     exit 1
 }
 
@@ -114,8 +128,11 @@ $currentPath = [Environment]::GetEnvironmentVariable("Path", "User")
 if ($currentPath -notlike "*$installBin*") {
     [Environment]::SetEnvironmentVariable("Path", "$currentPath;$installBin", "User")
     $env:Path = "$env:Path;$installBin"
-    Write-Host "✅ 已添加到 PATH（重启终端生效）"
+    Write-Host "✅ 已添加到 PATH"
 }
+
+# Refresh PATH again so xcoder is immediately available
+Refresh-Path
 
 Write-Host ""
 Write-Host "✅ xcoder 已全局安装!"
