@@ -9,7 +9,7 @@
 ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝
 ```
 
-![xcoder 完整演示](assets/images/xcoder-demo.gif)
+![xcoder 完整演示](assets/images/xcoder-screenshot-1.png)
 
 > **超越人类与 AI 的边界** — AI 不只是服务你，你也要听从 AI 的建议。
 
@@ -48,27 +48,13 @@ Xcoder 是一个具有强烈个人品牌特色的 AI 编程 CLI 工具。它不�
 
 Xcoder 在终端中运行，提供现代化的交互式 CLI 体验：
 
-![终端演示](assets/images/demo-terminal.png)
+![Xcoder 终端演示](assets/images/xcoder-screenshot-1.png)
 
-### 模式系统切换
+### 模式系统与交互
 
 6 种内置模式，一键切换不同的 AI 性格和交互风格：
 
-![模式切换演示](assets/images/demo-modes.png)
-
-### 交互式编程
-
-实时代码审查、建议和执行：
-
-![交互演示](assets/images/demo-interaction.png)
-
-### 完整演示流程
-
-观看 Xcoder 从安装到运行的完整流程：
-
-![完整演示 GIF](assets/images/xcoder-demo.gif)
-
-*更多演示视频请查看 [Movies/Videos](/Users/mayuanyuan/Movies/Videos) 目录*
+![Xcoder 模式与交互](assets/images/xcoder-screenshot-2.png)
 
 ## 快速开始
 
