@@ -4,6 +4,7 @@
   "description": "在 VS Code 中快速启动 Xcoder AI 编程助手",
   "version": "0.0.1",
   "publisher": "xcoder",
+  "icon": "images/icon.png",
   "license": "MIT",
   "engines": {
     "vscode": "^1.80.0"

@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, test } from 'bun:test'
-import { existsSync } from 'node:fs'
+import { existsSync, mkdirSync } from 'node:fs'
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import {
@@ -27,6 +27,7 @@ let tempDir = ''
 
 beforeEach(async () => {
   tempDir = await createTempDir('cron-baseline-')
+  mkdirSync(join(tempDir, '.claude'), { recursive: true })
   resetStateForTests()
   setOriginalCwd(tempDir)
   setProjectRoot(tempDir)

@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, mock, test } from 'bun:test'
-import { existsSync } from 'node:fs'
+import { existsSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { cleanupTempDir, createTempDir } from '../../../tests/mocks/file-system'
 
@@ -14,6 +14,7 @@ let tempDir = ''
 
 beforeEach(async () => {
   tempDir = await createTempDir('autonomy-persistence-')
+  mkdirSync(join(tempDir, '.claude'), { recursive: true })
 })
 
 afterEach(async () => {
