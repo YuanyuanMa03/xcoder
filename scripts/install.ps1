@@ -12,7 +12,7 @@ Write-Host ""
 Write-Host "  超越人类与 AI 的边界"
 Write-Host ""
 
-# Refresh PATH from registry
+# Refresh PATH from registry so newly installed tools are visible immediately
 function Refresh-Path {
     $machinePath = [Environment]::GetEnvironmentVariable("Path", "Machine")
     $userPath = [Environment]::GetEnvironmentVariable("Path", "User")
@@ -36,19 +36,48 @@ if (Get-Command node -ErrorAction SilentlyContinue) {
 
 if (-not $HAS_NODE) {
     Write-Host "📥 Node.js 未安装，正在自动安装..."
-    if (Get-Command winget -ErrorAction SilentlyContinue) {
-        winget install OpenJS.NodeJS.LTS --accept-source-agreements --accept-package-agreements --silent
-        Refresh-Path
-        if (Get-Command node -ErrorAction SilentlyContinue) {
-            $nodeVer = node -v
-            Write-Host "✅ Node.js $nodeVer"
-            $HAS_NODE = $true
-        } else {
-            Write-Host "❌ Node.js 安装失败，请手动安装: https://nodejs.org"
-            exit 1
+    $installed = $false
+
+    # Method 1: winget (Windows 10 1709+)
+    if (-not $installed -and (Get-Command winget -ErrorAction SilentlyContinue)) {
+        try {
+            winget install OpenJS.NodeJS.LTS --accept-source-agreements --accept-package-agreements --silent
+            Refresh-Path
+            if (Get-Command node -ErrorAction SilentlyContinue) {
+                $installed = $true
+            }
+        } catch {}
+    }
+
+    # Method 2: Download MSI directly
+    if (-not $installed) {
+        Write-Host "   winget 不可用，直接下载 Node.js 安装包..."
+        $arch = if ([Environment]::Is64BitOperatingSystem) { "x64" } else { "x86" }
+        $nodeUrl = "https://nodejs.org/dist/v22.16.0/node-v22.16.0-$arch.msi"
+        $msiPath = "$env:TEMP\node-installer.msi"
+
+        try {
+            Invoke-WebRequest -Uri $nodeUrl -OutFile $msiPath -UseBasicParsing
+            Start-Process msiexec.exe -ArgumentList "/i `"$msiPath`" /quiet /norestart" -Wait -NoNewWindow
+            Refresh-Path
+            if (Get-Command node -ErrorAction SilentlyContinue) {
+                $installed = $true
+            }
+            Remove-Item $msiPath -ErrorAction SilentlyContinue
+        } catch {
+            Write-Host "   ⚠️  自动下载安装失败: $_"
         }
+    }
+
+    if ($installed) {
+        $nodeVer = node -v
+        Write-Host "✅ Node.js $nodeVer"
     } else {
-        Write-Host "❌ winget 不可用，请手动安装 Node.js: https://nodejs.org"
+        Write-Host ""
+        Write-Host "❌ 自动安装失败，请手动安装 Node.js:"
+        Write-Host "   https://nodejs.org/"
+        Write-Host ""
+        Write-Host "   安装完成后重新运行此脚本即可"
         exit 1
     }
 }
@@ -57,6 +86,11 @@ if (-not $HAS_NODE) {
 Write-Host ""
 Write-Host "📦 安装 xcoder..."
 npm install -g @yuanyuan20031001/xcoder
+
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "❌ npm 安装失败，请检查网络连接"
+    exit 1
+}
 
 Write-Host ""
 Write-Host "✅ 安装完成!"

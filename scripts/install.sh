@@ -13,6 +13,7 @@ echo "  超越人类与 AI 的边界"
 echo ""
 
 OS="$(uname -s)"
+ARCH="$(uname -m)"
 
 # ── Auto-install Node.js ──
 HAS_NODE=false
@@ -28,30 +29,65 @@ fi
 
 if [ "$HAS_NODE" = false ]; then
     echo "📥 Node.js 未安装，正在自动安装..."
+    installed=false
+
     case "$OS" in
         Darwin)
-            if command -v brew &>/dev/null; then
-                brew install node
-            else
-                echo "❌ 需要 Homebrew，请先安装: https://brew.sh"
-                exit 1
+            # Method 1: Homebrew
+            if [ "$installed" = false ] && command -v brew &>/dev/null; then
+                brew install node && installed=true
+            fi
+
+            # Method 2: Download pkg directly
+            if [ "$installed" = false ]; then
+                echo "   Homebrew 不可用，直接下载 Node.js 安装包..."
+                if [ "$ARCH" = "arm64" ]; then
+                    NODE_URL="https://nodejs.org/dist/v22.16.0/node-v22.16.0-darwin-arm64.pkg"
+                else
+                    NODE_URL="https://nodejs.org/dist/v22.16.0/node-v22.16.0-darwin-x64.pkg"
+                fi
+                PKG_PATH="/tmp/node-installer.pkg"
+                curl -fsSL "$NODE_URL" -o "$PKG_PATH" && \
+                    sudo installer -pkg "$PKG_PATH" -target / && \
+                    installed=true
+                rm -f "$PKG_PATH"
             fi
             ;;
         Linux)
-            if command -v apt-get &>/dev/null; then
-                curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash - 2>/dev/null
-                sudo apt-get install -y -qq nodejs
-            elif command -v yum &>/dev/null; then
-                curl -fsSL https://rpm.nodesource.com/setup_lts.x | sudo bash - 2>/dev/null
-                sudo yum install -y nodejs
-            elif command -v dnf &>/dev/null; then
-                curl -fsSL https://rpm.nodesource.com/setup_lts.x | sudo bash - 2>/dev/null
-                sudo dnf install -y nodejs
-            elif command -v pacman &>/dev/null; then
-                sudo pacman -S --noconfirm nodejs npm
-            else
-                echo "❌ 无法自动安装 Node.js，请手动安装: https://nodejs.org"
-                exit 1
+            # Method 1: apt
+            if [ "$installed" = false ] && command -v apt-get &>/dev/null; then
+                curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash - 2>/dev/null && \
+                    sudo apt-get install -y -qq nodejs && installed=true
+            fi
+
+            # Method 2: yum
+            if [ "$installed" = false ] && command -v yum &>/dev/null; then
+                curl -fsSL https://rpm.nodesource.com/setup_22.x | sudo bash - 2>/dev/null && \
+                    sudo yum install -y nodejs && installed=true
+            fi
+
+            # Method 3: dnf
+            if [ "$installed" = false ] && command -v dnf &>/dev/null; then
+                curl -fsSL https://rpm.nodesource.com/setup_22.x | sudo bash - 2>/dev/null && \
+                    sudo dnf install -y nodejs && installed=true
+            fi
+
+            # Method 4: pacman
+            if [ "$installed" = false ] && command -v pacman &>/dev/null; then
+                sudo pacman -S --noconfirm nodejs npm && installed=true
+            fi
+
+            # Method 5: Download binary directly
+            if [ "$installed" = false ]; then
+                echo "   包管理器不可用，直接下载 Node.js 二进制..."
+                if [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; then
+                    NODE_TAR="node-v22.16.0-linux-arm64"
+                else
+                    NODE_TAR="node-v22.16.0-linux-x64"
+                fi
+                NODE_URL="https://nodejs.org/dist/v22.16.0/${NODE_TAR}.tar.xz"
+                INSTALL_DIR="/usr/local"
+                curl -fsSL "$NODE_URL" | sudo tar -xJ -C "$INSTALL_DIR" --strip-components=1 && installed=true
             fi
             ;;
         *)
@@ -60,10 +96,14 @@ if [ "$HAS_NODE" = false ]; then
             ;;
     esac
 
-    if command -v node &>/dev/null; then
+    if [ "$installed" = true ] && command -v node &>/dev/null; then
         echo "✅ Node.js $(node -v)"
     else
-        echo "❌ Node.js 安装失败，请手动安装: https://nodejs.org"
+        echo ""
+        echo "❌ 自动安装失败，请手动安装 Node.js:"
+        echo "   https://nodejs.org/"
+        echo ""
+        echo "   安装完成后重新运行此脚本即可"
         exit 1
     fi
 fi
@@ -72,6 +112,11 @@ fi
 echo ""
 echo "📦 安装 xcoder..."
 npm install -g @yuanyuan20031001/xcoder
+
+if [ $? -ne 0 ]; then
+    echo "❌ npm 安装失败，请检查网络连接"
+    exit 1
+fi
 
 echo ""
 echo "✅ 安装完成!"
