@@ -1,0 +1,34 @@
+# 源码
+src/
+
+# 测试
+tests/
+
+# 构建配置
+build.ts
+vite.config.ts
+tsconfig.json
+tsconfig.base.json
+biome.json
+knip.json
+bunfig.toml
+
+# 开发工具
+.husky/
+.vscode/
+.github/
+.editorconfig
+.tool-versions
+.mintignore
+.dockerignore
+
+# 文档
+docs/
+README_EN.md
+SECURITY.md
+
+# 其他
+assets/
+vendor/
+packages/
+.xcoder/
